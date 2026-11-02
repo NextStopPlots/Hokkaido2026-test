@@ -1,0 +1,1 @@
+v252: Extract ZIP over the existing Hokkaido-2026 folder, restart the local preview server, and hard-refresh the browser. All site assets and trip-data.json use ?v=252.

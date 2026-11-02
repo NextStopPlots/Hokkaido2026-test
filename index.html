@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="site-version" content="254">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#f3f6f2">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>AI 旅行網頁模板</title>
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/nimbus-sans-l">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=257">
+  <link rel="stylesheet" href="ledger.css?v=257">
+  <script src="runtime-storage.js?v=255" defer></script>
+  <script src="overview-map.js?v=255" defer></script>
+  <script src="route-ui.js?v=255" defer></script>
+  <script src="app.js?v=255" defer></script>
+  <script src="ticket-pdf-preview.js?v=255" defer></script>
+  <script src="ledger.js?v=257" defer></script>
+  <script src="site-navigation.js?v=255" defer></script>
+  <script src="prep-tabs.js?v=255" defer></script>
+  <script src="booking-unified-shadow.js?v=255" defer></script>
+</head>
+<body>
+  <a class="skip-link" id="skip-link" href="#main">跳到主要內容</a>
+
+  <main id="main" data-site-view="travel">
+
+    <section class="section route-section" id="route" aria-labelledby="route-title" data-module="overview" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">THE WHOLE JOURNEY</p>
+          <h2 id="route-title">本次旅程</h2>
+        </div>
+        <span class="soft-label" id="route-day-count"></span>
+      </div>
+      <div id="route-explorer"></div>
+      <p class="route-caption">路線为行程示意，实际驾驶和步行请使用当天的 Google Maps 导航。</p>
+    </section>
+
+    <section class="section itinerary-section" id="itinerary" aria-labelledby="itinerary-title" data-module="itinerary" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">DAY BY DAY</p>
+          <h2 id="itinerary-title">每日行程</h2>
+        </div>
+      </div>
+      <div class="itinerary-day-photo-placeholder" id="itinerary-day-photo-placeholder" role="img" aria-label="每日行程照片"></div>
+      <div class="itinerary-date-strip" id="itinerary-date-strip" aria-label="選擇行程日期"></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+  </main>
+
+
+  <main class="prep-view" id="prep-view" data-site-view="prep" data-module="todo" hidden>
+    <section class="section prep-section" id="prep" aria-labelledby="prep-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">BEFORE WE GO</p>
+          <h2 id="prep-title">旅行前準備</h2>
+        </div>
+      </div>
+      <div class="prep-tabs" role="tablist" aria-label="準備頁分頁">
+        <button class="prep-tab" type="button" id="prep-tab-memo" role="tab" aria-controls="prep-panel-memo" aria-selected="true" tabindex="0">備忘錄</button>
+        <button class="prep-tab" type="button" id="prep-tab-inspiration" role="tab" aria-controls="prep-panel-inspiration" aria-selected="false" tabindex="-1">旅行靈感</button>
+      </div>
+      <div class="prep-tab-panel" id="prep-panel-memo" role="tabpanel" aria-labelledby="prep-tab-memo">
+
+        <div class="todo-list" id="todo-list"></div>
+      </div>
+      <div class="prep-tab-panel" id="prep-panel-inspiration" role="tabpanel" aria-labelledby="prep-tab-inspiration" hidden>
+      <section class="wishlist-section" aria-labelledby="wishlist-title">
+        
+
+        <dialog class="v170-dialog" id="wishlist-dialog" aria-label="新增旅行靈感">
+          <div class="v178-sheet-handle-space" aria-hidden="true"></div>
+          <div class="wishlist-card wishlist-entry-card">
+          <form id="wishlist-form" novalidate>
+            <div class="wishlist-entry-scroll">
+            <div class="ledger-entry-sheet-form wishlist-region-picker"><fieldset class="wishlist-fieldset ledger-sheet-category-fieldset">
+              <div class="wishlist-choice-grid ledger-category-grid" id="wishlist-area-choices" aria-label="選擇地區"></div>
+            </fieldset></div>
+
+            <label class="wishlist-field">
+              <span>地點名稱</span>
+              <input id="wishlist-name" type="text" maxlength="80" autocomplete="off" placeholder="例如：小丑漢堡 本店">
+            </label>
+
+            <label class="wishlist-field">
+              <span>Google Maps 連結</span>
+              <input id="wishlist-map-url" type="url" inputmode="url" maxlength="600" autocomplete="off" placeholder="複製Google Maps連結貼入(選填)">
+              <p class="wishlist-map-error" id="wishlist-map-error" role="alert" aria-live="polite"></p>
+            </label>
+
+            <label class="wishlist-field">
+              <span>筆記</span>
+              <textarea id="wishlist-note" maxlength="300" rows="1" placeholder="例如：沿途有經過這間店必買"></textarea>
+            </label>
+
+            <p class="wishlist-form-message" id="wishlist-form-message" role="status" aria-live="polite"></p>
+            </div>
+            <div class="ledger-entry-sheet-actions">
+              <button class="ledger-entry-sheet-cancel shared-delete-cancel" type="button" data-close-dialog="wishlist-dialog">取消</button>
+              <button class="ledger-primary-button ledger-entry-sheet-save" type="submit">儲存</button>
+            </div>
+          </form>
+          </div>
+        </dialog>
+
+        <div class="wishlist-region-tabs" id="wishlist-region-tabs" aria-label="依地區查看想去清單"></div>
+        <article class="wishlist-card wishlist-list-card">
+          <div class="wishlist-list" id="wishlist-list"></div>
+        </article>
+      </section>
+      </div>
+    </section>
+  </main>
+
+  <main class="ledger-view" id="ledger-view" data-site-view="ledger" data-module="ledger" hidden>
+    <div id="ledger-root" data-trip-config-url="trip-data.json?v=255" data-travel-data-url="trip-data.json?v=255"></div>
+  </main>
+
+  <main class="accommodation-view" id="accommodation-view" data-site-view="accommodation" hidden>
+    <section class="section accommodation-section" id="accommodation" aria-labelledby="accommodation-title">
+      <div class="section-heading accommodation-main-heading">
+        <div>
+          <p class="section-kicker">OUR BOOKINGS</p>
+          <h2 id="accommodation-title">預訂資訊</h2>
+        </div>
+      </div>
+      <div class="accommodation-tabs three-tabs left-active" role="tablist" aria-label="住宿、機票及租車資訊">
+        <button type="button" class="accommodation-tab" id="stay-tab" role="tab" aria-controls="stay-panel" aria-selected="true" tabindex="0">住宿資訊</button>
+        <button type="button" class="accommodation-tab" id="transport-tab" role="tab" aria-controls="flight-panel" aria-selected="false" tabindex="-1">機票資訊</button>
+        <button type="button" class="accommodation-tab" id="rental-tab" role="tab" aria-controls="rental-panel" aria-selected="false" tabindex="-1">租車資訊</button>
+      </div>
+      <div class="accommodation-tab-panel" id="stay-panel" role="tabpanel" aria-labelledby="stay-tab">
+        <div class="accommodation-list" id="accommodation-list"></div>
+      </div>
+      <div class="accommodation-tab-panel" id="flight-panel" role="tabpanel" aria-labelledby="transport-tab" hidden>
+    <section class="section flights-section" id="flights" aria-labelledby="flights-title" data-module="flights" hidden>
+      <div class="section-heading visually-hidden">
+        <div>
+          <p class="section-kicker">BOARDING</p>
+          <h2 id="flights-title">航班行程</h2>
+        </div>
+        <p class="section-index" id="flight-index" aria-live="polite">1 / 3</p>
+      </div>
+      <div class="flight-carousel" id="flight-carousel" aria-label="航班卡片，垂直排列"></div>
+      <div class="carousel-dots" id="flight-dots" aria-hidden="true"></div>
+    </section>
+
+
+
+      </div>
+      <div class="accommodation-tab-panel" id="rental-panel" role="tabpanel" aria-labelledby="rental-tab" hidden>
+    <section class="section drive-section" id="drive" aria-labelledby="drive-title" data-module="driving" hidden>
+      <div id="rental-card"></div>
+      <div class="accordion-stack" id="drive-notes"></div>
+    </section>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-navigation" id="bottom-navigation" aria-label="主要頁面">
+    <a class="bottom-navigation__item" href="#top" data-bottom-view="travel" aria-label="行程">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 9 3l6 2.5L21 3v15.5L15 21l-6-2.5L3 21z"></path><path d="M9 3v15.5M15 5.5V21"></path></svg><span>行程</span>
+    </a>
+    <a class="bottom-navigation__item" href="#accommodation" data-bottom-view="accommodation" aria-label="預定">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path><circle cx="8" cy="14" r=".85" fill="currentColor" stroke="none"></circle><circle cx="12" cy="14" r=".85" fill="currentColor" stroke="none"></circle><circle cx="16" cy="14" r=".85" fill="currentColor" stroke="none"></circle><circle cx="8" cy="18" r=".85" fill="currentColor" stroke="none"></circle><circle cx="12" cy="18" r=".85" fill="currentColor" stroke="none"></circle></svg><span>預定</span>
+    </a>
+    <a class="bottom-navigation__item" href="#prep" data-bottom-view="prep" aria-label="準備">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-6-3.8-6 3.8z"></path><path d="M9 7.5h6"></path></svg><span>準備</span>
+    </a>
+    <a class="bottom-navigation__item" href="#ledger" data-bottom-view="ledger" aria-label="記帳">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h15.5a1.5 1.5 0 0 1 1.5 1.5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12"></path><path d="M15 11h6v5h-6a2.5 2.5 0 0 1 0-5z"></path><circle cx="16" cy="13.5" r=".7" fill="currentColor" stroke="none"></circle></svg><span>記帳</span>
+    </a>
+  </nav>
+
+  <dialog class="map-dialog" id="map-dialog">
+    <button type="button" class="dialog-close" id="map-close" aria-label="關閉路線图">關閉</button>
+    <div id="map-dialog-content"></div>
+  </dialog>
+
+  <dialog class="ticket-dialog" id="ticket-dialog" aria-labelledby="ticket-dialog-title">
+    <header>
+      <div>
+        <span>門票與預訂</span>
+        <h2 id="ticket-dialog-title">門票詳情</h2>
+      </div>
+      <button type="button" id="ticket-dialog-close" aria-label="關閉門票詳情">關閉</button>
+    </header>
+    <div class="ticket-dialog__body" id="ticket-dialog-body"></div>
+  </dialog>
+
+  <div class="place-map-overlay" id="place-map" hidden>
+    <section class="place-map-sheet" role="dialog" aria-modal="true" aria-labelledby="place-map-title">
+      <header><h2 id="place-map-title">地點地圖</h2><button id="place-map-close" type="button" aria-label="關閉地點地圖">關閉</button></header>
+      <iframe id="place-map-frame" title="地點地圖" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <footer><p>地圖需要能夠連線至 Google。若一直空白，請在系統瀏覽器中開啟。</p><a id="place-map-external" target="_blank" rel="noopener noreferrer">用 Google Maps 開啟 ↗</a></footer>
+    </section>
+  </div>
+
+  <div class="loading-error" id="loading-error" hidden>
+    <strong>行程暫時無法載入</strong>
+    <span>請確認 trip-data.json 已通過生成驗證，並與網頁位於同一目錄。</span>
+  </div>
+  <button type="button" class="v170-fab" id="v170-fab" aria-label="新增一筆" title="新增一筆">新增一筆</button>
+  <dialog class="v170-dialog v170-todo-dialog" id="todo-dialog" aria-labelledby="todo-dialog-title">
+    <div class="v170-dialog-heading"><h2 id="todo-dialog-title">新增備忘事項</h2><button type="button" class="v170-close" data-close-dialog="todo-dialog" aria-label="關閉">×</button></div>
+    <form class="todo-form" id="todo-form">
+      <textarea id="todo-input" maxlength="100" rows="4" aria-label="準備事項" required></textarea>
+      <div class="todo-character-count" id="todo-character-count" aria-live="polite">0/100</div>
+      <div class="v170-form-actions"><button type="button" class="v170-cancel" data-close-dialog="todo-dialog">取消</button><button type="submit">儲存</button></div>
+    </form>
+  </dialog>
+  <script src="fab-actions.js?v=255" defer></script>
+  <script src="shared-sheet-height.js?v=255" defer></script>
+</body>
+</html>

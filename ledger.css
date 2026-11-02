@@ -1,0 +1,3472 @@
+/* Primary travel / ledger view switch. Ledger component styles follow below. */
+[data-site-view][hidden] { display: none !important; }
+
+.topbar .primary-navigation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.travel-navigation { position: relative; }
+.travel-navigation summary {
+  position: relative;
+  min-height: 44px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-weight: 680;
+}
+.travel-navigation summary::-webkit-details-marker { display: none; }
+.travel-navigation summary span { transition: transform .18s ease; }
+.travel-navigation[open] summary span { transform: rotate(180deg); }
+.travel-navigation summary[aria-current="page"],
+.topbar .primary-navigation__ledger[aria-current="page"] { color: var(--ink); }
+.travel-navigation summary[aria-current="page"]::after,
+.topbar .primary-navigation__ledger[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--lake);
+}
+
+.topbar .primary-navigation__ledger {
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 680;
+}
+
+.travel-navigation-menu {
+  position: fixed;
+  z-index: 40;
+  top: calc(54px + var(--safe-top));
+  left: 14px;
+  right: 14px;
+  width: min(420px, calc(100vw - 28px));
+  margin-inline: auto;
+  padding: 9px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: 5px;
+  border: 1px solid rgba(19, 38, 47, .1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 16px 44px rgba(19, 38, 47, .14);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.topbar .travel-navigation-menu a {
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 6px;
+  border-radius: 9px;
+  color: #526166;
+  background: #f4f7f5;
+  font-size: 11px;
+  font-weight: 690;
+}
+.topbar .travel-navigation-menu a:active { color: white; background: var(--ink); }
+
+.ledger-view {
+  min-height: calc(100vh - 48px);
+  min-height: calc(100dvh - 48px);
+  background: #F2F5F7;
+}
+.ledger-view:not([hidden]) { animation: ledger-view-in .16s ease-out; }
+body[data-active-view="ledger"] { background: #F2F5F7; }
+body[data-active-view="ledger"] .topbar { background: rgba(242, 245, 247, .93); }
+
+@keyframes ledger-view-in {
+  from { opacity: .45; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 380px) {
+  .wordmark span { display: none; }
+  .travel-navigation summary { padding-inline: 7px; }
+  .travel-navigation summary[aria-current="page"]::after { left: 7px; right: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ledger-view:not([hidden]) { animation: none; }
+}
+
+/* Travel ledger: quiet white surfaces, circular people, and tabular totals. */
+.ledger-app {
+  width: min(100%, 720px);
+  min-height: calc(100vh - 48px);
+  min-height: calc(100dvh - 48px);
+  margin: 0 auto;
+  padding: 30px 18px calc(58px + var(--safe-bottom));
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.ledger-app button, .ledger-app input, .ledger-app select { font-family: inherit; }
+.ledger-app h1, .ledger-app h2, .ledger-app h3, .ledger-app p { margin: 0; }
+.ledger-page-header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.ledger-page-header h1 { font-size: clamp(30px, 9vw, 42px); line-height: 1; letter-spacing: -.055em; font-weight: 820; }
+.ledger-header-actions { display: flex; align-items: center; gap: 5px; }
+.ledger-text-button, .ledger-icon-button {
+  min-height: 42px; padding: 0 9px; border: 0; border-radius: 9px;
+  color: var(--lake); background: transparent; cursor: pointer; font-size: 11px; font-weight: 740;
+}
+.ledger-icon-button { padding: 0 13px; border: 1px solid rgba(19,38,47,.14); border-radius: 999px; color: var(--ink); background: #fff; }
+.ledger-text-button:hover, .ledger-icon-button:hover { background: #edf5f4; }
+.ledger-text-button:active, .ledger-icon-button:active, .ledger-primary-button:active, .ledger-secondary-button:active { transform: translateY(1px); }
+.ledger-danger-button { color: #aa5d4d; }
+.ledger-tabs { display: flex; gap: 26px; margin-top: 26px; border-bottom: 1px solid rgba(19,38,47,.1); }
+.ledger-tab { position: relative; min-height: 50px; padding: 0; border: 0; color: #899598; background: transparent; cursor: pointer; font-size: 14px; font-weight: 740; }
+.ledger-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: transparent; }
+.ledger-tab.ledger-is-active { color: var(--ink); }
+.ledger-tab.ledger-is-active::after { background: var(--lake); }
+.ledger-live { min-height: 0; margin-top: 8px; color: var(--lake); font-size: 11px; line-height: 1.4; }
+.ledger-live:empty { display: none; }
+.ledger-tab-panel[hidden] { display: none; }
+.ledger-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.ledger-section-heading h2 { margin-top: 4px; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 790; }
+.ledger-section-kicker { color: #7b898b; font-size: 11px; line-height: 1.3; font-weight: 760; letter-spacing: .07em; }
+.ledger-soft-count { color: #8a9798; font-size: 11px; }
+
+.ledger-members-strip { margin-top: 27px; }
+.ledger-members-strip-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ledger-members-strip-heading > div { display: flex; align-items: baseline; gap: 8px; }
+.ledger-members-strip-heading strong { font-size: 19px; font-weight: 790; }
+.ledger-members-strip-heading span { color: #8a9798; font-size: 11px; }
+.ledger-members-inline { display: flex; flex-wrap: wrap; gap: 18px 22px; margin-top: 17px; }
+.ledger-person-static, .ledger-add-person { width: 50px; display: grid; justify-items: center; gap: 6px; color: #748184; font-size: 10px; text-align: center; }
+.ledger-add-person { min-height: 67px; padding: 0; border: 0; color: var(--lake); background: transparent; cursor: pointer; }
+.ledger-add-person > span { width: 42px; height: 42px; display: grid; place-items: center; border: 1px dashed #a7c4c8; border-radius: 50%; font-size: 23px; font-weight: 400; }
+.ledger-add-person small { font-size: 10px; }
+.ledger-avatar { --ledger-avatar-color: #287b90; width: 42px; height: 42px; display: inline-grid; flex: 0 0 auto; place-items: center; border-radius: 50%; color: #fff; background: var(--ledger-avatar-color); font-size: 17px; font-weight: 790; line-height: 1; }
+.ledger-avatar-small { width: 28px; height: 28px; font-size: 11px; }
+.ledger-avatar-tiny { width: 24px; height: 24px; font-size: 10px; }
+.ledger-avatar-stack { display: inline-flex; align-items: center; }
+.ledger-avatar-stack .ledger-avatar + .ledger-avatar { margin-left: -5px; border: 2px solid #fff; }
+
+.ledger-entry-card, .ledger-list-section, .ledger-transfer-list, .ledger-member-stats-list, .ledger-stats-overview {
+  border: 1px solid rgba(19,38,47,.1); border-radius: 16px; background: #fff;
+  box-shadow: 0 12px 32px rgba(18,42,50,.055), 0 1px 3px rgba(18,42,50,.035);
+}
+.ledger-entry-card { margin-top: 27px; padding: 20px; }
+.ledger-bill-form { margin-top: 19px; }
+.ledger-amount-block { width: min(100%, 310px); display: grid; grid-template-columns: minmax(108px, 124px) minmax(0, 176px); align-items: start; gap: 10px; padding-bottom: 0; border-bottom: 0; }
+.ledger-field, .ledger-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.ledger-field-label, .ledger-fieldset legend { display: block; margin-bottom: 7px; color: #788688; font-size: 11px; line-height: 1.3; font-weight: 720; }
+.ledger-field-label small, .ledger-fieldset legend small { margin-left: 4px; color: #a1acad; font-size: 10px; font-weight: 560; }
+.ledger-select, .ledger-input { width: 100%; min-height: 44px; border: 1px solid rgba(19,38,47,.13); border-radius: 10px; outline: 0; color: var(--ink); background: #fff; }
+.ledger-select { padding: 0 10px; appearance: none; font-size: 12px; font-weight: 760; }
+.ledger-input { padding: 0 12px; font-size: 13px; }
+.ledger-input:focus, .ledger-select:focus, .ledger-amount-input:focus { border-color: #9fc4c9; box-shadow: 0 0 0 3px rgba(40,123,144,.1); }
+.ledger-amount-input { width: 100%; min-width: 0; min-height: 44px; padding: 0; border: 0; outline: 0; color: var(--ink); background: transparent; text-align: right; font-size: clamp(28px, 9vw, 38px); font-weight: 780; letter-spacing: -.045em; }
+.ledger-amount-input::placeholder { color: #b8c2c2; }
+.ledger-converted-field { max-width: 310px; padding: 14px 0 0; border-bottom: 0; }
+.ledger-converted-input-wrap { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 9px; }
+.ledger-converted-code { color: var(--lake); font: 760 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.ledger-converted-field .ledger-input { min-height: 35px; padding: 0; border: 0; color: var(--lake); font-size: 16px; font-weight: 750; }
+.ledger-field-help { display: block; margin-top: 5px; color: #a0acad; font-size: 10px; }
+.ledger-fieldset { margin-top: 18px; }
+.ledger-category-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
+.ledger-category-choice { position: relative; min-height: 43px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 9px; color: #768386; background: #f7f9f8; cursor: pointer; font-size: 10px; font-weight: 680; white-space: nowrap; }
+.ledger-category-input, .ledger-person-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.ledger-category-choice:has(input:checked) { border-color: #c6dde0; color: var(--lake); background: #e7f2f3; }
+.ledger-note-field, .ledger-date-field { display: grid; grid-template-columns: 88px minmax(0, 1fr); align-items: center; gap: 10px; padding: 14px 0 0; border-top: 0; }
+.ledger-note-field .ledger-field-label, .ledger-date-field .ledger-field-label { margin: 0; }
+.ledger-note-field .ledger-input, .ledger-date-field .ledger-input { min-height: 40px; box-sizing: border-box; border: 1px solid rgba(19,38,47,.13); border-radius: 10px; padding: 0 12px; text-align: left; color: var(--ink); background: #fff; font-size: 13px; }
+.ledger-fieldset-heading { display: flex; align-items: center; justify-content: space-between; }
+.ledger-fieldset-heading legend { margin-bottom: 0; }
+.ledger-person-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 8px; margin-top: 10px; }
+.ledger-person-choice { min-width: 0; display: grid; justify-items: center; gap: 7px; cursor: pointer; color: #647275; text-align: center; }
+.ledger-person-visual { position: relative; display: block; width: 44px; height: 44px; }
+.ledger-person-visual .ledger-avatar { width: 44px; height: 44px; transition: opacity .15s ease, filter .15s ease, box-shadow .15s ease; }
+.ledger-person-input:not(:checked) + .ledger-person-visual .ledger-avatar { opacity: .48; filter: saturate(.48); }
+.ledger-person-input:checked + .ledger-person-visual .ledger-avatar { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--lake); opacity: 1; filter: none; }
+.ledger-person-check { position: absolute; right: -5px; bottom: -3px; width: 18px; height: 18px; display: none; place-items: center; border: 2px solid #fff; border-radius: 50%; color: #fff; background: var(--lake); font-size: 10px; font-weight: 800; }
+.ledger-person-input:checked + .ledger-person-visual .ledger-person-check { display: grid; }
+.ledger-person-name { max-width: 100%; overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-split-summary { min-height: 18px; margin-top: 10px; color: #879496; font-size: 10px; }
+.ledger-form-error { min-height: 19px; margin-top: 12px !important; color: #a64f40; font-size: 11px; line-height: 1.45; }
+.ledger-primary-button, .ledger-secondary-button { min-height: 48px; border: 0; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 760; }
+.ledger-primary-button { width: 100%; margin-top: 7px; color: #fff; background: #132d37; }
+.ledger-secondary-button { padding: 0 17px; color: #fff; background: var(--lake); }
+.ledger-onboarding { margin-top: 20px; padding: 17px; border-radius: 11px; color: #788789; background: #f7f9f8; font-size: 12px; line-height: 1.5; }
+.ledger-onboarding .ledger-primary-button { margin-top: 14px; }
+
+.ledger-list-section { margin-top: 28px; overflow: hidden; }
+.ledger-list-heading { padding: 19px 16px 15px; align-items: flex-end; }
+.ledger-list-total { display: grid; justify-items: end; gap: 3px; }
+.ledger-list-total span { color: #8c999a; font-size: 10px; }
+.ledger-list-total strong { font-size: 21px; line-height: 1; letter-spacing: -.035em; }
+.ledger-bill-row { position: relative; padding: 15px 16px 12px; border-top: 1px solid rgba(19,38,47,.1); }
+.ledger-bill-main { display: flex; justify-content: space-between; gap: 12px; }
+.ledger-bill-title-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ledger-category-mark { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--lake); }
+.ledger-category-mark[data-ledger-category="餐饮"] { background: #d46f47; }
+.ledger-category-mark[data-ledger-category="交通"] { background: #4c8da0; }
+.ledger-category-mark[data-ledger-category="住宿"] { background: #7f72a9; }
+.ledger-category-mark[data-ledger-category="门票"] { background: #bd8a36; }
+.ledger-category-mark[data-ledger-category="购物"] { background: #608967; }
+.ledger-bill-title-row h3 { font-size: 14px; font-weight: 760; }
+.ledger-bill-title-row p { margin-top: 4px; color: #95a0a1; font-size: 10px; }
+.ledger-bill-amount { display: grid; justify-items: end; gap: 3px; text-align: right; }
+.ledger-bill-amount strong { font-size: 16px; font-weight: 760; }
+.ledger-bill-amount span { color: var(--lake); font-size: 10px; }
+.ledger-bill-people { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 14px; margin-top: 11px; color: #98a4a5; font-size: 10px; }
+.ledger-bill-payer, .ledger-bill-participants { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.ledger-bill-payer b, .ledger-bill-participants b { color: #6f7d7f; font-weight: 680; }
+.ledger-row-actions { display: flex; justify-content: flex-end; gap: 4px; margin-top: 3px; }
+.ledger-row-actions .ledger-text-button { min-height: 28px; padding-inline: 5px; font-size: 10px; }
+.ledger-empty-state { padding: 23px 16px; color: #8b9899; font-size: 12px; line-height: 1.5; text-align: center; }
+
+.ledger-stats-overview { margin-top: 28px; padding: 18px 20px; }
+.ledger-stats-overview h2 { margin-top: 7px; font-size: clamp(26px, 8vw, 32px); line-height: 1; letter-spacing: -.045em; }
+.ledger-stats-overview > span { display: block; margin-top: 8px; color: #899697; font-size: 10px; }
+.ledger-settlement-section, .ledger-member-stats-section { margin-top: 30px; }
+.ledger-transfer-list { margin-top: 14px; overflow: hidden; }
+.ledger-transfer-row { min-height: 76px; display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: center; gap: 11px; padding: 12px 16px; border-top: 1px solid rgba(19,38,47,.1); }
+.ledger-transfer-row:first-child { border-top: 0; }
+.ledger-transfer-person { display: contents; }
+.ledger-transfer-person > span { min-width: 0; display: grid; gap: 5px; }
+.ledger-transfer-person strong { overflow: hidden; font-size: 14px; font-weight: 760; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-transfer-person small { color: #8a9899; font-size: 10px; }
+.ledger-transfer-person small::first-letter { color: #8a9899; }
+.ledger-transfer-target { align-self: end; margin-bottom: 5px; opacity: .9; }
+.ledger-transfer-amount { white-space: nowrap; font-size: 17px; font-weight: 780; }
+.ledger-member-stats-list { margin-top: 14px; overflow: hidden; }
+.ledger-member-stat { border-top: 1px solid rgba(19,38,47,.1); }
+.ledger-member-stat:first-child { border-top: 0; }
+.ledger-member-stat-summary { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; list-style: none; cursor: pointer; }
+.ledger-member-stat-summary::-webkit-details-marker { display: none; }
+.ledger-member-identity { display: inline-flex; align-items: center; gap: 11px; min-width: 0; }
+.ledger-member-identity strong { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-member-net { display: grid; justify-items: end; gap: 3px; }
+.ledger-member-net small { color: #9aa7a8; font-size: 9px; }
+.ledger-member-net strong { white-space: nowrap; font-size: 15px; }
+.ledger-positive strong { color: var(--lake); }
+.ledger-negative strong { color: #c66b46; }
+.ledger-neutral strong { color: #869394; }
+.ledger-member-stat-body { padding: 0 16px 15px; }
+.ledger-member-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 12px 0; border-top: 1px solid rgba(19,38,47,.08); }
+.ledger-member-metrics div { display: grid; gap: 5px; }
+.ledger-member-metrics dt { color: #9aa7a8; font-size: 9px; }
+.ledger-member-metrics dd { margin: 0; font-size: 14px; font-weight: 730; }
+.ledger-member-metrics dd.ledger-positive { color: var(--lake); }
+.ledger-member-metrics dd.ledger-negative { color: #c66b46; }
+.ledger-member-metrics dd.ledger-neutral { color: #869394; }
+.ledger-member-bills { display: grid; gap: 0; }
+.ledger-member-bill { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid rgba(19,38,47,.07); color: #849193; font-size: 10px; }
+.ledger-member-empty { color: #95a1a2; font-size: 10px; }
+
+.ledger-dialog { width: min(calc(100% - 28px), 560px); max-height: min(86dvh, 760px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(19,38,47,.1); border-radius: 20px; color: var(--ink); background: #fff; box-shadow: 0 22px 70px rgba(19,38,47,.2); }
+.ledger-dialog::backdrop { background: rgba(19,38,47,.28); backdrop-filter: blur(3px); }
+.ledger-dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 22px 20px 15px; border-bottom: 1px solid rgba(19,38,47,.08); }
+.ledger-dialog-header h2 { margin-top: 5px; font-size: 21px; letter-spacing: -.035em; }
+.ledger-dialog-close { width: 38px; height: 38px; flex: 0 0 38px; border: 0; border-radius: 50%; color: #617174; background: #f1f5f3; cursor: pointer; font-size: 23px; line-height: 1; }
+.ledger-dialog-body { padding: 16px 20px 21px; overflow: auto; }
+.ledger-dialog-empty { padding: 13px 0; color: #8d9a9b; font-size: 12px; }
+.ledger-member-edit-list { display: grid; gap: 9px; }
+.ledger-member-edit-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) 36px auto auto; align-items: center; gap: 8px; }
+.ledger-member-edit-row .ledger-input { min-height: 42px; }
+.ledger-color-picker { width: 34px; height: 34px; display: block; overflow: hidden; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgba(19,38,47,.14); cursor: pointer; }
+.ledger-color-picker input { width: 42px; height: 42px; margin: -5px; padding: 0; border: 0; cursor: pointer; }
+.ledger-member-edit-row .ledger-text-button, .ledger-member-edit-row .ledger-icon-button { min-height: 38px; padding-inline: 5px; font-size: 10px; }
+.ledger-add-member-form { display: grid; grid-template-columns: 42px minmax(0, 1fr) 34px auto; align-items: end; gap: 8px; margin-top: 18px; padding-top: 17px; border-top: 1px solid rgba(19,38,47,.1); }
+.ledger-add-member-preview { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--ledger-avatar-color); font-size: 17px; font-weight: 790; }
+.ledger-add-member-name .ledger-field-label { margin-bottom: 6px; }
+.ledger-add-member-form .ledger-input { min-height: 42px; }
+.ledger-dialog-note { margin-top: 13px; color: #93a0a1; font-size: 10px; line-height: 1.5; }
+.ledger-setting-group + .ledger-setting-group { margin-top: 23px; padding-top: 20px; border-top: 1px solid rgba(19,38,47,.1); }
+.ledger-setting-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ledger-setting-heading h3 { font-size: 14px; font-weight: 760; }
+.ledger-setting-heading p { margin-top: 5px; color: #8d9a9b; font-size: 10px; }
+.ledger-currency-select-button { width: 100%; min-height: 64px; display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-top: 12px; padding: 0 14px; border: 1px solid rgba(19,38,47,.11); border-radius: 12px; color: var(--ink); background: #fff; cursor: pointer; text-align: left; }
+.ledger-currency-select-button:disabled { opacity: .7; cursor: not-allowed; }
+.ledger-currency-select-button .ledger-currency-symbol { color: var(--lake); font-size: 17px; font-weight: 780; }
+.ledger-currency-select-button strong, .ledger-currency-select-button small { display: block; }
+.ledger-currency-select-button strong { font-size: 12px; }
+.ledger-currency-select-button small { margin-top: 4px; color: #8c999a; font-size: 10px; }
+.ledger-setting-note { margin-top: 7px; color: #a16a5a; font-size: 10px; line-height: 1.45; }
+.ledger-currency-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+.ledger-currency-chip { min-height: 31px; display: inline-flex; align-items: center; gap: 6px; padding: 0 7px 0 10px; border: 1px solid rgba(19,38,47,.12); border-radius: 999px; color: #687779; background: #fafcfb; font-size: 11px; }
+.ledger-currency-chip b { color: var(--lake); font: 750 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.ledger-currency-chip button { width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; color: #93a0a1; background: transparent; cursor: pointer; font-size: 16px; }
+.ledger-currency-search { display: grid; grid-template-columns: 23px 1fr; align-items: center; gap: 8px; min-height: 48px; padding: 0 13px; border: 1px solid #b9d0d4; border-radius: 13px; background: #f7fbfa; color: var(--lake); }
+.ledger-currency-search > span:not(.ledger-visually-hidden) { font-size: 23px; line-height: 1; }
+.ledger-currency-search .ledger-input { min-height: 44px; padding: 0; border: 0; background: transparent; font-size: 13px; }
+.ledger-search-help { margin-top: 9px; color: #9aa7a8; font-size: 10px; }
+.ledger-currency-results { display: grid; gap: 7px; margin-top: 14px; max-height: 49dvh; overflow: auto; }
+.ledger-currency-result { min-height: 68px; display: grid; grid-template-columns: 50px minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid rgba(19,38,47,.1); border-radius: 12px; color: var(--ink); background: #fff; cursor: pointer; text-align: left; }
+.ledger-currency-result:disabled { opacity: .55; cursor: not-allowed; }
+.ledger-currency-result > .ledger-currency-symbol { color: var(--lake); font: 760 13px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.ledger-currency-result-name strong, .ledger-currency-result-name small { display: block; }
+.ledger-currency-result-name strong { font-size: 13px; }
+.ledger-currency-result-name small { margin-top: 4px; color: #8b9899; font-size: 10px; }
+.ledger-currency-result-state { color: #839091; font-size: 10px; }
+.ledger-currency-result.ledger-is-selected .ledger-currency-result-state { color: var(--lake); font-weight: 740; }
+.ledger-currency-empty { padding: 27px 10px; color: #8b9899; text-align: center; }
+.ledger-currency-empty p { font-size: 12px; }
+.ledger-currency-empty small { display: block; margin-top: 7px; font-size: 10px; }
+.ledger-visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+
+@media (min-width: 700px) {
+  .ledger-app { padding: 38px 0 74px; }
+  .ledger-entry-card { padding: 22px; }
+  .ledger-dialog { margin: auto; }
+}
+@media (max-width: 420px) {
+  .ledger-page-header { align-items: flex-start; }
+  .ledger-header-actions { flex-direction: column-reverse; align-items: flex-end; gap: 0; }
+  .ledger-header-actions .ledger-text-button { min-height: 31px; }
+  .ledger-entry-card { padding: 17px 15px; }
+  .ledger-note-field, .ledger-date-field { grid-template-columns: 76px minmax(0, 1fr); gap: 8px; }
+  .ledger-member-edit-row { grid-template-columns: 36px minmax(0, 1fr) 32px auto; }
+  .ledger-member-edit-row .ledger-icon-button { grid-column: 4; grid-row: 1; }
+  .ledger-member-edit-row .ledger-text-button { grid-column: 4; grid-row: 2; }
+  .ledger-add-member-form { grid-template-columns: 42px minmax(0, 1fr) 34px; }
+  .ledger-add-member-form .ledger-secondary-button { grid-column: 2 / -1; }
+}
+@media (max-width: 360px) {
+  .ledger-member-metrics { gap: 5px; }
+  .ledger-member-metrics dd { font-size: 13px; }
+  .ledger-member-metrics dt { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger-person-visual .ledger-avatar { transition: none; }
+}
+
+/* Final ledger refinements. */
+.ledger-currency-dropdown { position: relative; }
+.ledger-currency-dropdown summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 11px; border: 1px solid rgba(19,38,47,.16); border-radius: 11px; color: var(--ink); background: #fbfcfb; cursor: pointer; list-style: none; font-size: 12px; font-weight: 760; }
+.ledger-currency-dropdown summary::-webkit-details-marker { display: none; }
+.ledger-currency-dropdown[open] summary { border-color: #9fc4c9; box-shadow: 0 0 0 3px rgba(40,123,144,.1); }
+.ledger-currency-dropdown summary > span:last-child { color: #879596; font-size: 13px; }
+.ledger-currency-menu { position: absolute; z-index: 6; top: calc(100% + 6px); left: 0; right: 0; display: grid; gap: 3px; max-height: 220px; padding: 6px; overflow: auto; border: 1px solid rgba(19,38,47,.12); border-radius: 12px; background: #fff; box-shadow: 0 14px 32px rgba(19,38,47,.14); }
+.ledger-currency-option { min-height: 38px; display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 7px; padding: 0 8px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; cursor: pointer; text-align: left; font-size: 11px; }
+.ledger-currency-option:hover, .ledger-currency-option[aria-current="true"] { color: var(--lake); background: #e7f2f3; }
+.ledger-currency-option b { font: 760 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.ledger-currency-option span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-field-amount .ledger-amount-input { min-height: 44px; padding: 0 12px; border: 1px solid rgba(19,38,47,.16); border-radius: 11px; background: #fbfcfb; }
+.ledger-converted-field { padding-top: 14px; padding-bottom: 0; }
+.ledger-converted-input-wrap { padding: 0 12px; border: 1px solid rgba(19,38,47,.15); border-radius: 11px; background: #fbfcfb; }
+.ledger-converted-field .ledger-input { border: 0 !important; background: transparent; }
+.ledger-person-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 15px 4px; }
+.ledger-person-choice { width: 48px; justify-self: start; }
+.ledger-members-inline { gap: 16px 14px; }
+.ledger-member-edit-row-static { grid-template-columns: 42px minmax(0, 1fr) auto; gap: 8px; }
+.ledger-member-edit-row-static strong { min-width: 0; overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-member-edit-actions { display: inline-flex; align-items: center; gap: 2px; }
+.ledger-member-edit-actions .ledger-text-button, .ledger-member-edit-actions .ledger-icon-button { min-height: 36px; padding-inline: 7px; font-size: 10px; }
+.ledger-member-edit-row-is-open { grid-template-columns: 42px minmax(0, 1fr) 34px auto auto; gap: 7px; }
+
+/* Keep the amount controls calm and aligned on the same baseline. */
+.ledger-currency-dropdown summary,
+.ledger-field-amount .ledger-amount-input { min-height: 44px; box-sizing: border-box; font-size: 13px; font-weight: 720; letter-spacing: 0; }
+.ledger-field-amount .ledger-amount-input { padding: 0 12px; text-align: right; }
+[data-ledger-currency-display] { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-currency-dropdown summary > span:first-child { flex: 1 1 auto; }
+.ledger-currency-dropdown .ledger-currency-menu { right: auto; width: min(180px, calc(100vw - 66px)); }
+/* The note occupies the secondary line in each bill and is always editable. */
+.ledger-bill-main { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+.ledger-bill-title-row > div { min-width: 0; }
+.ledger-bill-amount strong,
+.ledger-bill-amount span { white-space: nowrap; }
+.ledger-bill-note-trigger { width: 100%; min-height: 34px; display: flex; align-items: center; gap: 2px; min-width: 0; margin-top: 1px; padding: 3px 0; border: 0; border-radius: 6px; color: #778789; background: transparent; cursor: text; text-align: left; font-size: 10px; line-height: 1.4; }
+.ledger-bill-note-trigger span:first-child { flex: 0 0 auto; color: #95a0a1; }
+.ledger-bill-note-trigger span:last-child { min-width: 0; overflow: hidden; color: #5f7275; text-overflow: ellipsis; white-space: nowrap; }
+.ledger-bill-note-trigger:hover { background: #f5f8f7; }
+.ledger-bill-note-trigger:focus-visible { outline: 2px solid #9fc4c9; outline-offset: 2px; }
+.ledger-bill-note-form { min-width: 0; display: grid; grid-template-columns: auto minmax(68px, 1fr) 30px 30px; align-items: center; gap: 4px; margin-top: 3px; color: #95a0a1; font-size: 10px; }
+.ledger-bill-note-form input { width: 100%; min-width: 0; height: 32px; box-sizing: border-box; padding: 0 8px; border: 1px solid #b8ced1; border-radius: 7px; outline: 0; color: var(--ink); background: #fff; font: inherit; }
+.ledger-bill-note-form input:focus { border-color: var(--lake); box-shadow: 0 0 0 2px rgba(40,123,144,.09); }
+.ledger-bill-note-form button { width: 30px; height: 32px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 7px; color: var(--lake); background: #edf5f4; cursor: pointer; font-size: 13px; }
+.ledger-bill-note-form button:last-child { color: #879596; background: #f3f5f4; }
+.ledger-bill-note-form.ledger-is-saving { opacity: .6; }
+.ledger-bill-date { margin-top: 4px; color: #95a0a1; font-size: 10px; line-height: 1.4; }
+.ledger-member-edit-row-is-open .ledger-text-button, .ledger-member-edit-row-is-open .ledger-icon-button { min-height: 36px; padding-inline: 6px; font-size: 10px; }
+.ledger-currency-search .ledger-input { appearance: none; -webkit-appearance: none; border: 0 !important; outline: 0; box-shadow: none !important; background: transparent !important; }
+
+.ledger-transfer-list, .ledger-member-stats-list { display: grid; gap: 10px; border: 0; border-radius: 0; background: transparent; box-shadow: none; overflow: visible; }
+.ledger-transfer-row { min-height: 84px; grid-template-columns: 42px minmax(0, 1fr) auto; border: 1px solid rgba(19,38,47,.08); border-radius: 17px; background: #fff; box-shadow: 0 10px 26px rgba(18,42,50,.05); }
+.ledger-transfer-row + .ledger-transfer-row { border-top: 1px solid rgba(19,38,47,.08); }
+.ledger-transfer-amount { color: #b04439; font-size: 19px; }
+.ledger-member-stat { border: 1px solid rgba(19,38,47,.08); border-radius: 17px; background: #fff; box-shadow: 0 10px 26px rgba(18,42,50,.05); overflow: hidden; }
+.ledger-member-stat + .ledger-member-stat { border-top: 1px solid rgba(19,38,47,.08); }
+.ledger-member-stat-summary { min-height: 78px; padding: 14px 17px; }
+.ledger-member-chevron { color: #172d34; font-size: 27px; font-weight: 300; line-height: 1; transform: translateY(-1px); }
+.ledger-member-stat[open] .ledger-member-chevron { transform: rotate(90deg); }
+.ledger-member-stat-body { padding: 0 17px 17px; }
+.ledger-member-metrics { padding-top: 14px; }
+
+@media (max-width: 420px) {
+  .ledger-person-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap-inline: 1px; }
+  .ledger-person-choice { width: 46px; }
+  .ledger-member-edit-row { grid-template-columns: 36px minmax(0, 1fr) auto; gap: 6px; }
+  .ledger-member-edit-row-is-open { grid-template-columns: 36px minmax(0, 1fr) 31px auto auto; }
+  .ledger-member-edit-row .ledger-avatar { width: 36px; height: 36px; font-size: 14px; }
+  .ledger-member-edit-row-static .ledger-member-edit-actions { gap: 0; }
+  .ledger-member-edit-actions .ledger-text-button, .ledger-member-edit-actions .ledger-icon-button { padding-inline: 4px; }
+}
+
+
+/* v53: simplified JPY-only expense entry and compact expense list. */
+.ledger-amount-block {
+  width: min(100%, 351px);
+  grid-template-columns: minmax(144px, 165px) minmax(0, 176px);
+}
+.ledger-currency-fixed {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  color: var(--ink);
+  background: #f7f9f8;
+  font-size: 13px;
+  font-weight: 720;
+}
+.ledger-bill-title-row { align-items: flex-start; }
+.ledger-bill-title-row > div { display: grid; justify-items: start; gap: 6px; }
+.ledger-category-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border: 1px solid #c6dde0;
+  border-radius: 999px;
+  color: var(--lake);
+  background: #e7f2f3;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* v54: compact bill metadata/actions row */
+.ledger-bill-meta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 7px;
+}
+.ledger-bill-badges { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; }
+.ledger-date-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 999px;
+  color: #66777b;
+  background: #f3f5f4;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+.ledger-bill-meta-actions .ledger-row-actions { margin-top: 0; flex: 0 0 auto; }
+
+/* v55: cleaner entry/list headings and mobile-safe category statistics. */
+.ledger-entry-card .ledger-section-heading,
+.ledger-list-heading { align-items: center; }
+.ledger-entry-card .ledger-section-kicker,
+.ledger-list-heading .ledger-section-kicker { font-size: 14px; color: var(--ink); letter-spacing: 0; }
+.ledger-category-stats-heading { padding: 19px 16px 13px; }
+.ledger-category-stats-list { display: grid; }
+.ledger-category-stat-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-top: 1px solid rgba(19,38,47,.1);
+}
+.ledger-category-stat-row .ledger-category-badge { justify-self: start; }
+.ledger-category-stat-row > strong {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 760;
+  text-align: right;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .ledger-category-stat-row { gap: 8px; padding-inline: 14px; }
+  .ledger-category-stat-row > strong { font-size: 14px; }
+}
+
+/* v56: live JPY total conversion (TWD default, USD optional). */
+.ledger-list-heading { flex-wrap: wrap; }
+.ledger-exchange-converter {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 10px;
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(19,38,47,.08);
+}
+.ledger-exchange-select-wrap { display: grid; align-content: start; gap: 6px; color: #8c999a; font-size: 10px; }
+.ledger-exchange-select {
+  width: 100%;
+  min-height: 38px;
+  box-sizing: border-box;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  padding: 0 30px 0 10px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+.ledger-exchange-result { min-width: 0; display: grid; justify-items: end; align-content: start; gap: 4px; text-align: right; }
+.ledger-exchange-result > span { color: #8c999a; font-size: 10px; }
+.ledger-exchange-result > strong { color: var(--ink); font-size: 18px; line-height: 1.1; white-space: nowrap; }
+.ledger-exchange-result > small { max-width: 100%; color: #98a4a5; font-size: 9px; line-height: 1.35; }
+@media (max-width: 360px) {
+  .ledger-exchange-converter { grid-template-columns: 1fr; }
+  .ledger-exchange-result { justify-items: start; text-align: left; }
+}
+
+
+/* v57: converter belongs inside stats overview; align bill title and amount on one visual line. */
+.ledger-bill-main { align-items: center; }
+.ledger-bill-title-row { align-items: center; }
+.ledger-bill-title-row h3,
+.ledger-bill-amount strong { margin: 0; line-height: 1.2; }
+.ledger-stats-overview .ledger-exchange-converter {
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+/* v58: direct prep navigation and refined ledger summary/converter alignment. */
+.topbar .primary-navigation__prep {
+  position: relative;
+  min-height: 44px;
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 680;
+}
+.topbar .primary-navigation__prep[aria-current="page"] { color: var(--ink); }
+.topbar .primary-navigation__prep[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--lake);
+}
+.prep-view { min-height: calc(100vh - 48px); min-height: calc(100dvh - 48px); }
+.prep-view .prep-section { padding-top: 32px; }
+
+.ledger-list-heading { align-items: flex-end; padding-top: 13px; }
+.ledger-list-heading .ledger-section-kicker {
+  margin: 0;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 790;
+  letter-spacing: -.035em;
+}
+.ledger-list-heading .ledger-list-total { position: relative; display: block; gap: 0; }
+.ledger-list-heading .ledger-list-total span {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  white-space: nowrap;
+}
+.ledger-list-heading .ledger-list-total strong {
+  display: block;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.ledger-exchange-control { min-width: 0; display: grid; gap: 6px; }
+.ledger-exchange-rate { color: #98a4a5; font-size: 9px; line-height: 1.35; }
+.ledger-exchange-result { align-self: end; }
+
+/* v59: balanced expense summary header and inline converted currency total. */
+.ledger-list-heading {
+  min-height: 70px;
+  box-sizing: border-box;
+  padding: 15px 16px;
+  align-items: flex-end;
+}
+.ledger-list-heading .ledger-section-kicker {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 790;
+  letter-spacing: -.025em;
+}
+.ledger-list-heading .ledger-list-total {
+  position: static;
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+.ledger-list-heading .ledger-list-total span {
+  position: static;
+  color: #8c999a;
+  font-size: 10px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.ledger-list-heading .ledger-list-total strong {
+  display: block;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+.ledger-exchange-result {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 7px;
+  text-align: right;
+}
+.ledger-exchange-result > span,
+.ledger-exchange-result > strong {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+@media (max-width: 360px) {
+  .ledger-exchange-result {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+/* v60: compact currency picker with circular flags and centered converted total. */
+.ledger-exchange-select-wrap {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  color: inherit;
+  font-size: inherit;
+}
+.ledger-exchange-label {
+  display: block;
+  margin: 0;
+  color: #788688;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 720;
+}
+.ledger-exchange-picker {
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  background: #fff;
+}
+.ledger-exchange-option {
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  color: #788688;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.ledger-exchange-option + .ledger-exchange-option { border-left: 1px solid rgba(19,38,47,.10); }
+.ledger-exchange-option.is-selected { color: var(--ink); background: #f7f9f8; }
+.ledger-flag {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1px rgba(19,38,47,.08);
+}
+.ledger-flag--tw {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23fe0000'/%3E%3Crect width='24' height='24' fill='%23000095'/%3E%3Cg transform='translate(12 12)' fill='%23fff'%3E%3Ccircle r='4.6'/%3E%3Cg%3E%3Cpath d='M0-10 1.35-5.2-1.35-5.2z'/%3E%3Cpath d='M0 10 1.35 5.2-1.35 5.2z'/%3E%3Cpath d='M10 0 5.2 1.35 5.2-1.35z'/%3E%3Cpath d='M-10 0-5.2 1.35-5.2-1.35z'/%3E%3C/g%3E%3Cg transform='rotate(45)'%3E%3Cpath d='M0-10 1.35-5.2-1.35-5.2z'/%3E%3Cpath d='M0 10 1.35 5.2-1.35 5.2z'/%3E%3Cpath d='M10 0 5.2 1.35 5.2-1.35z'/%3E%3Cpath d='M-10 0-5.2 1.35-5.2-1.35z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.ledger-flag--us {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23fff'/%3E%3Cg fill='%23b22234'%3E%3Crect width='48' height='4' y='0'/%3E%3Crect width='48' height='4' y='8'/%3E%3Crect width='48' height='4' y='16'/%3E%3Crect width='48' height='4' y='24'/%3E%3Crect width='48' height='4' y='32'/%3E%3Crect width='48' height='4' y='40'/%3E%3Crect width='48' height='4' y='44'/%3E%3C/g%3E%3Crect width='23' height='25' fill='%233c3b6e'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='5' cy='5' r='1.2'/%3E%3Ccircle cx='12' cy='5' r='1.2'/%3E%3Ccircle cx='19' cy='5' r='1.2'/%3E%3Ccircle cx='8' cy='11' r='1.2'/%3E%3Ccircle cx='15' cy='11' r='1.2'/%3E%3Ccircle cx='5' cy='17' r='1.2'/%3E%3Ccircle cx='12' cy='17' r='1.2'/%3E%3Ccircle cx='19' cy='17' r='1.2'/%3E%3C/g%3E%3C/svg%3E");
+}
+.ledger-exchange-converter { align-items: end; }
+.ledger-exchange-result {
+  align-self: end;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 0;
+}
+.ledger-exchange-result > strong {
+  display: block;
+  margin: 0;
+  line-height: 1;
+}
+@media (max-width: 360px) {
+  .ledger-exchange-converter { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .ledger-exchange-result { justify-content: flex-end; text-align: right; }
+  .ledger-exchange-option { padding-inline: 7px; gap: 5px; }
+}
+
+/* v61: one-tap currency toggle, Google Map pill silhouette, and exact center-line amount alignment. */
+.ledger-exchange-picker { display: none; }
+.ledger-exchange-toggle {
+  width: fit-content;
+  min-width: 124px;
+  min-height: 38px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  padding: 5px 9px;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 999px;
+  color: var(--ink);
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+.ledger-exchange-toggle__code {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+}
+.ledger-exchange-toggle__divider {
+  width: 1px;
+  height: 20px;
+  margin-left: 2px;
+  background: rgba(19,38,47,.13);
+}
+.ledger-exchange-toggle__icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #788688;
+}
+.ledger-exchange-toggle__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ledger-exchange-toggle .ledger-flag { width: 17px; height: 17px; flex-basis: 17px; }
+.ledger-exchange-result {
+  align-self: start;
+  min-height: 38px;
+  margin-top: 21px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ledger-exchange-result > strong {
+  margin: 0;
+  line-height: 1;
+}
+@media (max-width: 360px) {
+  .ledger-exchange-toggle { min-width: 116px; padding-inline: 8px; gap: 6px; }
+  .ledger-exchange-result { margin-top: 21px; }
+}
+
+/* v62: keep every currency-toggle element on identical coordinates for TWD/USD. */
+.ledger-exchange-toggle {
+  width: 124px;
+  min-width: 124px;
+  display: grid;
+  grid-template-columns: 17px 28px 1px 18px;
+  column-gap: 7px;
+  justify-content: space-between;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.ledger-exchange-toggle .ledger-flag { width: 17px; height: 17px; justify-self: start; }
+.ledger-exchange-toggle__code { width: 28px; text-align: center; justify-self: center; }
+.ledger-exchange-toggle__divider { margin-left: 0; justify-self: center; }
+.ledger-exchange-toggle__icon { justify-self: end; }
+@media (max-width: 360px) {
+  .ledger-exchange-toggle { width: 124px; min-width: 124px; padding-left: 9px; padding-right: 9px; column-gap: 7px; }
+}
+
+/* v64: single-page ledger and secondary-page header alignment. */
+.ledger-app { padding-top: 32px; }
+.ledger-page-header { display: block; margin: 0 0 16px; }
+.ledger-page-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  line-height: normal;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.ledger-page-header h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 820;
+}
+.ledger-single-page > .ledger-stats-overview { margin-top: 0; }
+.ledger-single-page > .ledger-entry-card,
+.ledger-single-page > .ledger-list-section { margin-top: 28px; }
+.ledger-list-heading { min-height: 0; align-items: center; }
+.ledger-category-stats-heading .ledger-section-kicker {
+  margin: 0;
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 790;
+  letter-spacing: -.025em;
+}
+
+/* v66: exact secondary-header rhythm + entry-card heading matches expense-list heading. */
+.accommodation-view .section-heading > div,
+.prep-view .section-heading > div,
+.ledger-page-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.accommodation-view .section-kicker,
+.prep-view .section-kicker,
+.ledger-page-kicker {
+  margin: 0;
+}
+.accommodation-view .section-heading h2,
+.prep-view .section-heading h2,
+.ledger-page-header h1 {
+  margin: 0;
+}
+
+/* Make 「記一筆」 use the same title treatment as 「支出明細」. */
+.ledger-entry-card {
+  padding: 0 20px 20px;
+}
+.ledger-entry-card .ledger-section-heading {
+  margin: 0 -20px;
+  padding: 19px 16px 15px;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(19,38,47,.1);
+}
+.ledger-entry-card .ledger-section-kicker,
+.ledger-list-heading .ledger-section-kicker {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+.ledger-entry-card .ledger-bill-form {
+  margin-top: 19px;
+}
+
+
+/* v67: cleaner ledger header + long-press expense actions. */
+.ledger-bill-row .ledger-row-actions {
+  display: none;
+}
+.ledger-bill-row.is-actions-visible .ledger-row-actions {
+  display: flex;
+}
+.ledger-bill-row.is-actions-visible {
+  background: rgba(19, 38, 47, .025);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ledger-bill-row { cursor: default; }
+}
+
+/* v68: swipe-left expense actions (edit + delete). */
+.ledger-bill-row {
+  overflow: hidden;
+  padding: 0;
+  touch-action: pan-y;
+  background: #fff;
+}
+.ledger-bill-content {
+  position: relative;
+  z-index: 2;
+  padding: 15px 16px 12px;
+  background: inherit;
+  transform: translateX(0);
+  will-change: transform;
+}
+.ledger-bill-content.is-animating {
+  transition: transform 180ms ease-out;
+}
+.ledger-swipe-actions {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 auto;
+  width: 132px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ledger-swipe-actions button {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 760;
+  cursor: pointer;
+}
+.ledger-swipe-edit { background: #68777d; }
+.ledger-swipe-delete { background: #c65a4b; }
+.ledger-bill-row .ledger-row-actions { display: none !important; }
+
+/* v69: ledger visual refinements. */
+.ledger-swipe-edit { background: #E59C19; }
+
+.ledger-currency-fixed {
+  gap: 7px;
+}
+.ledger-currency-fixed .ledger-flag { width: 17px; height: 17px; flex-basis: 17px; }
+.ledger-flag--jp {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23fff'/%3E%3Ccircle cx='24' cy='24' r='10' fill='%23bc002d'/%3E%3C/svg%3E");
+}
+.ledger-currency-fixed__code {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.ledger-note-field .ledger-field-label,
+.ledger-date-field .ledger-field-label {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 760;
+}
+.ledger-note-field .ledger-field-label small,
+.ledger-date-field .ledger-field-label small {
+  margin-left: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.ledger-bill-content { padding-top: 13px; }
+.ledger-bill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ledger-bill-title-row h3 {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 760;
+}
+.ledger-bill-amount strong {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 760;
+}
+
+/* v70: refine ledger hierarchy and metadata presentation. */
+/* JPY-only entry: text only, no flag. */
+.ledger-currency-fixed { gap: 0; }
+.ledger-currency-fixed__code {
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 720;
+}
+
+/* Form labels return to a lighter field-label hierarchy. */
+.ledger-note-field .ledger-field-label,
+.ledger-date-field .ledger-field-label {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.ledger-note-field .ledger-field-label small,
+.ledger-date-field .ledger-field-label small {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Expense metadata is plain text above the item name. */
+.ledger-bill-badges {
+  gap: 7px;
+  margin-bottom: 5px;
+}
+.ledger-bill-badges .ledger-category-badge,
+.ledger-bill-badges .ledger-date-badge {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.ledger-bill-badges .ledger-category-badge { color: var(--lake); }
+.ledger-bill-badges .ledger-date-badge { color: #7f8b8d; }
+.ledger-bill-title-row h3 {
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.ledger-bill-amount strong {
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 760;
+}
+.ledger-bill-content { padding-bottom: 12px; }
+
+/* Match 「各類別支出」 heading to 「支出明細」. */
+.ledger-category-stats-heading {
+  padding: 19px 16px 15px;
+  align-items: flex-end;
+}
+.ledger-category-stats-heading .ledger-section-kicker {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+
+/* v71: date-field placeholder + category statistics hierarchy. */
+.ledger-date-field .ledger-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: none;
+}
+.ledger-date-field .ledger-input::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+.ledger-date-field .ledger-input::placeholder {
+  color: #9aa5a6;
+  opacity: 1;
+}
+
+/* Category statistics use the same plain-text hierarchy as expense details. */
+.ledger-category-stat-row .ledger-category-badge {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.ledger-category-stat-row > strong {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 760;
+}
+@media (max-width: 420px) {
+  .ledger-category-stat-row > strong { font-size: 17px; }
+}
+
+/* v72: unify date placeholder with note placeholder; category stats use expense-detail blue. */
+.ledger-note-field .ledger-input::placeholder,
+.ledger-date-field .ledger-input::placeholder {
+  color: #757575;
+  opacity: 1;
+  font: inherit;
+}
+.ledger-category-stat-row .ledger-category-badge {
+  color: var(--lake);
+}
+
+/* v73: switch expense details and analysis in one compact segmented view. */
+.ledger-view-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-top: 22px;
+  padding: 3px;
+  border-radius: 14px;
+  background: #eef0ef;
+}
+.ledger-view-switcher button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 11px;
+  color: #788486;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 680;
+  transition: background .16s ease, color .16s ease, box-shadow .16s ease;
+}
+.ledger-view-switcher button[aria-selected="true"] {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 2px 8px rgba(19,38,47,.12);
+}
+.ledger-detail-panel,
+.ledger-analysis-panel {
+  margin-top: 12px;
+}
+.ledger-detail-panel .ledger-bill-row:first-child,
+.ledger-analysis-details .ledger-bill-row:first-child { border-top: 0; }
+
+.ledger-analysis-panel {
+  overflow: hidden;
+  border: 1px solid rgba(19,38,47,.1);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(18,42,50,.055), 0 1px 3px rgba(18,42,50,.035);
+}
+.ledger-donut-wrap {
+  display: grid;
+  place-items: center;
+  padding: 25px 16px 18px;
+}
+.ledger-donut {
+  width: 172px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  position: relative;
+}
+.ledger-donut-svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+}
+.ledger-donut::after {
+  content: "";
+  position: absolute;
+  inset: 25px;
+  border-radius: 50%;
+  background: #fff;
+}
+.ledger-donut-center {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  text-align: center;
+}
+.ledger-donut-center span { color: #8a9698; font-size: 11px; font-weight: 500; }
+.ledger-donut-center strong { color: var(--ink); font-size: 18px; line-height: 1.2; font-weight: 760; }
+.ledger-analysis-totals { padding: 0 16px 12px; }
+.ledger-analysis-total-row {
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid rgba(19,38,47,.08);
+}
+.ledger-analysis-total-row:first-child { border-top: 0; }
+.ledger-analysis-category { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 14px; font-weight: 500; }
+.ledger-analysis-category i { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--category-color); }
+.ledger-analysis-category small { color: #98a3a5; font-size: 11px; font-weight: 500; }
+.ledger-analysis-total-row > strong { color: var(--ink); font-size: 15px; font-weight: 760; }
+.ledger-analysis-category-tabs {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 4px 16px 0;
+  border-top: 1px solid rgba(19,38,47,.1);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.ledger-analysis-category-tabs::-webkit-scrollbar { display: none; }
+.ledger-analysis-category-tabs button {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding: 0 1px;
+  border: 0;
+  color: #8a9698;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ledger-analysis-category-tabs button[aria-selected="true"] { color: var(--ink); }
+.ledger-analysis-category-tabs button[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: #e59c19;
+}
+.ledger-analysis-details { border-top: 1px solid rgba(19,38,47,.1); }
+
+/* v74: lighter segmented controls, category progress lines, separate analysis details card. */
+.ledger-view-switcher {
+  gap: 3px;
+  padding: 4px;
+  border-radius: 16px;
+  background: #f3f2ef;
+}
+.ledger-view-switcher button {
+  min-height: 38px;
+  border-radius: 12px;
+  color: #7f898b;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+}
+.ledger-view-switcher button[aria-selected="true"] {
+  color: #fff;
+  background: #e59c19;
+  box-shadow: none;
+}
+
+.ledger-analysis-panel {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.ledger-donut-wrap,
+.ledger-analysis-totals {
+  background: #fff;
+}
+.ledger-donut-wrap {
+  border: 1px solid rgba(19,38,47,.1);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+}
+.ledger-analysis-totals {
+  padding: 0 16px 16px;
+  border: 1px solid rgba(19,38,47,.1);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  box-shadow: none;
+}
+.ledger-analysis-total-row {
+  min-height: 58px;
+  display: block;
+  padding: 9px 0 8px;
+  border-top: 0;
+}
+.ledger-analysis-total-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 7px;
+}
+.ledger-analysis-category {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+.ledger-analysis-category i { display: none; }
+.ledger-analysis-category small { color: #98a3a5; font-size: 11px; font-weight: 500; }
+.ledger-analysis-total-row > strong,
+.ledger-analysis-total-copy > strong { color: var(--ink); font-size: 15px; font-weight: 760; }
+.ledger-analysis-progress {
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e4e7e6;
+}
+.ledger-analysis-progress > span {
+  display: block;
+  width: var(--category-percent);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--category-color);
+}
+
+.ledger-analysis-category-tabs {
+  display: flex;
+  gap: 3px;
+  margin-top: 12px;
+  padding: 4px;
+  overflow-x: auto;
+  border: 0;
+  border-radius: 16px;
+  background: #f3f2ef;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.ledger-analysis-category-tabs button {
+  position: static;
+  flex: 1 0 auto;
+  min-width: 58px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  color: #7f898b;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ledger-analysis-category-tabs button[aria-selected="true"] {
+  color: #fff;
+  background: #e59c19;
+}
+.ledger-analysis-category-tabs button[aria-selected="true"]::after { display: none; }
+.ledger-analysis-details {
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(19,38,47,.1);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(18,42,50,.055), 0 1px 3px rgba(18,42,50,.035);
+}
+
+/* v75: two-level rounded segmented controls + restored native date picker. */
+.ledger-view-switcher {
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
+  background: #f3f2ef;
+}
+.ledger-view-switcher button {
+  min-height: 38px;
+  border-radius: 999px;
+  color: #687578;
+  background: transparent;
+}
+.ledger-view-switcher button[aria-selected="true"] {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 2px 7px rgba(19,38,47,.14);
+}
+
+.ledger-analysis-category-tabs {
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+.ledger-analysis-category-tabs button {
+  min-height: 36px;
+  border-radius: 999px;
+  color: rgba(255,255,255,.78);
+  background: transparent;
+}
+.ledger-analysis-category-tabs button[aria-selected="true"] {
+  color: #fff;
+  background: #e59c19;
+}
+
+.ledger-date-field {
+  position: relative;
+}
+.ledger-date-field .ledger-input[type="date"] {
+  position: relative;
+  z-index: 1;
+  appearance: auto;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.ledger-date-field .ledger-input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.ledger-date-field.is-empty .ledger-input[type="date"] {
+  color: transparent;
+}
+.ledger-date-field.is-empty::after {
+  content: "選填";
+  position: absolute;
+  z-index: 2;
+  left: 98px;
+  top: 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  color: #757575;
+  font-size: 13px;
+  font-weight: 400;
+  pointer-events: none;
+}
+@media (max-width: 420px) {
+  .ledger-date-field.is-empty::after { left: 86px; }
+}
+
+/* v76: date placeholder alignment, balanced analysis selector, custom analysis palette + donut spacing. */
+.ledger-date-field.is-empty::after {
+  left: 12px;
+  top: calc(1.3em + 7px);
+  height: 40px;
+}
+@media (max-width: 420px) {
+  .ledger-date-field.is-empty::after { left: 12px; }
+}
+.ledger-analysis-category-tabs {
+  box-sizing: border-box;
+  padding-left: 6px;
+  padding-right: 6px;
+  scroll-padding-inline: 6px;
+}
+.ledger-analysis-category-tabs button:last-child { margin-right: 0; }
+
+/* v77: stable custom date display, unified segmented controls, refreshed analysis palette. */
+.ledger-date-field {
+  position: relative;
+}
+.ledger-date-control {
+  position: relative;
+  min-width: 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.ledger-date-display {
+  width: 100%;
+  padding: 0 12px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ledger-date-field.is-empty .ledger-date-display { color: #757575; }
+.ledger-date-field .ledger-date-native {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.ledger-date-field .ledger-date-native::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.ledger-date-field.is-empty::after { content: none; display: none; }
+
+.ledger-analysis-category-tabs {
+  gap: 4px;
+  padding: 5px 6px;
+  border-radius: 999px;
+  background: #f3f2ef;
+}
+.ledger-analysis-category-tabs button {
+  min-height: 36px;
+  border-radius: 999px;
+  color: #687578;
+  background: transparent;
+}
+.ledger-analysis-category-tabs button[aria-selected="true"] {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 2px 7px rgba(19,38,47,.14);
+}
+
+/* v78: spacing polish, larger analysis donut, prep cards, dark stats card, swipe-mask fix. */
+/* Secondary-page title to first content: double the v77 16px rhythm. */
+.accommodation-view .section-heading,
+.prep-view .section-heading,
+.ledger-page-header {
+  margin-bottom: 32px;
+}
+
+/* Ledger vertical rhythm: use the stats -> entry gap as the standard. */
+.ledger-view-switcher { margin-top: 28px; }
+.ledger-single-page > .ledger-detail-panel,
+.ledger-single-page > .ledger-analysis-panel { margin-top: 12px; }
+
+/* Larger donut while keeping the same hollow-ring treatment. */
+.ledger-donut { width: 210px; }
+.ledger-donut::after { inset: 31px; }
+
+/* Prevent the swipe action colors from bleeding through row separators. */
+.ledger-bill-row { isolation: isolate; background: #fff; }
+.ledger-bill-content {
+  z-index: 2;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(19,38,47,.10);
+}
+.ledger-swipe-actions { z-index: 0; }
+
+/* Prep checklist: compact individual cards with circular check and icon-only delete. */
+
+
+
+
+
+
+
+/* First ledger card: dark default surface with adjusted text/control contrast. */
+.ledger-stats-overview {
+  color: #fff;
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 0 14px 34px rgba(19,38,47,.16);
+}
+.ledger-stats-overview .ledger-section-kicker,
+.ledger-stats-overview h2 { color: #fff; }
+.ledger-stats-overview > span,
+.ledger-stats-overview .ledger-exchange-label,
+.ledger-stats-overview .ledger-exchange-rate,
+.ledger-stats-overview .ledger-exchange-result > span,
+.ledger-stats-overview .ledger-exchange-result > small { color: rgba(255,255,255,.62); }
+.ledger-stats-overview .ledger-exchange-result > strong { color: #fff; }
+.ledger-stats-overview .ledger-exchange-converter { border-top-color: rgba(255,255,255,.14); }
+.ledger-stats-overview .ledger-exchange-toggle {
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.18);
+}
+.ledger-stats-overview .ledger-exchange-toggle__divider { background: rgba(255,255,255,.22); }
+.ledger-stats-overview .ledger-exchange-toggle__icon { color: rgba(255,255,255,.82); }
+
+/* v79: unified prep list card + analysis typography/palette refinements. */
+/* One large checklist card; rows are separated by a subtle line starting at the checkbox. */
+
+
+
+
+
+
+
+
+/* Percentage text matches the category label size. */
+.ledger-analysis-category small { font-size: 14px; }
+
+/* v80: requested ledger/prep refinements. */
+/* Analysis detail rows already sit under a selected category, so omit redundant metadata spacing. */
+.ledger-analysis-details .ledger-bill-content { padding-top: 15px; }
+
+/* Currency toggle: white pill on the dark stats card. */
+.ledger-stats-overview .ledger-exchange-toggle {
+  color: var(--ink);
+  background: #fff;
+  border-color: rgba(255,255,255,.82);
+}
+.ledger-stats-overview .ledger-exchange-toggle__divider { background: rgba(19,38,47,.16); }
+.ledger-stats-overview .ledger-exchange-toggle__icon { color: #657477; }
+
+/* Prep: 20% smaller circular checkbox; divider reaches the delete-X column. */
+
+
+
+/* Swipe rows: the separator belongs to the opaque foreground, never to the action layer. */
+.ledger-bill-row {
+  overflow: hidden;
+  border-top: 0;
+  background: #fff;
+  isolation: isolate;
+}
+.ledger-bill-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100%;
+  background: #fff;
+  box-shadow: none;
+}
+.ledger-bill-row + .ledger-bill-row .ledger-bill-content::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(19,38,47,.10);
+  pointer-events: none;
+}
+.ledger-swipe-actions {
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* v81: final visual refinements and robust swipe-action concealment. */
+/* Prep delete is deliberately quiet visually while keeping its 44px touch target. */
+
+
+/* Softer currency-conversion control on the dark overview card. */
+.ledger-stats-overview .ledger-exchange-toggle {
+  color: var(--ink);
+  background: #F1F3F2;
+  border-color: rgba(241,243,242,.82);
+}
+.ledger-stats-overview .ledger-exchange-toggle__divider { background: rgba(19,38,47,.14); }
+.ledger-stats-overview .ledger-exchange-toggle__icon { color: #657477; }
+
+/* Entry categories: selected state uses the site's default dark surface. */
+.ledger-category-choice:has(input:checked) {
+  border-color: #13262F;
+  color: #fff;
+  background: #13262F;
+}
+
+/* Swipe actions do not exist visually until the row is actually being revealed. */
+.ledger-swipe-actions {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ledger-bill-row.is-swipe-revealing .ledger-swipe-actions,
+.ledger-bill-row.is-swipe-open .ledger-swipe-actions {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Detail amounts use the same weight as their item names. */
+.ledger-detail-panel .ledger-bill-amount strong { font-weight: 500; }
+
+/* Analysis item rows match the category/percentage typography above. */
+.ledger-analysis-details .ledger-bill-title-row h3,
+.ledger-analysis-details .ledger-bill-amount strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* v82: latest confirmed visual refinements. */
+/* Analysis summary amounts use the same weight as category/percentage text. */
+.ledger-analysis-total-row > strong,
+.ledger-analysis-total-copy > strong {
+  font-weight: 500;
+}
+
+/* Primary save action uses the site's warm action accent. */
+.ledger-primary-button {
+  color: #fff;
+  background: #E59C19;
+}
+
+/* Prep item copy is one step larger while remaining vertically centered. */
+
+
+/* v83: polished empty states for prep and ledger analysis. */
+/* Empty prep checklist stays inside the unified card and is visually centered. */
+
+
+/* With no ledger data, keep the donut and its explanatory copy in one complete card. */
+.ledger-analysis-panel.is-empty .ledger-donut-wrap {
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  box-shadow: none;
+}
+.ledger-analysis-panel.is-empty .ledger-analysis-empty-summary {
+  margin: 0;
+  padding: 4px 16px 24px;
+  border: 1px solid rgba(19,38,47,.1);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(18,42,50,.055), 0 1px 3px rgba(18,42,50,.035);
+}
+
+
+/* v84: unify empty-state typography and make zero-data analysis fully interactive. */
+
+
+/* Donut + zero-data explanation are one visual card with one background. */
+.ledger-analysis-panel.is-empty .ledger-analysis-empty-card {
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(18,42,50,.025), 0 1px 2px rgba(18,42,50,.015);
+}
+.ledger-analysis-panel.is-empty .ledger-analysis-empty-card .ledger-donut-wrap {
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+.ledger-analysis-panel.is-empty .ledger-analysis-empty-card .ledger-analysis-empty-summary {
+  margin: 0;
+  padding: 10px 16px 20px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+/* v85: long-press expense actions replace swipe actions. */
+.ledger-bill-row {
+  overflow: visible;
+  touch-action: pan-y;
+}
+.ledger-bill-content {
+  transform: none !important;
+  will-change: auto;
+}
+.ledger-swipe-actions { display: none !important; }
+.ledger-longpress-actions {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  top: 50%;
+  width: min(calc(100vw - 40px), 380px);
+  min-height: 134px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 10px;
+  padding: 24px 22px 18px;
+  border: 1px solid rgba(19,38,47,.14);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 22px 70px rgba(19,38,47,.28);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(.96);
+  transition: opacity 120ms ease, transform 120ms ease, visibility 120ms ease;
+}
+.ledger-bill-row.is-actions-visible .ledger-longpress-actions {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+.ledger-longpress-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.ledger-longpress-cancel { background: #E8EBF0; color: #13262F !important; }
+.ledger-longpress-delete { background: #81021F; }
+.ledger-entry-card .ledger-section-heading .ledger-text-button {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+/* v87: align edit header and center long-press actions. */
+.ledger-entry-card .ledger-section-heading:has([data-ledger-action="cancel-edit"]) {
+  align-items: center;
+}
+.ledger-entry-card .ledger-section-heading:has([data-ledger-action="cancel-edit"]) h2,
+.ledger-entry-card .ledger-section-heading [data-ledger-action="cancel-edit"] {
+  font-size: 19px;
+  line-height: 1.2;
+}
+.ledger-entry-card .ledger-section-heading [data-ledger-action="cancel-edit"] {
+  min-height: 0;
+  padding-block: 0;
+}
+.ledger-longpress-actions {
+  align-items: center;
+  padding: 22px;
+}
+.ledger-longpress-cancel {
+  background: #E8EBF0;
+  color: #13262F !important;
+}
+
+
+/* v88: modal backdrop for long-press expense actions. */
+.ledger-longpress-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(7, 18, 22, .28);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.ledger-longpress-actions {
+  z-index: 9999;
+  background: #fff !important;
+  opacity: 0;
+  isolation: isolate;
+}
+.ledger-bill-row.is-actions-visible .ledger-longpress-actions {
+  opacity: 1;
+}
+
+/* v89: keep the long-press action panel sharp above the blurred backdrop.
+   Bill rows normally use isolation to protect separators, but that traps the
+   fixed modal inside a lower stacking context. Release isolation only while
+   its modal is open so the z-index 9999 panel sits above the z-index 9998
+   backdrop; the rest of the page remains behind the backdrop and blurred. */
+.ledger-bill-row.is-actions-visible {
+  isolation: auto;
+}
+
+/* v91: when editing an expense, align the viewport to the edit heading row. */
+.ledger-entry-card .ledger-section-heading:has([data-ledger-action="cancel-edit"]) {
+  scroll-margin-top: 8px;
+}
+
+
+/* v104: unify expense-entry field labels and control surfaces to the note-field baseline. */
+.ledger-bill-form .ledger-field-label,
+.ledger-bill-form .ledger-fieldset legend {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.ledger-bill-form .ledger-note-field .ledger-field-label,
+.ledger-bill-form .ledger-date-field .ledger-field-label {
+  margin: 0;
+}
+.ledger-bill-form .ledger-currency-fixed,
+.ledger-bill-form .ledger-field-amount .ledger-amount-input,
+.ledger-bill-form .ledger-note-field .ledger-input,
+.ledger-bill-form .ledger-date-control {
+  min-height: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  background: #fff;
+}
+.ledger-bill-form .ledger-currency-fixed,
+.ledger-bill-form .ledger-field-amount .ledger-amount-input {
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+}
+
+/* v105: streamlined JPY entry, thousand separators, balanced category tabs, and unified placeholders. */
+.ledger-stats-overview .ledger-exchange-label {
+  color: #fff;
+}
+
+.ledger-bill-form .ledger-amount-block {
+  width: 100%;
+  display: block;
+}
+.ledger-bill-form .ledger-field-amount {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+.ledger-bill-form .ledger-field-amount .ledger-field-label {
+  margin: 0;
+}
+.ledger-amount-control {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  background: #fff;
+}
+.ledger-amount-code {
+  flex: 0 0 auto;
+  padding-left: 12px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 500;
+}
+.ledger-bill-form .ledger-field-amount .ledger-amount-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 38px;
+  height: 38px;
+  padding: 0 12px 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: right;
+}
+.ledger-bill-form .ledger-field-amount .ledger-amount-input:focus {
+  border: 0;
+  box-shadow: none;
+}
+.ledger-bill-form .ledger-field-amount .ledger-amount-input::placeholder,
+.ledger-bill-form .ledger-note-field .ledger-input::placeholder {
+  color: #757575;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.ledger-category-choice {
+  min-height: 38px;
+  padding-inline: clamp(2px, 1vw, 14px);
+  font-size: 14px;
+}
+@media (max-width: 420px) {
+  .ledger-bill-form .ledger-field-amount {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .ledger-category-choice {
+    min-height: 36px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 340px) {
+  .ledger-category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ledger-analysis-category-tabs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  padding: 5px 6px;
+  overflow: visible;
+  scroll-padding-inline: 0;
+}
+.ledger-analysis-category-tabs button {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 0 2px;
+  font-size: 14px;
+}
+
+
+/* v106: expense fields use a consistent two-line label/control rhythm and a directly interactive native date input. */
+.ledger-bill-form .ledger-field-amount,
+.ledger-bill-form .ledger-note-field,
+.ledger-bill-form .ledger-date-field {
+  display: block;
+  grid-template-columns: none;
+  align-items: initial;
+  gap: 0;
+}
+.ledger-bill-form .ledger-field-amount .ledger-field-label,
+.ledger-bill-form .ledger-note-field .ledger-field-label,
+.ledger-bill-form .ledger-date-field .ledger-field-label {
+  display: block;
+  margin: 0 0 7px;
+}
+.ledger-bill-form .ledger-note-field,
+.ledger-bill-form .ledger-date-field {
+  padding-top: 14px;
+}
+.ledger-bill-form .ledger-amount-control,
+.ledger-bill-form .ledger-note-field .ledger-input,
+.ledger-bill-form .ledger-date-control {
+  width: 100%;
+}
+
+/* The input itself now receives taps; no transparent full-control overlay. */
+.ledger-bill-form .ledger-date-control {
+  position: relative;
+  min-height: 40px;
+  height: 40px;
+  overflow: visible;
+}
+.ledger-bill-form .ledger-date-field .ledger-date-native {
+  position: relative;
+  z-index: 1;
+  inset: auto;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  opacity: 1;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: auto;
+  font-size: 13px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+.ledger-bill-form .ledger-date-field .ledger-date-native::-webkit-calendar-picker-indicator {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  opacity: .55;
+  cursor: pointer;
+}
+.ledger-date-placeholder {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  top: 0;
+  height: 40px;
+  align-items: center;
+  color: #757575;
+  font-size: 13px;
+  font-weight: 400;
+  pointer-events: none;
+}
+.ledger-date-field.is-empty .ledger-date-placeholder { display: flex; }
+.ledger-date-field.is-empty .ledger-date-native {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit,
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit-fields-wrapper,
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit-text,
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit-month-field,
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit-day-field,
+.ledger-date-field.is-empty .ledger-date-native::-webkit-datetime-edit-year-field {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.ledger-date-field.is-empty .ledger-date-native::-webkit-calendar-picker-indicator {
+  opacity: .55;
+}
+
+@media (max-width: 420px) {
+  .ledger-bill-form .ledger-field-amount {
+    display: block;
+  }
+}
+
+
+/* v107: restore v104 selection copy and make the native date control reliably tappable on mobile. */
+.ledger-category-choice {
+  font-size: 10px;
+}
+.ledger-analysis-category-tabs button {
+  font-size: 13px;
+}
+@media (max-width: 420px) {
+  .ledger-category-choice { font-size: 10px; }
+  .ledger-analysis-category-tabs button { font-size: 13px; }
+}
+
+.ledger-bill-form .ledger-date-field .ledger-date-native {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  opacity: 1;
+  cursor: pointer;
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+  pointer-events: auto;
+}
+.ledger-bill-form .ledger-date-field .ledger-date-native::-webkit-calendar-picker-indicator {
+  display: block !important;
+  -webkit-appearance: auto !important;
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  opacity: .55;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.ledger-date-placeholder {
+  pointer-events: none;
+}
+
+
+/* v108: align ledger long-press delete confirmation with the prep-page modal. */
+.ledger-longpress-actions {
+  min-height: 0;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 22px;
+}
+.ledger-longpress-message {
+  grid-column: 1 / -1;
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+}
+
+
+/* v109: shared delete modal, aligned entry labels, and title-free new-expense form. */
+.ledger-entry-card.is-new-bill {
+  padding-top: 20px;
+}
+.ledger-entry-card.is-new-bill .ledger-bill-form {
+  margin-top: 0;
+}
+.ledger-bill-form .ledger-fieldset > legend {
+  padding-inline: 0;
+  margin-left: 0;
+}
+
+/* One shared long-press confirmation component for Prep and Ledger. */
+.shared-delete-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(7,18,22,.28);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.shared-delete-dialog {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  width: min(calc(100vw - 40px), 380px);
+  box-sizing: border-box;
+  padding: 22px;
+  border: 1px solid rgba(19,38,47,.14);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 22px 70px rgba(19,38,47,.28);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.96);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+.shared-delete-dialog.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.shared-delete-message {
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+}
+.shared-delete-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.shared-delete-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.shared-delete-cancel {
+  color: #13262F;
+  background: #E8EBF0;
+}
+.shared-delete-danger {
+  color: #fff;
+  background: #81021F;
+}
+.shared-delete-danger:disabled { opacity: .65; cursor: wait; }
+
+/* v110: mobile-friendly 3 x 2 selection layout for ledger categories. */
+@media (max-width: 600px) {
+  .ledger-category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .ledger-category-choice {
+    min-height: 41px;
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+}
+
+/* v111: unified 48px entry controls, clearer category surfaces, and doubled field-group spacing. */
+.ledger-category-choice:not(.ledger-sheet-category-choice):not(:has(input:checked)) {
+  background: #ECEFF1;
+}
+
+.ledger-bill-form .ledger-amount-control,
+.ledger-bill-form .ledger-note-field .ledger-input,
+.ledger-bill-form .ledger-date-control {
+  min-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+}
+.ledger-bill-form .ledger-field-amount .ledger-amount-input {
+  min-height: 46px;
+  height: 46px;
+}
+.ledger-bill-form .ledger-date-field .ledger-date-native {
+  min-height: 48px;
+  height: 48px;
+}
+.ledger-date-placeholder { height: 48px; }
+
+/* Double the space from the previous control/group to the next field title. */
+.ledger-bill-form .ledger-fieldset { margin-top: 36px; }
+.ledger-bill-form .ledger-note-field,
+.ledger-bill-form .ledger-date-field { padding-top: 28px; }
+
+
+/* v112: 44px ledger controls, unified 22px field rhythm, and first-line checklist alignment. */
+.ledger-bill-form .ledger-amount-control,
+.ledger-bill-form .ledger-note-field .ledger-input,
+.ledger-bill-form .ledger-date-control {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+}
+.ledger-bill-form .ledger-field-amount .ledger-amount-input {
+  min-height: 42px;
+  height: 42px;
+}
+.ledger-bill-form .ledger-date-field .ledger-date-native {
+  min-height: 44px;
+  height: 44px;
+}
+.ledger-date-placeholder { height: 44px; }
+
+/* One consistent gap from the previous control/group to the next field title. */
+.ledger-bill-form .ledger-fieldset { margin-top: 22px; }
+.ledger-bill-form .ledger-note-field,
+.ledger-bill-form .ledger-date-field { padding-top: 22px; }
+
+/* Multi-line prep items: controls follow the first text line rather than the row center. */
+
+
+
+
+
+/* v117: dashboard-style expense summary.
+   The primary row is baseline-aligned; the lower cards are a 30% white overlay. */
+.ledger-summary-layout {
+  --ledger-summary-gap: 12px;
+  margin-top: 0;
+}
+.ledger-summary-card {
+  min-width: 0;
+  box-sizing: border-box;
+}
+.ledger-summary-card--primary {
+  padding: 48px 24px 24px;
+  display: grid;
+  gap: 18px;
+  color: #fff;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(19,38,47,.16);
+}
+.ledger-summary-primary-content {
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0;
+}
+.ledger-summary-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ledger-summary-gap);
+}
+.ledger-summary-card--secondary {
+  padding: 14px 13px 12px;
+  display: grid;
+  align-content: start;
+  grid-template-rows: auto auto auto;
+  gap: 0;
+  color: var(--ink);
+  background: rgba(255,255,255,.30);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.ledger-summary-label {
+  margin: 0;
+  color: #667679;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 780;
+  letter-spacing: .01em;
+}
+.ledger-summary-card--primary > .ledger-summary-primary-content .ledger-summary-label {
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+}
+.ledger-summary-card--secondary .ledger-summary-label {
+  margin-bottom: 16px;
+}
+.ledger-summary-amount {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+}
+.ledger-summary-card--secondary .ledger-summary-amount {
+  margin-bottom: 4px;
+}
+.ledger-summary-amount .ledger-summary-symbol {
+  flex: 0 0 auto;
+  color: #56686c;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 780;
+  letter-spacing: -.02em;
+}
+.ledger-summary-amount strong {
+  min-width: 0;
+  color: var(--ink);
+  font-family: "Inter", "Nimbus Sans L", Arial, sans-serif;
+  font-size: 28px;
+  line-height: .98;
+  font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -.045em;
+}
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="5"] { font-size: 26px; }
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="6"] { font-size: 24px; }
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="7plus"] { font-size: 22px; }
+.ledger-summary-amount--primary {
+  flex: 0 1 auto;
+  justify-content: flex-end;
+  gap: 7px;
+}
+.ledger-summary-amount--primary .ledger-summary-symbol {
+  color: #fff;
+  font-size: clamp(20px, 6.1vw, 22px);
+}
+.ledger-summary-amount--primary strong {
+  color: #fff;
+  font-size: clamp(44px, 14.5vw, 52px);
+  line-height: .94;
+}
+.ledger-summary-rate {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(19,38,47,.70);
+  font-size: 9px;
+  line-height: 1.35;
+  font-weight: 560;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 360px) {
+  .ledger-summary-layout { --ledger-summary-gap: 10px; }
+  .ledger-summary-card--secondary { padding-inline: 11px; }
+  .ledger-summary-amount { gap: 4px; }
+  .ledger-summary-amount .ledger-summary-symbol { font-size: 12px; }
+  .ledger-summary-amount--primary .ledger-summary-symbol { font-size: clamp(20px, 6.1vw, 22px); }
+}
+
+
+
+/* v118: compact conversion-card typography based on the approved mobile mockup. */
+.ledger-summary-card--secondary {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+.ledger-summary-card--secondary .ledger-summary-label {
+  margin: 0 0 3px;
+  font-size: 14px;
+  line-height: 1.25;
+}
+.ledger-summary-card--secondary .ledger-summary-rate {
+  order: 2;
+  margin: 0;
+  overflow: visible;
+  color: rgba(19,38,47,.70);
+  font-size: 11px;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+.ledger-summary-card--secondary .ledger-summary-amount {
+  order: 3;
+  align-self: flex-end;
+  justify-content: flex-end;
+  margin: 12px 0 0;
+  gap: 5px;
+  text-align: right;
+}
+.ledger-summary-card--secondary .ledger-summary-amount strong {
+  font-size: 28px;
+}
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="5"] { font-size: 26px; }
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="6"] { font-size: 24px; }
+.ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="7plus"] { font-size: 22px; }
+@media (max-width: 360px) {
+  .ledger-summary-card--secondary { padding: 16px; }
+  .ledger-summary-card--secondary .ledger-summary-label { font-size: 14px; }
+  .ledger-summary-card--secondary .ledger-summary-rate { font-size: 11px; }
+  .ledger-summary-card--secondary .ledger-summary-amount strong { font-size: 28px; }
+  .ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="5"] { font-size: 26px; }
+  .ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="6"] { font-size: 24px; }
+  .ledger-summary-card--secondary .ledger-summary-amount strong[data-digit-band="7plus"] { font-size: 22px; }
+}
+
+/* v119: tighten dashboard spacing and unify conversion-card typography. */
+.ledger-summary-card--primary {
+  padding: 48px 20px 20px;
+  gap: 20px;
+}
+.ledger-summary-card--secondary {
+  padding: 14px 12px;
+}
+.ledger-summary-card--secondary .ledger-summary-label,
+.ledger-summary-card--secondary .ledger-summary-rate,
+.ledger-summary-card--secondary .ledger-summary-symbol,
+.ledger-summary-card--secondary .ledger-summary-amount strong {
+  color: var(--ink);
+}
+.ledger-summary-card--secondary .ledger-summary-label {
+  font-weight: 560;
+}
+@media (max-width: 360px) {
+  .ledger-summary-card--primary {
+    padding: 48px 20px 20px;
+    gap: 20px;
+  }
+  .ledger-summary-card--secondary {
+    padding: 14px 12px;
+  }
+}
+
+
+/* v120: refine the dashboard summary punctuation and conversion-card surface. */
+.ledger-summary-amount--primary .ledger-summary-comma {
+  display: inline-block;
+  margin: 0 -1px;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+.ledger-summary-card--secondary {
+  padding: 12px;
+  border: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.46) 0%,
+    rgba(255,255,255,.36) 45%,
+    rgba(255,255,255,.28) 100%
+  );
+}
+@media (max-width: 360px) {
+  .ledger-summary-card--secondary { padding: 12px; }
+}
+
+
+/* v121: match conversion-card punctuation to the primary summary and reduce secondary corner radius. */
+.ledger-summary-card--secondary {
+  border-radius: 9px;
+}
+.ledger-summary-card--secondary .ledger-summary-comma {
+  display: inline-block;
+  margin: 0 -1px;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+
+/* v122: compact dashboard spacing + mobile-first add-expense bottom sheet. */
+.ledger-summary-card--primary {
+  padding: 48px 16px 16px;
+}
+.ledger-summary-card--secondary {
+  border-radius: 10px;
+}
+
+/* Keep punctuation visually small without letting it change the row's alignment box. */
+.ledger-summary-amount--primary strong,
+.ledger-summary-card--secondary .ledger-summary-amount strong {
+  display: inline-flex;
+  align-items: flex-end;
+}
+.ledger-summary-amount--primary .ledger-summary-comma,
+.ledger-summary-card--secondary .ledger-summary-comma {
+  display: inline-block;
+  margin: 0 -.06em;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: baseline;
+  transform: scale(.69);
+  transform-origin: 50% 100%;
+}
+
+.ledger-add-expense-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+.ledger-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+body.ledger-entry-sheet-open {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ledger-entry-sheet-layer {
+  --ledger-sheet-backdrop-opacity: 1;
+  position: fixed;
+  z-index: 10020;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ledger-entry-sheet-layer.is-open,
+.ledger-entry-sheet-layer.is-closing {
+  visibility: visible;
+  pointer-events: auto;
+}
+.ledger-entry-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,18,22,.32);
+  opacity: 0;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: opacity 180ms ease;
+}
+.ledger-entry-sheet-layer.is-open .ledger-entry-sheet-backdrop {
+  opacity: var(--ledger-sheet-backdrop-opacity);
+}
+.ledger-entry-sheet-layer.is-closing .ledger-entry-sheet-backdrop {
+  opacity: 0;
+}
+.ledger-entry-sheet {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  height: var(--shared-entry-sheet-height, auto);
+  max-height: min(90svh, 760px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  box-shadow: 0 -18px 60px rgba(7,18,22,.22);
+  transform: translateY(100%);
+  transition: transform 210ms cubic-bezier(.22,.75,.25,1);
+  will-change: transform;
+}
+.ledger-entry-sheet-layer.is-open .ledger-entry-sheet {
+  transform: translateY(0);
+}
+.ledger-entry-sheet-layer.is-closing .ledger-entry-sheet {
+  transform: translateY(100%);
+}
+.ledger-entry-sheet.is-dragging {
+  transition: none;
+}
+.ledger-entry-sheet-handle-zone { min-height: 38px; flex: 0 0 auto; }
+.ledger-entry-sheet-form {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-bottom: 0;
+}
+.ledger-entry-sheet-scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 20px 12px;
+}
+.ledger-sheet-amount-section {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 18px;
+}
+.ledger-sheet-amount-control {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  cursor: text;
+}
+.ledger-sheet-amount-symbol {
+  flex: 0 0 auto;
+  color: var(--ink);
+  font-family: "Inter", "Nimbus Sans L", Arial, sans-serif;
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 600;
+}
+.ledger-sheet-amount-input {
+  width: auto;
+  min-width: 1ch;
+  max-width: min(72vw, 360px);
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  caret-color: var(--ink);
+  font-family: "Inter", "Nimbus Sans L", Arial, sans-serif;
+  font-size: clamp(48px, 15vw, 58px);
+  line-height: .96;
+  font-weight: 700;
+  letter-spacing: -.045em;
+  text-align: center;
+}
+.ledger-sheet-amount-input::placeholder {
+  color: #B8C2C2;
+  opacity: 1;
+}
+.ledger-sheet-amount-input:focus { box-shadow: none; }
+
+.ledger-entry-sheet-form .ledger-sheet-category-fieldset {
+  margin-top: 18px;
+}
+.ledger-entry-sheet-form .ledger-sheet-category-fieldset .ledger-category-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+.ledger-entry-sheet-form .ledger-category-choice {
+  min-height: 42px;
+  padding-inline: 10px;
+  font-size: 13px;
+}
+.ledger-entry-sheet-form .ledger-sheet-field {
+  display: block;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.ledger-entry-sheet-form .ledger-sheet-category-fieldset + .ledger-sheet-note-field {
+  margin-top: 44px;
+}
+.ledger-entry-sheet-form .ledger-sheet-field .ledger-field-label {
+  margin: 0 0 7px;
+  color: #788688;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 720;
+}
+.ledger-entry-sheet-form .ledger-sheet-field .ledger-input,
+.ledger-entry-sheet-form .ledger-sheet-field .ledger-date-control {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+}
+.ledger-entry-sheet-form .ledger-sheet-field > .ledger-input {
+  width: 100%;
+  padding: 0 12px;
+  border: 1px solid rgba(19,38,47,.13);
+  border-radius: 10px;
+  color: var(--ink);
+  background: #fff;
+  font-size: 13px;
+}
+/* The note field shares the inspiration note's 44–128px autosize behavior. */
+.ledger-entry-sheet-form .ledger-sheet-note-field > .ledger-autogrow-note {
+  display: block;
+  min-height: 44px;
+  height: 44px;
+  max-height: 128px;
+  padding: 10px 12px;
+  line-height: 22px;
+  resize: none;
+  overflow-y: hidden;
+}
+.ledger-entry-sheet-form .ledger-date-field .ledger-date-native {
+  min-height: 44px;
+  height: 44px;
+}
+.ledger-entry-sheet-form .ledger-date-placeholder { height: 44px; }
+.ledger-entry-sheet-form .ledger-form-error {
+  min-height: 18px;
+  margin: 10px 0 0 !important;
+}
+
+.ledger-entry-sheet-actions {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 16px calc(48px + env(safe-area-inset-bottom, 0px));
+  margin-top: auto;
+  position: relative;
+  border-top: none;
+  background: rgba(255,255,255,.97);
+}
+.ledger-entry-sheet-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.ledger-entry-sheet-cancel {
+  color: #13262F;
+  background: #E8EBF0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+.ledger-entry-sheet-save {
+  color: #fff;
+  background: #E59C19;
+  font-size: 13px;
+  font-weight: 760;
+}
+
+@media (min-width: 700px) {
+  .ledger-entry-sheet {
+    bottom: 18px;
+    height: min(78vh, 700px);
+    border-radius: 28px;
+  }
+}
+
+
+/* v123: icon category picker, custom amount caret, independent expense cards,
+   matched analysis empty-state height, and slightly stronger summary surfaces. */
+.ledger-summary-card--secondary {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.51) 0%,
+    rgba(255,255,255,.41) 45%,
+    rgba(255,255,255,.33) 100%
+  );
+}
+
+/* Bottom-sheet category picker: icon tile above a compact Chinese caption. */
+.ledger-entry-sheet-form .ledger-sheet-category-fieldset .ledger-category-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 12px;
+  row-gap: 14px;
+}
+.ledger-entry-sheet-form .ledger-sheet-category-choice,
+.ledger-entry-sheet-form .ledger-sheet-category-choice:has(input:checked) {
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  border: 0;
+  border-radius: 0;
+  color: #657477;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.ledger-entry-sheet-form .ledger-category-icon-tile {
+  width: 58px;
+  height: 58px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 16px;
+  color: #80919A;
+  background: #ECEFF1;
+  transition: color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+.ledger-entry-sheet-form .ledger-category-icon {
+  width: 29px;
+  height: 29px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ledger-entry-sheet-form .ledger-category-name {
+  color: #657477;
+  transition: color 150ms ease, font-weight 150ms ease;
+}
+.ledger-entry-sheet-form .ledger-category-input:checked + .ledger-category-icon-tile {
+  color: #fff;
+  background: var(--ink);
+}
+.ledger-entry-sheet-form .ledger-category-input:checked ~ .ledger-category-name {
+  color: var(--ink);
+  font-weight: 760;
+}
+.ledger-entry-sheet-form .ledger-sheet-category-choice:active .ledger-category-icon-tile {
+  transform: scale(.97);
+}
+
+/* Replace the oversized native caret with a short rounded App-like caret. */
+.ledger-sheet-amount-control {
+  position: relative;
+}
+.ledger-sheet-amount-input {
+  caret-color: transparent;
+}
+.ledger-sheet-amount-control::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  width: 2px;
+  height: 28px;
+  border-radius: 999px;
+  background: #8FA3AD;
+  opacity: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.ledger-sheet-amount-control:focus-within::after {
+  opacity: .65;
+  animation: ledger-sheet-caret-blink 1.05s step-end infinite;
+}
+@keyframes ledger-sheet-caret-blink {
+  0%, 48% { opacity: .65; }
+  49%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger-sheet-amount-control:focus-within::after { animation: none; opacity: .65; }
+}
+
+/* Each expense is its own card instead of one shared card with separators. */
+.ledger-bill-list,
+.ledger-analysis-details {
+  display: grid;
+  gap: 8px;
+}
+.ledger-detail-panel,
+.ledger-analysis-details {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.ledger-bill-list > .ledger-bill-row,
+.ledger-analysis-details > .ledger-bill-row {
+  min-height: 48px;
+  box-sizing: border-box;
+  overflow: visible;
+  border: 1px solid rgba(19,38,47,.10);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(18,42,50,.025), 0 1px 2px rgba(18,42,50,.015);
+}
+.ledger-bill-list > .ledger-bill-row .ledger-bill-content,
+.ledger-analysis-details > .ledger-bill-row .ledger-bill-content {
+  border-radius: inherit;
+  box-shadow: none;
+}
+.ledger-bill-list > .ledger-bill-row + .ledger-bill-row .ledger-bill-content::before,
+.ledger-analysis-details > .ledger-bill-row + .ledger-bill-row .ledger-bill-content::before {
+  display: none;
+}
+
+/* Empty analysis category occupies the same visual height as one one-line item card. */
+.ledger-analysis-details > .ledger-empty-state {
+  min-height: 48px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(19,38,47,.10);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(18,42,50,.025), 0 1px 2px rgba(18,42,50,.015);
+}
+
+@media (max-width: 360px) {
+  .ledger-entry-sheet-form .ledger-category-icon-tile {
+    width: 54px;
+    height: 54px;
+    border-radius: 15px;
+  }
+  .ledger-entry-sheet-form .ledger-category-icon { width: 27px; height: 27px; }
+}
+
+
+/* v124: user-provided category icons, consistent standalone cards,
+   no amount caret, and centered/larger donut total. */
+
+/* Every expense card, including the first item, uses the exact same border treatment. */
+.ledger-bill-list > .ledger-bill-row:first-child,
+.ledger-analysis-details > .ledger-bill-row:first-child {
+  border: 1px solid rgba(19,38,47,.10);
+}
+
+/* The amount stays fully editable, but the visible caret is intentionally removed. */
+.ledger-sheet-amount-control::after {
+  display: none !important;
+  content: none !important;
+  animation: none !important;
+}
+.ledger-sheet-amount-input {
+  caret-color: transparent;
+}
+
+/* Category picker: rounded-square icon tiles with user-provided artwork.
+   PNGs are used as masks so selection state can recolor them reliably. */
+.ledger-entry-sheet-form .ledger-sheet-category-fieldset .ledger-category-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 12px;
+}
+.ledger-entry-sheet-form .ledger-sheet-category-choice,
+.ledger-entry-sheet-form .ledger-sheet-category-choice:has(input:checked) {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.ledger-entry-sheet-form .ledger-category-icon-tile {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 16px;
+  color: #80919A;
+  background: #ECEFF1;
+  transition: color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+.ledger-entry-sheet-form .ledger-category-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+  background: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.ledger-entry-sheet-form .ledger-category-icon--food {
+  -webkit-mask-image: url("assets/icons/ledger-categories/food.png");
+  mask-image: url("assets/icons/ledger-categories/food.png");
+}
+.ledger-entry-sheet-form .ledger-category-icon--transport {
+  -webkit-mask-image: url("assets/icons/ledger-categories/transport.png");
+  mask-image: url("assets/icons/ledger-categories/transport.png");
+}
+.ledger-entry-sheet-form .ledger-category-icon--lodging {
+  -webkit-mask-image: url("assets/icons/ledger-categories/lodging.png");
+  mask-image: url("assets/icons/ledger-categories/lodging.png");
+}
+.ledger-entry-sheet-form .ledger-category-icon--ticket {
+  -webkit-mask-image: url("assets/icons/ledger-categories/ticket.png");
+  mask-image: url("assets/icons/ledger-categories/ticket.png");
+}
+.ledger-entry-sheet-form .ledger-category-icon--shopping {
+  -webkit-mask-image: url("assets/icons/ledger-categories/shopping.png");
+  mask-image: url("assets/icons/ledger-categories/shopping.png");
+}
+.ledger-entry-sheet-form .ledger-category-icon--other {
+  -webkit-mask-image: url("assets/icons/ledger-categories/other.png");
+  mask-image: url("assets/icons/ledger-categories/other.png");
+}
+.ledger-entry-sheet-form .ledger-category-input:checked + .ledger-category-icon-tile {
+  color: #fff;
+  background: var(--ink);
+}
+.ledger-entry-sheet-form .ledger-category-input:checked ~ .ledger-category-name {
+  color: var(--ink);
+  font-weight: 760;
+}
+
+/* Center the two-line donut label as a single unit; emphasize the amount slightly more. */
+.ledger-donut-center {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  pointer-events: none;
+}
+.ledger-donut-center strong {
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+@media (max-width: 360px) {
+  .ledger-entry-sheet-form .ledger-category-icon-tile {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    border-radius: 15px;
+  }
+  .ledger-entry-sheet-form .ledger-category-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+
+/* v125: final pass from the latest mobile review. */
+
+/* Conversion cards: solid surface, no gradient or transparency. */
+.ledger-summary-card--secondary {
+  background: #9FA5A7;
+  border: 0;
+}
+
+/* All compact money commas use the same visually-short punctuation treatment. */
+.ledger-summary-comma {
+  display: inline-block;
+  margin: 0 -.06em;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: baseline;
+  transform: scale(.69);
+  transform-origin: 50% 100%;
+}
+
+/* Bottom-sheet amount is rendered through a visual layer so its comma can match the dashboard comma. */
+.ledger-sheet-amount-control {
+  position: relative;
+}
+.ledger-sheet-amount-display {
+  min-width: 1ch;
+  max-width: min(72vw, 360px);
+  display: inline-flex;
+  align-items: flex-end;
+  color: var(--ink);
+  font-family: "Inter", "Nimbus Sans L", Arial, sans-serif;
+  font-size: clamp(48px, 15vw, 58px);
+  line-height: .96;
+  font-weight: 700;
+  letter-spacing: -.045em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ledger-sheet-amount-input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-width: 100%;
+  opacity: .001;
+  color: transparent;
+  caret-color: transparent;
+  cursor: text;
+}
+
+/* Category choices: the outer label never owns a large square background.
+   Only the fixed rounded icon tile changes color between selected/unselected states. */
+.ledger-entry-sheet-form .ledger-sheet-category-choice {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  border: 0;
+  border-radius: 0;
+  color: #657477;
+  background: transparent;
+  box-shadow: none;
+}
+.ledger-entry-sheet-form .ledger-category-icon-tile {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 16px;
+  color: #80919A;
+  background: #ECEFF1;
+}
+.ledger-entry-sheet-form .ledger-category-input:checked + .ledger-category-icon-tile {
+  color: #fff;
+  background: var(--ink);
+}
+.ledger-entry-sheet-form .ledger-category-name {
+  color: #657477;
+  background: transparent;
+}
+.ledger-entry-sheet-form .ledger-category-input:checked ~ .ledger-category-name {
+  color: var(--ink);
+  font-weight: 760;
+}
+@media (max-width: 360px) {
+  .ledger-entry-sheet-form .ledger-category-icon-tile {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    border-radius: 15px;
+  }
+}
+
+/* Date-error rhythm: match the same 22px control-to-next-label spacing used above it. */
+.ledger-entry-sheet-form .ledger-form-error {
+  margin-top: 22px !important;
+}
+
+/* Donut: the amount's own center sits exactly on the donut's vertical center line.
+   The label is positioned independently above it. */
+.ledger-donut-center {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  text-align: center;
+  pointer-events: none;
+}
+.ledger-donut-center span {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 20px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.ledger-donut-center strong {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* Ledger cards are borderless while retaining their backgrounds, radii, shadows and spacing. */
+.ledger-summary-card--primary,
+.ledger-summary-card--secondary,
+.ledger-entry-card,
+.ledger-list-section,
+.ledger-transfer-list,
+.ledger-member-stats-list,
+.ledger-stats-overview,
+.ledger-donut-wrap,
+.ledger-analysis-totals,
+.ledger-bill-list > .ledger-bill-row,
+.ledger-analysis-details > .ledger-bill-row,
+.ledger-analysis-details > .ledger-empty-state {
+  border: 0 !important;
+}
+
+/* Prep checklist: one item = one standalone card, no shared outer card and no separators. */
+
+
+
+
+
+
+
+
+
+/* v126: final mobile review fixes.
+   - prep card contents vertically centered
+   - all monetary commas use one relative Inter treatment
+   - historical fixed-pixel/transform comma rules neutralized */
+
+
+
+
+
+
+.ledger-summary-comma {
+  display: inline-block !important;
+  margin: 0 -0.01em !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 0.69em !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  vertical-align: baseline !important;
+  transform: none !important;
+  transform-origin: initial !important;
+}
+
+
+/* v127: final polish after mobile review.
+   - Bottom Sheet category shape stays identical selected/unselected
+   - monetary commas share one relative Inter treatment and inherit amount color
+   - prep checklist contents are centered with a wider text lane */
+
+/* The outer category label is always transparent. Only the fixed rounded tile changes color. */
+.ledger-entry-sheet-form .ledger-sheet-category-choice,
+.ledger-entry-sheet-form .ledger-sheet-category-choice:not(:has(input:checked)),
+.ledger-entry-sheet-form .ledger-sheet-category-choice:has(input:checked) {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.ledger-entry-sheet-form .ledger-category-icon-tile {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border-radius: 16px;
+  background: #ECEFF1;
+}
+.ledger-entry-sheet-form .ledger-category-input:checked + .ledger-category-icon-tile {
+  background: var(--ink);
+}
+@media (max-width: 360px) {
+  .ledger-entry-sheet-form .ledger-category-icon-tile {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    border-radius: 15px;
+  }
+}
+
+/* One comma system everywhere in Ledger: keep the surrounding number font, only the comma is Inter.
+   The size is relative to the local amount, never fixed in px. */
+.ledger-summary-comma {
+  display: inline !important;
+  margin: 0 -0.015em !important;
+  color: inherit !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: .69em !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  vertical-align: -.05em !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  transform-origin: initial !important;
+}
+/* The donut amount must be a normal inline line; inline-flex was letting a smaller comma become its own flex item. */
+.ledger-donut-center strong {
+  display: inline-block !important;
+  align-items: initial !important;
+}
+
+/* Prep checklist: center circle / full text block / delete control, while giving copy more usable width. */
+
+
+
+
+
+
+
+/* v127.1: keep punctuation in normal inline text flow so relative sizing cannot jump rows. */
+.ledger-summary-amount--primary strong,
+.ledger-summary-card--secondary .ledger-summary-amount strong,
+.ledger-sheet-amount-display,
+.ledger-donut-center strong {
+  display: inline-block !important;
+}
+.ledger-summary-comma {
+  color: inherit !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: .69em !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  vertical-align: baseline !important;
+  margin: 0 -0.015em !important;
+  transform: none !important;
+}
+
+
+/* v128: ledger CTA spacing, custom prep completion mark, ranked analysis rows. */
+.ledger-add-expense-button {
+  margin-top: 35px !important;
+}
+.ledger-view-switcher {
+  margin-top: 35px !important;
+}
+
+
+
+
+
+/* v129: prep completion mark uses the site ink color and a quieter white icon. */
+
+
+
+/* v172: memo-specific final overrides are in styles.css; avoid older card styling for empty state. */
+
+/* v179: same source color as inactive preparation tab SVG. */
+.ledger-view-switcher { background: var(--prep-inactive-tab-bg) !important; }
+
+/* Shared white surfaces: apply elevation only to standalone expense/empty cards.
+   Analysis totals are part of the donut card and must not cast a second shadow. */
+.ledger-bill-list > .ledger-bill-row,
+.ledger-analysis-details > .ledger-bill-row,
+.ledger-analysis-details > .ledger-empty-state {
+  border: 0 !important;
+  box-shadow: 0 3px 10px rgba(18,42,50,.025), 0 1px 2px rgba(18,42,50,.015) !important;
+}
+.ledger-analysis-totals {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.ledger-analysis-category-tabs,
+.ledger-view-switcher,
+.ledger-view-tabs,
+.ledger-mode-tabs {
+  background-color: #F3F3F3 !important;
+}
+
+
+
+/* v257: prevent iOS focus zoom; center native date text without resizing fields. */
+@supports (-webkit-touch-callout: none) {
+  .ledger-entry-sheet input:not([type="hidden"]),
+  .ledger-entry-sheet textarea,
+  .ledger-bill-form .ledger-note-field .ledger-input,
+  .ledger-bill-form .ledger-date-field .ledger-date-native {
+    font-size: 16px !important;
+  }
+  .ledger-bill-form .ledger-date-field .ledger-date-native {
+    line-height: normal !important;
+    padding-top: 0 !important; padding-bottom: 0 !important;
+  }
+  .ledger-bill-form .ledger-date-field .ledger-date-native::-webkit-date-and-time-value {
+    min-height: 100%; text-align: left;
+  }
+  .ledger-bill-form .ledger-date-field .ledger-date-native::-webkit-datetime-edit {
+    display: inline-flex; align-items: center; min-height: 100%;
+  }
+}

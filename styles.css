@@ -1,0 +1,3962 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.cdnfonts.com/css/nimbus-sans-l");
+
+:root {
+  --paper: #f3f6f2;
+  --surface: #ffffff;
+  --ink: #13262f;
+  --muted: #66757a;
+  --line: #d7dfdc;
+  --lake: #287b90;
+  --lake-soft: #d9ebee;
+  --forest: #516b55;
+  --terracotta: #b65c3a;
+  --warning: #b84635;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --shadow: 0 16px 48px rgba(25, 47, 55, 0.08);
+  --content: 720px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; }
+[data-module][hidden] { display: none !important; }
+html { scroll-behavior: smooth; background: #F2F5F7; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #F2F5F7;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a { touch-action: manipulation; }
+button { font: inherit; color: inherit; }
+input, select, textarea { font-family: inherit; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: white;
+  border-radius: 10px;
+}
+.skip-link:focus { top: calc(12px + var(--safe-top)); }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: calc(48px + var(--safe-top));
+  padding: var(--safe-top) 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0;
+  background: rgba(250, 251, 249, 0.93);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.wordmark { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; font-weight: 800; letter-spacing: 0.06em; font-size: 12px; }
+.wordmark span { color: var(--muted); font-weight: 600; }
+.topbar nav { display: flex; gap: 2px; }
+.topbar nav a {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 650;
+}
+.topbar nav a:active { color: var(--lake); }
+
+main { overflow: hidden; }
+.hero, .section, .footer { width: min(100%, var(--content)); margin-inline: auto; }
+.hero { padding: 32px 18px 24px; min-height: 188px; display: flex; flex-direction: column; justify-content: flex-end; }
+.hero__eyebrow, .section-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.hero h1 { margin: 0; max-width: 620px; font-size: clamp(38px, 12vw, 64px); line-height: 0.98; letter-spacing: -0.06em; font-weight: 820; }
+.hero__date { margin: 14px 0 0; font: 500 14px/1.4 "Inter", sans-serif; letter-spacing: 0.03em; }
+
+.section { padding: 44px 18px; scroll-margin-top: 48px; }
+.flights-section { padding-top: 24px; padding-bottom: 34px; }
+.section-heading { margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.section-heading h2 { margin: 0; font-size: 30px; line-height: 1; letter-spacing: -0.04em; }
+.drive-section .section-heading { margin-bottom: 21px; }
+.section-index, .soft-label { margin: 0; color: var(--muted); font: 600 11px/1 "Montserrat", sans-serif; letter-spacing: 0.08em; }
+
+.flight-carousel {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  padding: 2px 0 14px;
+}
+.flight-carousel::-webkit-scrollbar { display: none; }
+.flight-card {
+  flex: 0 0 calc(100% - 20px);
+  scroll-snap-align: center;
+  min-height: auto;
+  padding: 30px 20px;
+  border-radius: var(--radius-lg);
+  color: #eff8f8;
+  background: var(--ink);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+.flight-card__top { color: #a9c3c8; font: 600 11px/1.3 "Montserrat", sans-serif; letter-spacing: 0.08em; }
+.flight-card__airlines,
+.flight-city-row,
+.flight-route-line__duration,
+.flight-baggage {
+  color: #9db7bc;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.flight-card__airlines { margin-top: 10px; color: #fff; }
+.flight-route-line {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flight-route-line__code {
+  color: #fff;
+  font: 700 clamp(18px, 6vw, 24px)/1 "Inter", sans-serif;
+  letter-spacing: -.04em;
+}
+.flight-route-line__duration {
+  white-space: nowrap;
+  text-align: center;
+  font-size: 12px;
+}
+.flight-city-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7px;
+}
+.flight-time-row {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+}
+.flight-time-row__time {
+  color: #fff;
+  font: 700 clamp(25px, 7.5vw, 30px)/1 "Inter", sans-serif;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.flight-time-row__time--departure { justify-self: start; }
+.flight-time-row__time--arrival { justify-self: end; }
+.flight-time-row__middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+.flight-time-row__segment {
+  flex: 0 0 clamp(10.5px, 3.75vw, 16.5px);
+  height: 1px;
+  background: #8fc6d0;
+}
+.flight-baggage { margin-top: 40px; }
+.flight-card__countdown-row { display: none; }
+.flight-countdown { display: none; }
+.flight-placeholder { margin: 34px 0 22px; }
+.flight-placeholder__eyebrow { color: #e0a983; font: 600 10px/1.3 "Montserrat", sans-serif; letter-spacing: .12em; }
+.flight-placeholder h3 { margin: 9px 0 0; color: #fff; font-size: clamp(24px, 7vw, 34px); line-height: 1.08; letter-spacing: -.035em; }
+.flight-placeholder p { max-width: 520px; margin: 12px 0 0; color: #b8cccf; font-size: 12px; line-height: 1.7; }
+.flight-placeholder ul { margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; list-style: none; }
+.flight-placeholder li { padding: 6px 9px; border: 1px solid rgba(143,198,208,.3); border-radius: 999px; color: #d7e7e8; background: rgba(255,255,255,.04); font-size: 10px; }
+.carousel-dots { display: flex; justify-content: center; gap: 7px; }
+.carousel-dot { width: 6px; height: 6px; border: 0; padding: 0; border-radius: 50%; background: #aebbb8; transition: width .2s ease; }
+.carousel-dot.is-active { width: 22px; border-radius: 99px; background: var(--lake); }
+
+.route-map-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow); cursor: zoom-in; }
+.route-map-button img { width: 100%; height: auto; }
+.route-map-button span { position: absolute; right: 12px; bottom: 12px; padding: 9px 12px; border-radius: 999px; color: white; background: rgba(19,38,47,.86); font-size: 11px; font-weight: 700; backdrop-filter: blur(8px); }
+.route-caption { margin: 12px 4px 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+/* v135: horizontally scrollable day selector for the overview itinerary. */
+.itinerary-date-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 2px 0 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.itinerary-date-strip::-webkit-scrollbar { display: none; }
+.itinerary-date-option {
+  width: 58px;
+  min-width: 58px;
+  padding: 0;
+  flex: 0 0 58px;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  scroll-snap-align: center;
+}
+.itinerary-date-weekday {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--ink);
+}
+.itinerary-date-number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  transition: background-color .16s ease, color .16s ease;
+}
+.itinerary-date-option.is-selected .itinerary-date-number {
+  color: #fff;
+  background: var(--ink);
+}
+.itinerary-date-option:focus-visible { outline: none; }
+.itinerary-date-option:focus-visible .itinerary-date-number {
+  box-shadow: 0 0 0 3px rgba(19, 38, 47, .14);
+}
+
+.itinerary-date-option:first-child {
+  width: 38px;
+  min-width: 38px;
+  flex: 0 0 38px;
+}
+
+.timeline { position: relative; }
+.day-card { position: relative; padding-left: 37px; }
+.day-card + .day-card { margin-top: 8px; }
+.day-detail { padding: 0 0 26px; }
+.schedule { margin: 0; padding: 0; list-style: none; }
+.schedule-item { position: relative; padding: 0 0 20px; min-height: 0; }
+.schedule-item:last-child { padding-bottom: 0; }
+.schedule-item::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 11.5px;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid #8d9b9f;
+  border-radius: 50%;
+  background: var(--paper);
+  transform: translate(-50%, -50%);
+}
+.schedule-item::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 11.5px;
+  bottom: -20px;
+  width: 1px;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+.schedule-item:last-child::after {
+  bottom: 0;
+}
+.schedule-main {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  column-gap: 22px;
+  align-items: start;
+}
+.schedule-time { color: var(--muted); font: 500 15px/23px "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; white-space: nowrap; align-self: start; }
+.schedule-text { min-width: 0; font: 500 15px/23px "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; white-space: normal; }
+.schedule-text__first-row { display: block; min-width: 0; }
+.schedule-text__primary { min-width: 0; display: block; }
+.schedule-text__line { display: block; white-space: break-spaces; }
+.schedule-text__line.is-pink { color: #E83568; }
+.schedule-text__line.is-green { color: #55AA37; }
+.schedule-text__line.is-blue { color: #277089; }
+.schedule-text__line.is-red { color: #C00000; }
+.schedule-content { margin-left: 102px; }
+.schedule-content { margin-left: 102px; }
+.schedule-map-links { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.schedule-map-link { min-height: 0; padding: 5px 9px; display: inline-flex; align-items: center; gap: 5px; border: 0; border-radius: 999px; color: #fff; background: #404040; text-decoration: none; font-size: 12px; font-weight: 700; }
+.schedule-map-link__icon { width: 12px; height: 12px; object-fit: contain; flex: 0 0 auto; transform: rotate(-45deg); }
+
+/* v137: quieter map control rendered as the final line of each itinerary text block. */
+.itinerary-section .schedule-map-links--paragraph {
+  display: flex;
+  justify-content: flex-start;
+  margin: 7px 0 0;
+  gap: 4px;
+}
+.itinerary-section .schedule-map-link--itinerary {
+  min-height: 26px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.itinerary-section .schedule-map-link__pin { width: 11px; height: 11px; flex: 0 0 11px; fill: #C00000; }
+.schedule-ticket { margin-top: 9px; border: 1px solid #e8c8b8; border-radius: 12px; background: #fff8f4; overflow: hidden; }
+.schedule-ticket summary { min-height: 38px; padding: 8px 10px; display: flex; align-items: center; gap: 6px; list-style: none; color: #8f492e; cursor: pointer; font-size: 10px; font-weight: 750; }
+.schedule-ticket summary::-webkit-details-marker { display: none; }
+.schedule-ticket summary b { margin-left: auto; color: var(--ink); font-size: 11px; }
+.schedule-ticket.is-purchased { border-color: #cbdcca; background: #f1f7f0; }
+.schedule-ticket.is-purchased summary { color: #43654a; }
+.ticket-status-dot { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: currentColor; }
+.schedule-ticket__body { padding: 0 10px 11px 23px; }
+.schedule-ticket__body p { margin: 0; color: #614b42; font-size: 11px; line-height: 1.5; }
+.schedule-ticket__body span { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+.schedule-ticket__body a { min-height: 34px; margin-top: 5px; display: inline-flex; align-items: center; color: var(--lake); font-size: 10px; font-weight: 750; }
+.detail-note { margin: 8px 0 0; padding: 12px 14px; border-left: 2px solid var(--terracotta); background: rgba(182,92,58,.06); color: #6d4c3e; font-size: 12px; line-height: 1.6; }
+.costs { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+.cost-tag { padding: 7px 9px; border-radius: 8px; background: #e8eeeb; color: #53615e; font-size: 11px; }
+
+.tickets-section { padding-top: 40px; }
+.tickets-summary { margin: -5px 0 15px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.ticket-filters { display: flex; gap: 7px; margin-bottom: 14px; overflow-x: auto; }
+.ticket-filters button { min-height: 38px; padding: 0 14px; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.7); color: var(--muted); cursor: pointer; font-size: 11px; font-weight: 720; }
+.ticket-filters button.is-active { border-color: var(--ink); color: white; background: var(--ink); }
+.ticket-list { display: grid; gap: 11px; }
+.ticket-card { padding: 17px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.78); }
+.ticket-card.is-purchased { background: rgba(241,247,240,.82); }
+.ticket-card__date { color: var(--lake); font: 500 10px/1.2 "Inter", sans-serif; letter-spacing: .06em; }
+.ticket-card__head { margin-top: 9px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.ticket-card__head h3 { margin: 0; font-size: 16px; line-height: 1.25; }
+.ticket-card__head p { margin: 4px 0 0; color: var(--muted); font-size: 10px; }
+.ticket-badge { min-height: 25px; padding: 5px 8px; flex: 0 0 auto; border-radius: 999px; color: #8f492e; background: #f6e2d8; font-size: 9px; font-weight: 760; }
+.ticket-badge.is-advance-recommended { color: #205e6b; background: #ddecf0; }
+.ticket-badge.is-purchased { color: #43654a; background: #dfeade; }
+.ticket-card__guidance { margin-top: 15px; padding-top: 13px; border-top: 1px solid var(--line); }
+.ticket-card__guidance span { display: block; color: var(--muted); font-size: 9px; letter-spacing: .08em; }
+.ticket-card__guidance strong { display: block; margin-top: 4px; font-size: 12px; line-height: 1.5; }
+.ticket-details { margin-top: 7px; }
+.ticket-details > summary { min-height: 38px; display: inline-flex; align-items: center; color: var(--lake); cursor: pointer; font-size: 11px; font-weight: 750; }
+.ticket-details dl { margin: 4px 0 0; }
+.ticket-details dl div { padding: 8px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 70px 1fr; gap: 8px; font-size: 11px; line-height: 1.5; }
+.ticket-details dt { color: var(--muted); }
+.ticket-details dd { margin: 0; }
+.ticket-uncertainties { margin-top: 8px; padding: 11px; border-radius: 10px; background: #f2f3ef; color: #52605d; font-size: 10px; }
+.ticket-uncertainties ul { margin: 5px 0 0; padding-left: 16px; }
+.ticket-actions { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ticket-actions a, .ticket-actions button { min-height: 40px; display: inline-flex; align-items: center; font-size: 10px; font-weight: 740; }
+.ticket-actions a { color: var(--lake); }
+.ticket-actions span { color: var(--muted); font-size: 10px; }
+.ticket-actions button { padding: 0 12px; border: 0; border-radius: 10px; color: white; background: var(--lake); cursor: pointer; }
+.tickets-empty { padding: 28px 0; color: var(--muted); text-align: center; font-size: 12px; }
+
+.rental-panel { overflow: visible; border-radius: 0; background: transparent; color: white; box-shadow: none; border: 0; outline: 0; }
+.return-deadline { padding: 22px; background: #F8F6F2; color: #E59C19; border: 0; border-bottom: 5px solid #E59C19; outline: 0; box-shadow: none; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.return-deadline__label { display: block; font-size: 14px; font-weight: 800; color: var(--ink); }
+.return-deadline > strong { display: block; margin: 12px 0 6px; font-size: clamp(23px,7vw,34px); line-height: 1.3; color: #E59C19; }
+.return-deadline time { font-variant-numeric: tabular-nums; }
+.return-deadline__map-links { margin-top: 16px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 6px; }
+.return-deadline > span:not(:first-child), .return-deadline small { font-size: 11px; line-height: 1.6; }
+.return-deadline small.return-deadline__fuel-note { display: block; color: var(--muted); font-size: 13px; }
+.return-deadline p { margin: 10px 0; font-size: 12px; overflow-wrap: anywhere; }
+.return-deadline__warning { font-weight: 750; }
+.return-deadline.is-urgent { background: #ffe1da; color: #8c291f; border-color: #b84635; }
+.rental-details { padding: 22px; background: #13262F; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+.rental-car { font-size: 19px; font-weight: 750; }
+.rental-sub { margin-top: 5px; color: #abc0c4; font-size: 12px; }
+.rental-stops { margin-top: 24px; display: grid; gap: 16px; }
+.rental-stop { display: grid; grid-template-columns: 58px 1fr; gap: 12px; }
+.rental-stop__label { color: #7fa8b0; font: 600 10px/1.5 "Montserrat", sans-serif; }
+.rental-stop b { display: block; font-size: 14px; }
+.rental-stop__detail span { display: block; }
+.rental-price { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); display: flex; justify-content: space-between; color: #abc0c4; font-size: 12px; }
+.rental-price strong { color: white; font: 500 15px/1 "Inter", sans-serif; }
+
+.accordion-stack { margin-top: 14px; display: grid; gap: 10px; }
+.accordion { border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.72); overflow: hidden; }
+.accordion summary { min-height: 54px; padding: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 740; }
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary::after { content: "+"; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--lake); }
+.accordion[open] summary::after { content: "−"; }
+.accordion ul { margin: 0; padding: 0 18px 18px 38px; color: #47575b; }
+.accordion li { margin: 9px 0; font-size: 12px; line-height: 1.65; }
+
+.packing-progress { height: 4px; margin: -8px 0 24px; border-radius: 99px; background: #dbe3e0; overflow: hidden; }
+.packing-progress span { display: block; width: 0; height: 100%; background: var(--lake); transition: width .2s ease; }
+.packing-group + .packing-group { margin-top: 25px; }
+.packing-group h3 { margin: 0 0 8px; color: var(--muted); font-size: 11px; letter-spacing: .1em; }
+.packing-item { min-height: 52px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 14px; }
+.packing-item input { appearance: none; width: 22px; height: 22px; margin: 0; flex: 0 0 22px; border: 1.5px solid #93a5a2; border-radius: 7px; background: transparent; display: grid; place-items: center; }
+.packing-item input::after { content: "✓"; color: white; font-size: 14px; opacity: 0; transform: scale(.6); transition: .15s ease; }
+.packing-item input:checked { border-color: var(--lake); background: var(--lake); }
+.packing-item input:checked::after { opacity: 1; transform: scale(1); }
+.packing-item:has(input:checked) span { color: #87928f; text-decoration: line-through; }
+.text-button { min-height: 44px; margin-top: 18px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+.footer { padding: 46px 20px calc(50px + var(--safe-bottom)); border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+.footer p { margin: 0; font-weight: 750; letter-spacing: .08em; }
+.footer a { min-height: 44px; margin-top: -15px; display: flex; align-items: center; text-decoration: none; }
+
+.map-dialog { width: 100%; max-width: 760px; height: 100%; max-height: none; margin: 0; padding: calc(56px + var(--safe-top)) 0 var(--safe-bottom); border: 0; background: #0e1b21; overflow: auto; }
+.map-dialog::backdrop { background: rgba(7,18,22,.88); }
+.map-dialog.is-fallback-open { position: fixed; inset: 0; z-index: 50; display: block; }
+.map-dialog img { width: 100%; height: auto; }
+.dialog-close { position: fixed; z-index: 2; top: calc(10px + var(--safe-top)); right: 12px; min-width: 54px; min-height: 40px; border: 0; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--ink); font-size: 12px; font-weight: 700; }
+.loading-error { position: fixed; left: 16px; right: 16px; bottom: calc(16px + var(--safe-bottom)); z-index: 30; padding: 16px; border-radius: 14px; color: white; background: var(--warning); box-shadow: var(--shadow); }
+.loading-error strong, .loading-error span { display: block; }
+.loading-error span { margin-top: 5px; font-size: 12px; line-height: 1.5; }
+
+:focus-visible { outline: 3px solid rgba(40,123,144,.45); outline-offset: 3px; }
+
+.place-map-overlay { position: fixed; inset: 0; z-index: 60; background: rgba(7,18,22,.6); display: flex; align-items: flex-end; justify-content: center; }
+.place-map-overlay[hidden] { display: none; }
+.place-map-sheet { width: min(100%,720px); height: 85vh; height: 85dvh; display: flex; flex-direction: column; background: var(--paper); border-radius: 20px 20px 0 0; overflow: hidden; padding-bottom: var(--safe-bottom); }
+.place-map-sheet header { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.place-map-sheet h2 { margin: 0; font-size: 17px; overflow-wrap: anywhere; }
+.place-map-sheet button { flex-shrink: 0; min-height: 44px; min-width: 48px; border: 0; background: transparent; color: var(--lake); }
+.place-map-sheet iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #e8eeeb; }
+.place-map-sheet footer { padding: 10px 16px; }
+.place-map-sheet footer p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.place-map-sheet footer a { display: flex; min-height: 44px; align-items: center; color: var(--lake); font-size: 13px; font-weight: 700; }
+
+/* Compact ticket completion, driving notes and user-managed trip preparation */
+.schedule-ticket { min-height: 58px; padding: 9px 10px; background: #fff2ed; display: grid; grid-template-columns: 21px minmax(0,1fr) auto; align-items: flex-start; gap: 9px; }
+.schedule-ticket__toggle { display: contents; cursor: pointer; }
+.schedule-ticket input { position: absolute; opacity: 0; pointer-events: none; }
+.schedule-ticket__check { width: 21px; height: 21px; margin-top: 1px; flex: 0 0 21px; border: 1.5px solid #ba765d; border-radius: 7px; color: transparent; display: grid; place-items: center; font-size: 12px; }
+.schedule-ticket__content { min-width: 0; display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 2px 7px; }
+.schedule-ticket__status { color: #995137; font-size: 9px; font-weight: 780; }
+.schedule-ticket__content strong { overflow: hidden; color: var(--ink); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.schedule-ticket__content small { grid-column: 1 / -1; color: #795c50; font-size: 9px; line-height: 1.45; }
+.schedule-ticket__open { align-self: center; min-width: 44px; min-height: 36px; padding: 0 8px; border: 0; border-left: 1px solid rgba(153,81,55,.18); background: transparent; color: #8f492e; cursor: pointer; font-size: 10px; font-weight: 760; }
+.schedule-ticket.is-purchased { border-color: #cbdcca; background: #eaf3e9; }
+.schedule-ticket.is-purchased .schedule-ticket__check { border-color: var(--forest); color: white; background: var(--forest); }
+.schedule-ticket.is-purchased .schedule-ticket__status { color: var(--forest); }
+.schedule-ticket.is-purchased .schedule-ticket__content strong { color: #708072; text-decoration: line-through; }
+.schedule-ticket.is-purchased .schedule-ticket__content small { display: none; }
+.schedule-ticket.is-purchased .schedule-ticket__open { color: var(--forest); border-left-color: rgba(81,107,85,.2); }
+
+.ticket-dialog { width: min(100% - 28px,720px); max-height: min(88dvh,820px); padding: 0; border: 1px solid rgba(19,38,47,.12); border-radius: 20px; background: var(--paper); box-shadow: 0 22px 70px rgba(19,38,47,.2); overflow: hidden; }
+.ticket-dialog[open] { display: flex; flex-direction: column; }
+.ticket-dialog::backdrop { background: rgba(7,18,22,.58); backdrop-filter: blur(3px); }
+.ticket-dialog > header { min-height: 76px; padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); }
+.ticket-dialog > header span { display: block; color: var(--lake); font-size: 10px; font-weight: 780; letter-spacing: .12em; }
+.ticket-dialog > header h2 { margin: 5px 0 0; font-size: 21px; letter-spacing: -.035em; }
+.ticket-dialog > header button { min-width: 52px; min-height: 40px; border: 0; border-radius: 999px; background: white; color: var(--lake); cursor: pointer; font-size: 12px; font-weight: 720; }
+.ticket-dialog__body { min-height: 0; padding: 18px; overflow: auto; flex: 1 1 auto; }
+.ticket-dialog__status { margin: 0; color: var(--terracotta); font-size: 11px; font-weight: 780; }
+.ticket-dialog__guidance { margin: 8px 0 16px; color: #47575b; font-size: 13px; line-height: 1.65; }
+.ticket-dialog__preview { width: 100%; min-height: min(58dvh,520px); max-height: 62dvh; border: 1px solid var(--line); border-radius: 12px; background: white; object-fit: contain; }
+.ticket-dialog__preview--pdf { display: block; height: min(68dvh,680px); max-height: none; object-fit: initial; }
+.ticket-dialog__empty { margin: 18px 0; padding: 24px 16px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); text-align: center; font-size: 12px; line-height: 1.6; }
+.ticket-dialog__links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+.ticket-dialog__links a { min-height: 42px; padding: 0 13px; display: inline-flex; align-items: center; border: 1px solid #c8dadc; border-radius: 999px; color: #205e6b; background: #edf6f5; text-decoration: none; font-size: 12px; font-weight: 720; }
+
+.accordion-stack { margin-top: 14px; display: block; }
+.drive-note-tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+.drive-note-tabs button { position: relative; min-width: 0; min-height: 48px; padding: 12px 4px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 650; }
+.drive-note-tabs button::after { content: ""; position: absolute; bottom: -1px; left: 20%; right: 20%; height: 2px; border-radius: 2px; background: transparent; }
+.drive-note-tabs button[aria-expanded="true"] { color: var(--ink); font-weight: 780; }
+.drive-note-tabs button[aria-expanded="true"]::after { background: var(--lake); }
+.drive-note-panel { padding: 8px 4px 4px; }
+.drive-note-panel[hidden] { display: none; }
+.drive-note-panel ul, .drive-note-panel ol { margin: 0; padding: 0; color: #47575b; }
+.drive-note-panel ul { list-style: none; }
+.drive-note-panel ol { list-style: none; counter-reset: drive-note-step; }
+.drive-note-panel li { position: relative; margin: 0; padding: 12px 0 12px 14px; font-size: 12px; line-height: 1.7; }
+.drive-note-panel li + li { border-top: 1px solid var(--line); }
+.drive-note-panel ul li::before { content: ""; position: absolute; left: 0; top: 20px; width: 4px; height: 4px; border-radius: 50%; background: #8ca5a7; }
+.drive-note-panel ol li { counter-increment: drive-note-step; padding-left: 22px; }
+.drive-note-panel ol li::before { content: counter(drive-note-step) "."; position: absolute; left: 0; top: 12px; }
+.drive-note-panel__footnote { margin: 8px 0 0; padding: 12px 0 4px; border-top: 1px solid var(--line); color: #47575b; font-size: 12px; line-height: 1.7; }
+
+.todo-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.todo-form input { min-width: 0; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.8); font: inherit; font-size: 13px; outline: none; }
+.todo-form input:focus { border-color: var(--lake); box-shadow: 0 0 0 3px rgba(40,123,144,.1); }
+.todo-form button { min-width: 64px; min-height: 48px; border: 0; border-radius: 13px; color: white; background: var(--ink); cursor: pointer; font-size: 12px; font-weight: 750; }
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 700px) {
+  .topbar { padding-inline: max(24px, calc((100vw - var(--content)) / 2)); }
+  .hero { min-height: 260px; padding-inline: 0; }
+  .section { padding-inline: 0; }
+  .flight-card { flex-basis: 86%; min-height: 350px; }
+  .rental-stops { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* Map is the main surface; date controls remain compact. */
+.route-region-tabs,.route-day-tabs { display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:10px; }
+.route-region-tabs button,.route-day-tabs button { border:0;background:transparent;padding:7px 10px;font-size:13px;border-radius:6px;cursor:pointer; }
+.route-region-tabs button[aria-pressed="true"] {background:var(--ink);color:white;}
+.route-day-tabs button {font-size:12px;padding:7px 8px;}
+.route-day-tabs button[aria-pressed="true"] {background:white;box-shadow:inset 0 0 0 1px var(--line);}
+.route-day-tabs i {display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--route-color);margin-right:5px;}
+.travel-map-scroll {overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;border-radius:12px;border:1px solid var(--line);background:#f6f6f1;}
+.travel-map-canvas {position:relative;min-width:700px;}
+.travel-map-canvas svg {display:block;width:100%;height:auto;}
+.map-utility {display:flex;justify-content:space-between;align-items:center;margin:5px 0 12px;font-size:12px;color:var(--muted);}
+.map-utility button {border:0;background:transparent;font-size:12px;padding:8px;cursor:pointer;}
+.transport-pin {position:absolute;transform:translate(-50%,-50%);font-size:11px;line-height:1.2;border:1px solid var(--route-color);background:white;color:var(--ink);padding:5px 7px;border-radius:20px;cursor:pointer;box-shadow:0 2px 6px #13262f22;white-space:nowrap;}
+.transport-pin::before {content:"";position:absolute;inset:-6px;}
+.transport-pin[aria-expanded="true"] {background:var(--route-color);color:white;}
+.transport-popover {position:fixed;z-index:100;width:min(300px,calc(100vw - 16px));padding:16px 30px 14px 16px;border:1px solid var(--line);border-radius:12px;background:white;box-shadow:0 8px 32px #13262f30;font-size:14px;line-height:1.6;}
+.transport-popover strong {font-size:13px;}
+.transport-popover p {margin:7px 0 0;}
+.transport-popover button {position:absolute;right:4px;top:4px;background:transparent;border:0;width:28px;height:28px;cursor:pointer;}
+.route-list-overview {border-top:1px solid var(--line);}
+.route-list-overview a {display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:14px;}
+.route-list-overview span {white-space:nowrap;color:var(--muted);font-size:12px;}
+.day-detail .travel-map-block {margin:0 0 22px;}
+#map-dialog {width:96vw;max-width:1448px;overflow:auto;padding:48px 12px 12px;background:#f6f6f1;}
+#map-dialog-content {overflow:auto;}
+#map-dialog-content .travel-map-canvas {min-width:1100px;}
+button:focus-visible,a:focus-visible {outline:2px solid var(--lake);outline-offset:3px;}
+@media(min-width:1000px) {.route-section {width:min(1100px,calc(100vw - 64px));max-width:none;margin-left:50%;transform:translateX(-50%);} .travel-map-canvas {min-width:0;}}
+.is-overview .travel-map-canvas {min-width:0;}
+
+/* Daily and Overview deliberately share one full-map canvas and viewport. */
+.is-daily .travel-map-scroll {overflow:hidden;}
+.is-daily .travel-map-canvas {width:100%;min-width:0;}
+.map-place-dot {position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;padding:0;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;}
+.map-place-dot span {display:block;width:11px;height:11px;border:1.5px solid #fffdf6;background:var(--route-color);border-radius:50%;box-shadow:0 0 0 1px var(--route-color);}
+.map-place-dot:hover span,.map-place-dot[aria-expanded="true"] span {box-shadow:0 0 0 4px #ffffffa8,0 0 0 5px var(--route-color);}
+.transport-pin {transform:translate(-50%,-50%);width:28px;height:28px;display:grid;place-items:center;padding:6px;border-radius:8px;border:1px solid var(--route-color);color:var(--route-color);box-shadow:0 2px 5px #13262f18;}
+.transport-pin::before {inset:-3px;}
+.transport-pin svg {width:15px;height:15px;}
+.transport-pin[aria-expanded="true"] {background:var(--route-color);color:white;}
+.route-popover {position:fixed;z-index:100;width:min(360px,calc(100vw - 16px));max-height:calc(100dvh - 16px);overflow:auto;padding:16px;border:1px solid var(--line);border-radius:13px;background:#fff;box-shadow:0 10px 36px #13262f33;color:var(--ink);}
+.route-popover .route-popover-close {position:absolute;right:5px;top:5px;display:grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:transparent;font-size:20px;cursor:pointer;}
+.route-place-popover header {padding-right:22px;margin-bottom:10px;}
+.route-place-popover header small {display:block;color:var(--muted);font-size:12px;margin-bottom:4px;}
+.route-place-popover header strong {font-size:15px;}
+.route-place-popover iframe {display:block;width:100%;height:min(240px,35dvh);border:1px solid var(--line);border-radius:8px;background:#edf1ea;}
+.route-place-popover footer {display:flex;flex-direction:column;gap:7px;margin-top:10px;font-size:13px;}
+.route-place-popover footer small {font-size:12px;color:var(--muted);}
+.popup-place-options {display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.popup-place-options button {padding:6px 9px;border:1px solid var(--line);border-radius:6px;background:white;font-size:12px;cursor:pointer;}
+
+.ledger-confirm-dialog { width: min(100% - 40px, 380px); padding: 0; border: 1px solid rgba(19,38,47,.14); border-radius: 18px; background: var(--paper); color: var(--ink); box-shadow: 0 22px 70px rgba(19,38,47,.28); }
+.ledger-confirm-dialog::backdrop { background: rgba(7,18,22,.55); backdrop-filter: blur(3px); }
+.ledger-confirm-card { padding: 24px 22px 18px; }
+.ledger-confirm-card p { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.55; text-align: center; }
+.ledger-confirm-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+.ledger-confirm-actions button { min-height: 46px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--ink); font: inherit; font-size: 14px; font-weight: 720; cursor: pointer; }
+.ledger-confirm-actions .ledger-confirm-danger { border-color: rgba(171,67,55,.28); background: #fff1ee; color: #a13f34; }
+.popup-place-options button[aria-pressed="true"] {background:var(--ink);color:white;}
+.transport-popover {width:min(320px,calc(100vw - 16px));padding-right:32px;font-size:14px;line-height:1.65;}
+.transport-leg + .transport-leg {margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
+.transport-leg strong {font-size:13px;}
+.transport-leg p {margin:5px 0 0;}
+#map-dialog-content .daily-fullscreen {min-width:850px;}
+
+@media (max-width:699px) {
+  .is-daily .map-place-dot {width:14px;height:14px;}
+  .is-daily .map-place-dot span {width:8px;height:8px;border-width:1px;}
+  .is-daily .transport-pin {width:24px;height:24px;padding:5px;border-radius:7px;}
+  .is-daily .transport-pin svg {width:13px;height:13px;}
+  #map-dialog-content .daily-fullscreen {width:100%;min-width:0;}
+}
+
+.schedule-text__highlight.is-blue { color: #277089; }
+.schedule-text__highlight.is-green { color: #55AA37; }
+.schedule-text__highlight.is-pink { color: #E83568; }
+.schedule-text__highlight.is-red { color: #C00000; }
+
+/* v58: unify driving-note typography with travel-prep items. */
+.drive-note-tabs button { font-size: 13px; }
+.drive-note-panel ul, .drive-note-panel ol { color: var(--ink); }
+.drive-note-panel li { font-size: 13px; }
+.drive-note-panel__footnote { color: var(--ink); font-size: 13px; }
+
+/* v62: driving-map buttons keep the established wider horizontal padding. */
+.schedule-map-links:not(.schedule-map-links--inline) .schedule-map-link { padding-left: 14px; padding-right: 14px; }
+/* v62: pickup subsidy note and rental price baseline alignment. */
+.rental-stop span.rental-stop__subsidy { margin-top: 5px; color: #abc0c4; font-size: 12px; line-height: 1.5; }
+.rental-price { align-items: center; }
+.rental-price > span, .rental-price > strong { line-height: 1; }
+
+/* v63: floating bottom navigation */
+body { padding-bottom: calc(96px + var(--safe-bottom)); }
+.topbar { justify-content: flex-start; }
+.primary-navigation { display: none !important; }
+.bottom-navigation {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 45;
+  width: min(calc(100% - 28px), 620px);
+  min-height: 64px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  border-radius: 999px;
+  background: #13262f;
+  box-shadow: 0 12px 32px rgba(19, 38, 47, .22);
+}
+.bottom-navigation__item {
+  min-width: 0;
+  min-height: 52px;
+  padding: 6px 4px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #d7dfdc;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color .16s ease, color .16s ease;
+}
+.bottom-navigation__item svg {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.bottom-navigation__item[aria-current="page"] {
+  color: #13262f;
+  background: #E59C19;
+}
+
+/* v63: align travel-section headings to the same left edge as the hero title. */
+.drive-section { padding-left: 18px; padding-right: 18px; }
+
+/* v63: accommodation view */
+.accommodation-view { min-height: calc(100dvh - 48px); }
+.accommodation-list { display: grid; gap: 12px; }
+.accommodation-card { padding: 18px; border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow); }
+.accommodation-card__meta { margin: 0 0 6px; color: var(--lake); font: 600 11px/1.4 "Inter", sans-serif; letter-spacing: .08em; }
+.accommodation-card h3 { margin: 0; font-size: 18px; line-height: 1.35; }
+.accommodation-card__dates { margin: 7px 0 0; color: var(--muted); font: 500 12px/1.5 "Inter", sans-serif; }
+.accommodation-card ul { margin: 14px 0 0; padding: 13px 0 0 18px; border-top: 1px solid var(--line); }
+.accommodation-card li { margin: 6px 0; font-size: 13px; line-height: 1.65; }
+
+@media (max-width: 420px) {
+  .bottom-navigation { width: calc(100% - 20px); }
+  .bottom-navigation__item { gap: 4px; font-size: 11px; }
+  .bottom-navigation__item svg { width: 20px; height: 20px; flex-basis: 20px; }
+}
+
+/* v64: unified headers for all secondary bottom-navigation pages. */
+.prep-view .prep-section,
+.accommodation-view .accommodation-section {
+  padding-top: 32px;
+}
+.prep-view .section-heading,
+.accommodation-view .section-heading {
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+.prep-view .section-kicker,
+.accommodation-view .section-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  line-height: normal;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.prep-view .section-heading h2,
+.accommodation-view .section-heading h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+
+/* v65: all four bottom-navigation views share the ledger page background. */
+body,
+body[data-active-view="travel"],
+body[data-active-view="accommodation"],
+body[data-active-view="prep"],
+body[data-active-view="ledger"],
+#main, .accommodation-view, .prep-view, .ledger-view {
+  background: #F2F5F7;
+}
+body[data-active-view] .topbar {
+  border-bottom: 0;
+  background: rgba(242, 245, 247, .93);
+}
+
+/* v65: WHERE WE STAY is the single visual baseline for the three secondary page headers. */
+.accommodation-view .accommodation-section,
+.prep-view .prep-section {
+  padding-top: 32px;
+}
+.accommodation-view .section-heading,
+.prep-view .section-heading,
+.ledger-page-header {
+  margin-bottom: 16px;
+}
+.accommodation-view .section-kicker,
+.prep-view .section-kicker,
+.ledger-page-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  line-height: normal;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.accommodation-view .section-heading h2,
+.prep-view .section-heading h2,
+.ledger-page-header h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 700;
+}
+
+/* v76: light app-style bottom navigation. */
+body { padding-bottom: calc(82px + var(--safe-bottom)); }
+.bottom-navigation {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: none;
+  width: 100%;
+  max-width: none;
+  min-height: 66px;
+  padding: 7px 14px calc(7px + var(--safe-bottom));
+  gap: 4px;
+  border-top: 1px solid rgba(19, 38, 47, .07);
+  border-radius: 0;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 -8px 24px rgba(19, 38, 47, .06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.bottom-navigation__item {
+  min-height: 52px;
+  padding: 4px 2px 2px;
+  flex-direction: column;
+  gap: 3px;
+  border-radius: 0;
+  color: #9aa3a5;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.15;
+  background: transparent;
+}
+.bottom-navigation__item svg {
+  width: 22px;
+  height: 22px;
+  flex-basis: 22px;
+  stroke-width: 1.8;
+}
+.bottom-navigation__item[aria-current="page"] {
+  color: #13262f;
+  background: transparent;
+}
+@media (max-width: 420px) {
+  .bottom-navigation { width: 100%; padding-left: 10px; padding-right: 10px; }
+  .bottom-navigation__item { gap: 3px; font-size: 10px; }
+  .bottom-navigation__item svg { width: 21px; height: 21px; flex-basis: 21px; }
+}
+
+/* v82: warm accent for the prep-page add action. */
+.todo-form button {
+  color: #fff;
+  background: #E59C19;
+}
+
+/* v95: accommodation photo carousel (first stay preview) */
+.accommodation-card { padding: 0; overflow: hidden; }
+.accommodation-card__content { padding: 18px; }
+.accommodation-gallery { position: relative; background: #eef1f2; }
+.accommodation-gallery__track {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.accommodation-gallery__track::-webkit-scrollbar { display: none; }
+.accommodation-gallery__slide {
+  flex: 0 0 100%;
+  aspect-ratio: 3 / 2;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+}
+.accommodation-gallery__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.accommodation-gallery__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: rgba(19, 38, 47, .22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.accommodation-gallery__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+}
+.accommodation-gallery__dot.is-active { background: #fff; }
+
+/* v97: accommodation detail icons + prep-item-sized detail text */
+.accommodation-card__details {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 13px 0 0;
+  border-top: 1px solid var(--line);
+}
+.accommodation-card__details .accommodation-card__detail {
+  margin: 7px 0;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.accommodation-card__detail--icon {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+}
+.accommodation-card__detail-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+}
+.accommodation-card__detail-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.accommodation-card__detail-text { min-width: 0; }
+.accommodation-card__detail--bullet {
+  position: relative;
+  padding-left: 29px;
+}
+.accommodation-card__detail--bullet::before {
+  content: "•";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  color: var(--ink);
+}
+
+/* v98: accommodation detail alignment, prep-item typography, clearer parking icon and address copy */
+.accommodation-card__details .accommodation-card__detail {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+.accommodation-card__detail--icon {
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+.accommodation-card__detail-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 0;
+}
+.accommodation-card__detail-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.accommodation-card__detail--bullet {
+  padding-left: 32px;
+}
+.accommodation-card__detail--bullet::before { left: 8px; }
+.accommodation-card__address-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.accommodation-card__address-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.accommodation-card__copy {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  margin: -4px 0;
+  padding: 5px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #66757a;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.accommodation-card__copy svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.accommodation-card__copy:active,
+.accommodation-card__copy.is-copied { background: #eef2f1; color: var(--ink); }
+
+/* v99: accommodation detail alignment and final icon treatment. */
+.accommodation-card .accommodation-card__details {
+  padding-left: 0;
+}
+.accommodation-card__details .accommodation-card__detail {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+.accommodation-card__detail--icon {
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+}
+.accommodation-card__detail-icon,
+.accommodation-card__detail-icon svg,
+.accommodation-card__detail-icon img {
+  width: 20px;
+  height: 20px;
+}
+.accommodation-card__detail-icon img {
+  display: block;
+  object-fit: contain;
+}
+.accommodation-card__copy:active { background: transparent; color: #66757a; }
+
+
+/* v100: final accommodation icon choices. */
+.accommodation-card .accommodation-card__details {
+  margin-left: 0;
+  padding-left: 0;
+}
+.accommodation-card__details .accommodation-card__detail {
+  margin: 7px 0;
+}
+.accommodation-card__detail--icon {
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+.accommodation-card__detail-icon,
+.accommodation-card__detail-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.accommodation-card__detail-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.accommodation-card__detail--bullet { padding-left: 30px; }
+.accommodation-card__detail--bullet::before { left: 7px; }
+.accommodation-card__address-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* v102: restored the original site typography for all text, digits, and symbols. */
+
+/* v103: prep-page wishlist / saved places */
+.wishlist-section { margin-top: 38px; }
+.wishlist-heading { margin-bottom: 16px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.wishlist-heading .section-kicker { margin-bottom: 9px; }
+.wishlist-heading h3 { margin: 0; font-size: 24px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700; }
+.wishlist-card {
+  border: 1px solid rgba(19, 38, 47, .09);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(18, 42, 50, .055), 0 1px 3px rgba(18, 42, 50, .035);
+}
+.wishlist-entry-card { padding: 20px; }
+.wishlist-list-card { margin-top: 16px; padding: 18px; }
+.wishlist-fieldset { min-width: 0; margin: 0 0 18px; padding: 0; border: 0; }
+.wishlist-fieldset legend,
+.wishlist-field > span {
+  display: block;
+  margin-bottom: 7px;
+  color: #6f7d80;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 720;
+}
+.wishlist-choice-grid,
+.wishlist-region-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 5px;
+}
+.wishlist-choice {
+  min-width: 0;
+  min-height: 43px;
+  padding: 0 3px;
+  border: 0;
+  border-radius: 9px;
+  color: #768386;
+  background: #f7f9f8;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 680;
+  white-space: nowrap;
+}
+.wishlist-choice[aria-pressed="true"] { color: #fff; background: #132d37; font-weight: 760; }
+.wishlist-choice:focus-visible { outline: 2px solid #8eb9c0; outline-offset: 2px; }
+.wishlist-field { display: block; margin-top: 14px; }
+.wishlist-field input,
+.wishlist-field textarea {
+  width: 100%;
+  border: 1px solid rgba(19, 38, 47, .13);
+  border-radius: 10px;
+  outline: 0;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  font-size: 13px;
+}
+.wishlist-field input { min-height: 44px; padding: 0 12px; }
+.wishlist-field textarea { min-height: 44px; padding: 10px 12px; line-height: 22px; resize: none; }
+.wishlist-field input::placeholder,
+.wishlist-field textarea::placeholder { color: #a6b0b1; }
+.wishlist-field input:focus,
+.wishlist-field textarea:focus { border-color: #9fc4c9; box-shadow: 0 0 0 3px rgba(40, 123, 144, .1); }
+.wishlist-form-message { min-height: 18px; margin: 10px 0 0; color: #a64f40; font-size: 11px; line-height: 1.45; }
+.wishlist-form-message.is-success { color: #52735a; }
+.wishlist-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: #132d37;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 760;
+}
+.wishlist-region-tabs { margin-bottom: 16px; }
+.wishlist-list { display: grid; gap: 10px; }
+.wishlist-place-card {
+  position: relative;
+  min-height: 86px;
+  padding: 16px 54px 16px 16px;
+  border: 1px solid rgba(19, 38, 47, .10);
+  border-radius: 14px;
+  background: #fff;
+}
+.wishlist-place-copy h4 { margin: 0; font-size: 14px; line-height: 1.45; font-weight: 760; }
+.wishlist-place-copy p { margin: 12px 0 0; color: #58676a; font-size: 12px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.wishlist-map-link {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  color: #59676a;
+  background: transparent;
+  text-decoration: none;
+}
+.wishlist-map-link svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wishlist-map-link:focus-visible { outline: 2px solid #8eb9c0; outline-offset: 1px; }
+.wishlist-empty { margin: 0; padding: 23px 10px 18px; color: #8b9899; text-align: center; font-size: 11px; line-height: 1.55; }
+
+@media (max-width: 380px) {
+  .wishlist-entry-card { padding: 18px 14px; }
+  .wishlist-list-card { padding: 16px 14px; }
+  .wishlist-choice-grid,
+  .wishlist-region-tabs { gap: 4px; }
+  .wishlist-choice { min-height: 41px; padding-inline: 1px; font-size: 9px; }
+}
+
+
+/* v104: requested accommodation and wishlist refinements. */
+.accommodation-card__address-meta {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font: 500 12px/1.5 "Inter", sans-serif;
+  letter-spacing: 0;
+}
+.accommodation-card__address-meta .accommodation-card__copy {
+  width: 28px;
+  height: 28px;
+  flex-basis: 28px;
+  margin-block: -4px;
+}
+
+/* Match the secondary wishlist heading rhythm to the main prep heading. */
+.wishlist-heading .section-kicker {
+  margin: 0 0 10px;
+  line-height: normal;
+}
+
+/* Wishlist entry labels follow the ledger note-label hierarchy. */
+.wishlist-fieldset legend,
+.wishlist-field > span {
+  margin-bottom: 7px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.wishlist-field--first { margin-top: 0; }
+.wishlist-fieldset { margin-top: 18px; margin-bottom: 0; }
+.wishlist-submit { background: #E59C19; }
+
+/* The saved-place region switcher sits outside the content card and mirrors ledger analysis tabs. */
+.wishlist-region-tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding: 5px 6px;
+  overflow-x: auto;
+  border-radius: 999px;
+  background: #f3f2ef;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.wishlist-region-tabs::-webkit-scrollbar { display: none; }
+.wishlist-region-tabs .wishlist-choice {
+  flex: 1 0 auto;
+  min-width: 58px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #687578;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+.wishlist-region-tabs .wishlist-choice[aria-pressed="true"] {
+  color: #fff;
+  background: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 2px 7px rgba(19,38,47,.14);
+}
+.wishlist-list-card {
+  margin-top: 12px;
+}
+
+/* v105: wishlist spacing, compact controls, placeholder consistency, and balanced tabs. */
+.wishlist-section {
+  margin-top: 76px;
+}
+.wishlist-heading .section-kicker {
+  margin: 0 0 10px;
+  line-height: normal;
+}
+.wishlist-heading h3 {
+  line-height: 1;
+}
+.wishlist-field input::placeholder,
+.wishlist-field textarea::placeholder {
+  color: #757575;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 1;
+}
+.wishlist-form-message:empty {
+  display: none;
+}
+.wishlist-choice-grid .wishlist-choice {
+  min-height: 38px;
+  padding-inline: clamp(2px, 1vw, 14px);
+  font-size: 14px;
+}
+.wishlist-region-tabs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  padding: 5px 6px;
+  overflow: visible;
+  scroll-padding-inline: 0;
+}
+.wishlist-region-tabs .wishlist-choice {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 0 2px;
+  font-size: 14px;
+}
+@media (max-width: 420px) {
+  .wishlist-choice-grid .wishlist-choice {
+    min-height: 36px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 340px) {
+  .wishlist-choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* v106: final wishlist heading hierarchy, recover compact option copy, validation, and saved-place actions. */
+.wishlist-heading.section-heading {
+  margin-bottom: 16px;
+  align-items: flex-end;
+}
+.wishlist-heading .section-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  line-height: normal;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.wishlist-heading h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 700;
+}
+
+/* Input-card area/category copy returns to the pre-v105 size; control dimensions stay compact. */
+.wishlist-choice-grid .wishlist-choice {
+  font-size: 10px;
+}
+@media (max-width: 420px) {
+  .wishlist-choice-grid .wishlist-choice { font-size: 10px; }
+}
+
+/* Validation copy follows the overview page's red accent and the 14px field-label scale. */
+.wishlist-form-message {
+  color: #C00000;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Saved-place copy follows the prep checklist typography. */
+.wishlist-place-card {
+  padding-right: 96px;
+}
+.wishlist-place-copy h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 760;
+}
+.wishlist-place-copy p {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.wishlist-place-actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.wishlist-place-actions .wishlist-map-link,
+.wishlist-delete {
+  position: static;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+.wishlist-place-actions .wishlist-map-link { color: #59676a; }
+.wishlist-delete { color: #9a7062; }
+.wishlist-delete svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wishlist-delete:focus-visible { outline: 2px solid #8eb9c0; outline-offset: 1px; }
+
+
+/* v107: verified mobile fixes and wishlist typography. */
+/* Restore v104 option-copy sizing while keeping the newer control dimensions/layout. */
+.wishlist-choice-grid .wishlist-choice {
+  font-size: 10px;
+}
+.wishlist-region-tabs .wishlist-choice {
+  font-size: 13px;
+}
+@media (max-width: 420px) {
+  .wishlist-choice-grid .wishlist-choice { font-size: 10px; }
+  .wishlist-region-tabs .wishlist-choice { font-size: 13px; }
+}
+
+/* Use the same red token as the overview warnings. */
+.wishlist-form-message {
+  color: var(--warning);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Saved-place text mirrors the preparation checklist; the place name differs only by weight. */
+.wishlist-place-card {
+  padding-right: 54px;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+}
+.wishlist-place-copy h4,
+.wishlist-place-copy p {
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.wishlist-place-copy h4 {
+  margin: 0;
+  font-weight: 700;
+}
+.wishlist-place-copy p {
+  margin: 8px 0 0;
+  font-weight: 400;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.wishlist-place-actions {
+  top: 7px;
+  right: 7px;
+}
+.wishlist-place-actions .wishlist-map-link {
+  width: 42px;
+  height: 42px;
+}
+.wishlist-delete { display: none !important; }
+
+
+/* v108: compact wishlist cards, inline Maps validation, and unified delete confirmation. */
+.wishlist-map-error {
+  min-height: 0;
+  margin: 7px 0 0;
+  color: var(--warning);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.wishlist-map-error:empty { display: none; }
+
+/* Saved-place cards now follow the compact ledger-detail rhythm. */
+.wishlist-list { gap: 8px; }
+.wishlist-place-card {
+  min-height: 0;
+  padding: 10px 52px 10px 16px;
+  border: 1px solid rgba(19,38,47,.10);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(18,42,50,.04), 0 1px 2px rgba(18,42,50,.025);
+}
+.wishlist-place-copy {
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  min-height: 38px;
+}
+.wishlist-place-copy h4 {
+  margin: 0;
+  color: var(--lake);
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.wishlist-place-copy p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 760;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.wishlist-place-actions {
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}
+.wishlist-place-actions .wishlist-map-link {
+  width: 38px;
+  height: 38px;
+}
+
+.wishlist-delete-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(7,18,22,.28);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.wishlist-delete-dialog {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  width: min(calc(100vw - 40px), 380px);
+  box-sizing: border-box;
+  padding: 22px;
+  border: 1px solid rgba(19,38,47,.14);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 22px 70px rgba(19,38,47,.28);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.96);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+.wishlist-delete-dialog.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.wishlist-delete-message {
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+}
+.wishlist-delete-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.wishlist-delete-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.wishlist-delete-cancel {
+  color: #13262F;
+  background: #E8EBF0;
+}
+.wishlist-delete-danger {
+  color: #fff;
+  background: #81021F;
+}
+
+/* v108 final typography: destination title stays emphasized; note matches ledger detail item text. */
+.wishlist-place-copy h4 {
+  color: var(--lake);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.wishlist-place-copy p {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+
+/* v109: compact wishlist note editor + refined saved-place typography. */
+.wishlist-field textarea {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  line-height: 1.45;
+  resize: none;
+}
+.wishlist-place-copy h4 {
+  color: var(--lake);
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.wishlist-place-copy p {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* v110: mobile-friendly 3 x 2 selection layout for wishlist area/category controls. */
+@media (max-width: 600px) {
+  .wishlist-choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .wishlist-choice-grid .wishlist-choice {
+    min-height: 41px;
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+}
+
+/* v111: unified 48px controls, clearer option surfaces, roomier field rhythm, and checklist alignment. */
+.wishlist-choice-grid .wishlist-choice:not([aria-pressed="true"]) {
+  background: #ECEFF1;
+}
+
+.wishlist-field input,
+.wishlist-field textarea {
+  min-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+}
+.wishlist-field input { padding: 0 12px; }
+.wishlist-field textarea {
+  padding: 11px 12px;
+  line-height: 1.45;
+  resize: none;
+}
+
+/* Keep title-to-control spacing unchanged, but double the gap before the next field title. */
+.wishlist-field:not(.wishlist-field--first) { margin-top: 28px; }
+.wishlist-fieldset { margin-top: 36px; }
+
+/* Match the ledger's date-control-to-submit rhythm. */
+.wishlist-submit { margin-top: 38px; }
+
+/* When prep text wraps, keep both controls aligned with the first text line. */
+
+
+
+
+
+/* v112: 44px prep controls, unified 22px field rhythm, top-anchored resizable note text. */
+.wishlist-field input,
+.wishlist-field textarea {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+}
+.wishlist-field input {
+  padding: 0 12px;
+}
+.wishlist-field textarea {
+  padding: 10px 12px;
+  line-height: 22px;
+  resize: none;
+}
+/* One consistent gap from the previous control to the next field title. */
+.wishlist-field:not(.wishlist-field--first),
+.wishlist-fieldset {
+  margin-top: 22px;
+}
+
+
+/* v125: borderless cards across Overview, Accommodation, Prep and Ledger-facing shared cards. */
+#main .route-map-button,
+#main .ticket-card,
+#main .accordion,
+.accommodation-view .accommodation-card,
+.prep-view .wishlist-card,
+.prep-view .wishlist-place-card {
+  border: 0 !important;
+}
+
+
+/* v127: saved-place list uses standalone item cards with no shared outer container. */
+.wishlist-list-card {
+  margin-top: 16px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.wishlist-list {
+  gap: 10px;
+}
+.wishlist-place-card {
+  min-height: 58px;
+  box-sizing: border-box;
+}
+.wishlist-empty {
+  min-height: 58px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 16px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 14px;
+  color: #8b9899;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(18,42,50,.04), 0 1px 2px rgba(18,42,50,.025);
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+
+/* v127: shared comma treatment for monetary values outside Ledger. */
+.money-comma {
+  display: inline;
+  margin: 0 -0.015em;
+  color: inherit;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: .69em;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: -.05em;
+}
+
+
+/* v129: tighter accommodation address rhythm and unified empty-state typography. */
+.accommodation-card__address-meta {
+  margin-top: 2px;
+}
+.accommodation-card__map-link {
+  text-decoration: none;
+  color: inherit;
+}
+.accommodation-card__map-link:hover,
+.accommodation-card__map-link:focus-visible {
+  color: var(--ink);
+}
+.wishlist-empty {
+  color: #8b9899;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* v130: tighten accommodation date/address rhythm and keep the Maps affordance adjacent to the address. */
+.accommodation-card__dates,
+.accommodation-card__address-meta {
+  line-height: 1.3;
+}
+.accommodation-card__address-meta {
+  margin-top: 0;
+}
+.accommodation-card__address-row {
+  justify-content: flex-start;
+  gap: 3px;
+}
+.accommodation-card__address-meta .accommodation-card__copy,
+.accommodation-card__map-link {
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  display: inline-grid;
+  place-items: center;
+  color: #66757a;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* v131: make the full accommodation address tappable and visually join the Maps arrow to the address. */
+.accommodation-card__address-meta {
+  margin-top: -4px;
+}
+.accommodation-card__address-row {
+  display: block;
+}
+.accommodation-card__map-link {
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.accommodation-card__map-link:hover,
+.accommodation-card__map-link:focus-visible,
+.accommodation-card__map-link:active {
+  color: inherit;
+}
+.accommodation-card__map-link:focus-visible {
+  outline: 2px solid #8eb9c0;
+  outline-offset: 2px;
+}
+.accommodation-card__map-arrow {
+  display: inline;
+  margin-left: 0;
+  padding: 0;
+  color: inherit;
+  font-family: "Inter", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+
+/* v132: use the overview Google Maps navigation mark inline with accommodation addresses. */
+.accommodation-card__address-meta {
+  margin-top: -2px;
+}
+.accommodation-card__map-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+  background: currentColor;
+  -webkit-mask: url("assets/google-map-arrow.png?v=241") center / contain no-repeat;
+  mask: url("assets/google-map-arrow.png?v=241") center / contain no-repeat;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  vertical-align: -0.08em;
+}
+
+/* v134: keep the v133 date/address spacing; return the Maps icon gap to one text space and lift the icon by 1px. */
+.accommodation-card__address-meta {
+  margin-top: 2px;
+}
+.accommodation-card__map-icon {
+  position: relative;
+  top: -1px;
+  width: 0.75em;
+  height: 0.75em;
+  margin-left: 0;
+  vertical-align: -0.02em;
+}
+
+/* v141: connected, mobile-first accommodation / transport tabs. */
+.accommodation-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  margin: 0;
+  gap: 0;
+  align-items: stretch;
+}
+.accommodation-tab {
+  min-width: 0;
+  min-height: 46px;
+  border: 0;
+  border-radius: 12px 12px 0 0;
+  background: #e9eceb;
+  color: #6c7573;
+  font: inherit;
+  font-size: 14px;
+  font-weight: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.accommodation-tab[aria-selected="true"] { background: #fff; color: #25302e; }
+.accommodation-tab:focus-visible { outline: 2px solid #285d58; outline-offset: -3px; }
+.accommodation-tab-panel { background: #fff; padding: 14px 10px 18px; border-radius: 0 0 12px 12px; min-width: 0; }
+.accommodation-tab-panel[hidden] { display: none !important; }
+.accommodation-tab-panel .flights-section,
+.accommodation-tab-panel .drive-section { padding-left: 0; padding-right: 0; }
+.accommodation-tab-panel .flights-section { padding-top: 8px; }
+.accommodation-tab-panel .drive-section { padding-top: 16px; }
+@media (min-width: 700px) {
+  .accommodation-tab-panel { padding: 22px; }
+  .accommodation-tab { min-height: 48px; font-size: 15px; }
+}
+
+/* v142: mobile-first raised tabs with separate half-height white base and content. */
+.accommodation-view .accommodation-tabs {
+  margin-top: 3px;
+  overflow: visible;
+  isolation: isolate;
+}
+.accommodation-view .accommodation-tab {
+  position: relative;
+  z-index: 0;
+  height: 46px;
+  min-height: 46px;
+  border-radius: 12px 12px 0 0;
+  background: #e9eceb;
+  color: #6c7573;
+  padding: 0 6px;
+  line-height: 46px;
+  text-align: center;
+}
+.accommodation-view .accommodation-tab[aria-selected="true"] {
+  z-index: 1;
+  background: #fff;
+  color: #25302e;
+}
+.accommodation-view .accommodation-tab[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: #fff;
+}
+.accommodation-tabs-base {
+  height: 23px; /* exactly half the 46px tab height */
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+}
+.accommodation-view .accommodation-content-heading {
+  margin-top: 18px;
+  margin-bottom: 16px;
+}
+.accommodation-view .accommodation-tab-panel {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.accommodation-view .accommodation-tab-panel .flights-section { padding-top: 0; }
+.accommodation-view .accommodation-tab-panel .drive-section { padding-top: 16px; }
+@media (min-width: 700px) {
+  .accommodation-view .accommodation-tab { height: 46px; min-height: 46px; line-height: 46px; }
+  .accommodation-view .accommodation-tab-panel { padding: 0; }
+}
+/* v142: overview heading shares the same 32px top start as secondary page headings. */
+body[data-active-view="travel"] .hero {
+  min-height: 0;
+  padding: 32px 18px 24px;
+  justify-content: flex-start;
+}
+/* Prevent elastic overscroll from exposing phantom top space on supported browsers. */
+html, body { overscroll-behavior-y: none; }
+
+/* v143: mirrored trapezoid tabs, active tab rises without moving its label. */
+.accommodation-view .accommodation-tabs { display:flex; align-items:flex-end; margin:0 0 -1px; padding-top:15px; isolation:isolate; overflow:visible; }
+.accommodation-view .accommodation-tab { --tab-bg:#e9eceb; --tab-fg:#6c7573; position:relative; flex:0 0 56%; height:51px; min-height:51px; padding:0 14px; border:0; border-radius:0; background:transparent !important; color:var(--tab-fg); line-height:51px; z-index:1; white-space:nowrap; }
+.accommodation-view .accommodation-tab:first-child { margin-right:-12%; }
+.accommodation-view .accommodation-tab[aria-selected="true"] { --tab-bg:#fff; --tab-fg:#25302e; z-index:3; }
+.accommodation-view .accommodation-tab::before, .accommodation-view .accommodation-tab[aria-selected="true"]::before { content:""; position:absolute; inset:0; top:0; z-index:-1; background:var(--tab-bg); border-radius:0; }
+.accommodation-view .accommodation-tab:first-child::before { clip-path:polygon(0 0,77% 0,100% 100%,0 100%); border-top-left-radius:13px; }
+.accommodation-view .accommodation-tab:last-child::before { clip-path:polygon(23% 0,100% 0,100% 100%,0 100%); border-top-right-radius:13px; }
+.accommodation-view .accommodation-tab[aria-selected="true"]::before { top:-12px; }
+.accommodation-view .accommodation-tabs-base,.accommodation-view .accommodation-content-heading { display:none !important; }
+.accommodation-view .accommodation-tab-panel { padding:0; background:transparent; }
+.accommodation-view .accommodation-list .accommodation-card:first-child { border-top-left-radius:0; border-top-right-radius:0; }
+.accommodation-view .accommodation-tab-panel .flights-section { border-top-left-radius:0; border-top-right-radius:0; }
+
+/* v144 preview: mobile-first, attached mirror trapezoid tabs. */
+.accommodation-view .accommodation-section { padding-top: 38px; }
+.accommodation-view .accommodation-tabs {
+  display: flex; align-items: flex-end; position: relative;
+  height: 73px; padding-top: 14px; margin: 0 0 -1px;
+  overflow: visible; isolation: isolate;
+}
+.accommodation-view .accommodation-tab {
+  position: relative; flex: 0 0 55%; height: 57px; min-height: 57px;
+  line-height: 57px; padding: 0 12px; border: 0; border-radius: 0;
+  background: transparent !important; color: #7a858a;
+  font-size: 15px; font-weight: 650; text-align: center;
+  z-index: 1; transform: none !important;
+}
+.accommodation-view .accommodation-tab:first-child { margin-right: -10%; }
+.accommodation-view .accommodation-tab:last-child { color: #a9b7c0; }
+.accommodation-view .accommodation-tab::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: #e8eceb; border-radius: 0; transition: top 140ms ease;
+}
+.accommodation-view .accommodation-tab:first-child::before {
+  clip-path: polygon(0 0, 74% 0, 100% 100%, 0 100%);
+  border-top-left-radius: 22px;
+}
+.accommodation-view .accommodation-tab:last-child::before {
+  background: #142a35;
+  clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%);
+  border-top-right-radius: 22px;
+}
+.accommodation-view .accommodation-tab[aria-selected="true"] { z-index: 4; }
+.accommodation-view .accommodation-tab:first-child[aria-selected="true"] { color: #142a35; }
+.accommodation-view .accommodation-tab:first-child[aria-selected="true"]::before { background: #fff; }
+.accommodation-view .accommodation-tab:last-child[aria-selected="true"] { color: #fff; }
+.accommodation-view .accommodation-tab[aria-selected="true"]::before { top: -5px; }
+.accommodation-view .accommodation-tab-panel { background: transparent; padding: 0 !important; border-radius: 0; }
+.accommodation-view .accommodation-list .accommodation-card:first-child,
+.accommodation-view .accommodation-list .accommodation-card:first-child .accommodation-card__gallery,
+.accommodation-view .accommodation-list .accommodation-card:first-child img,
+.accommodation-view .accommodation-tab-panel .flight-card:first-child {
+  border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;
+}
+.accommodation-view .accommodation-tab-panel .flights-section {
+  padding: 0 !important; margin: 0 !important; border-radius: 0;
+}
+.accommodation-view .accommodation-tab-panel .flight-carousel {
+  padding-top: 0 !important;
+}
+.accommodation-view .accommodation-tab-panel .flight-card { border-radius: 0 0 22px 22px; }
+.accommodation-view .accommodation-tab-panel .flights-section .section-heading { display: none !important; }
+.accommodation-view .accommodation-tab-panel .drive-section { padding-top: 20px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* v145: selected tab rises exactly 5px; label baseline remains fixed. */
+.accommodation-view .accommodation-tab[aria-selected="true"]::before { top: -5px; }
+.accommodation-view .accommodation-tab:first-child::before { border-top-left-radius: 22px; }
+.accommodation-view .accommodation-tab:last-child::before { border-top-right-radius: 22px; }
+
+/* v146: rounded tangent fillets at both ends of the 10deg-from-vertical diagonal.
+   SVG alpha masks scale with each tab. Selected background rises 5px;
+   text remains on the original 57px line box. */
+.accommodation-view .accommodation-tabs {
+  display:flex; align-items:flex-end; height:70px; padding-top:8px;
+  margin:0 0 -1px; isolation:isolate; overflow:visible;
+}
+.accommodation-view .accommodation-tab {
+  flex:0 0 52%; height:57px; min-height:57px; line-height:57px;
+  padding:0 10px; margin:0; border:0; border-radius:0;
+  background:transparent !important; transform:none !important;
+  font-size:15px; font-weight:650; position:relative; z-index:1;
+}
+.accommodation-view .accommodation-tab:first-child { margin-right:-4%; }
+.accommodation-view .accommodation-tab::before {
+  content:""; position:absolute; inset:0; top:0; z-index:-1;
+  border-radius:0 !important; clip-path:none !important;
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  transition:top 140ms ease;
+}
+.accommodation-view .accommodation-tab:first-child::before {
+  -webkit-mask-image:url("assets/tab-left-v146.svg");
+  mask-image:url("assets/tab-left-v146.svg"); background:#e8eceb;
+}
+.accommodation-view .accommodation-tab:last-child::before {
+  -webkit-mask-image:url("assets/tab-right-v146.svg");
+  mask-image:url("assets/tab-right-v146.svg"); background:#142a35;
+}
+.accommodation-view .accommodation-tab[aria-selected="true"] { z-index:4; }
+.accommodation-view .accommodation-tab[aria-selected="true"]::before { top:-5px; }
+.accommodation-view .accommodation-tab:first-child[aria-selected="true"]::before { background:#fff; }
+.accommodation-view .accommodation-tab:first-child[aria-selected="true"] { color:#142a35; }
+.accommodation-view .accommodation-tab:first-child[aria-selected="false"] { color:#77838a; }
+.accommodation-view .accommodation-tab:last-child[aria-selected="true"] { color:#fff; }
+.accommodation-view .accommodation-tab:last-child[aria-selected="false"] { color:#a9b7c0; }
+/* The first content card is visually attached to the tab bar, with square top corners. */
+.accommodation-view .accommodation-list .accommodation-card:first-child { border-radius:0 0 22px 22px !important; }
+.accommodation-view .accommodation-tab-panel .flights-section { border-radius:0 !important; }
+.accommodation-view .accommodation-card__content { padding:20px 22px 24px; }
+.accommodation-view .accommodation-card__meta { font-size:13px; letter-spacing:.025em; margin-bottom:8px; }
+.accommodation-view .accommodation-card h3 { font-size:23px; line-height:1.3; }
+.accommodation-view .accommodation-card__dates { font-family:inherit; font-size:14px; font-weight:inherit; line-height:1.55; margin-top:8px; color:#66757A; }
+.accommodation-view .accommodation-card__address-row { font-family:inherit; font-size:14px; font-weight:inherit; line-height:1.55; color:#66757A; }
+.accommodation-view .accommodation-card__details .accommodation-card__detail { font-size:14px; line-height:1.55; }
+@media (min-width:700px) {
+  .accommodation-view .accommodation-card__content { padding:24px 28px 28px; }
+  .accommodation-view .accommodation-card h3 { font-size:26px; }
+}
+
+/* v147: approved 390x65 complete-shape state swap; original layout remains intact. */
+.accommodation-view .accommodation-tabs { position:relative; }
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:43.3333px;
+  background-position:center bottom; background-repeat:no-repeat; background-size:100% 100%;
+  pointer-events:none; z-index:0; transition:opacity .25s ease;
+}
+.accommodation-view .accommodation-tabs::before { background-image:url("assets/tabs-left-active.svg?v=241"); opacity:1; }
+.accommodation-view .accommodation-tabs::after { background-image:url("assets/tabs-right-active.svg?v=241"); opacity:0; }
+.accommodation-view .accommodation-tabs.right-active::before { opacity:0; }
+.accommodation-view .accommodation-tabs.right-active::after { opacity:1; }
+.accommodation-view .accommodation-tab::before { display:none !important; }
+.accommodation-view .accommodation-tab { line-height:normal; display:flex; align-items:center; justify-content:center; transition:font-size .25s ease; }
+.accommodation-view .accommodation-tab:first-child { color:#142a35 !important; }
+.accommodation-view .accommodation-tab:last-child { color:#fff !important; }
+.accommodation-view .accommodation-tab[aria-selected="true"] { z-index:4; font-size:17.25px; }
+.accommodation-view .accommodation-tab[aria-selected="false"] { z-index:1; font-size:15px; }
+.accommodation-view .accommodation-tab:focus-visible { outline:2px solid #5b9bbb; outline-offset:-3px; }
+.accommodation-view .accommodation-tab:active { filter:brightness(.92); }
+@media(hover:hover) { .accommodation-view .accommodation-tab:hover { text-decoration:none; } }
+@media(prefers-reduced-motion:reduce) {
+ .accommodation-view .accommodation-tabs::before,.accommodation-view .accommodation-tabs::after,
+ .accommodation-view .accommodation-tab { transition:none !important; }
+}
+
+/* v148: approved flight-card corrections. Keep all existing card padding unchanged. */
+.accommodation-view .accommodation-tab:hover { text-decoration:none; }
+.accommodation-view .accommodation-tab-panel .flight-carousel {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:14px;
+  width:100%;
+  overflow-x:hidden;
+  overflow-y:visible;
+  scroll-snap-type:none;
+  padding-bottom:0;
+}
+.accommodation-view .accommodation-tab-panel .flight-card {
+  box-sizing:border-box;
+  flex:0 0 auto;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  scroll-snap-align:none;
+  background-color:#142a35;
+}
+.accommodation-view .accommodation-tab-panel .carousel-dots { display:none; }
+
+/* v151: only scale the tab strip height to two thirds of v148. */
+.accommodation-view .accommodation-tabs { height:46.6667px; padding-top:5.3333px; }
+.accommodation-view .accommodation-tab { height:38px; min-height:38px; line-height:38px; }
+.accommodation-view .accommodation-tab[aria-selected="true"]::before { top:-3.3333px; }
+
+
+/* v153: one dark flight card containing one white, two-part boarding pass. */
+.accommodation-view .accommodation-tab-panel .flight-card--boarding {
+  background:#142a35;
+  gap:16px;
+}
+.accommodation-view .accommodation-tab-panel .flight-card--boarding .boarding-pass {
+  position:relative;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) minmax(0,1fr);
+  background:#fff;
+  color:#142a35;
+  border-radius:20px;
+  min-width:0;
+  overflow:hidden;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__half {
+  box-sizing:border-box;
+  min-width:0;
+  padding:20px 16px 28px;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__half + .boarding-pass__tear + .boarding-pass__half {
+  padding-top:28px;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear {
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:0;
+  border-top:1.5px dashed #b9c3c6;
+  z-index:2;
+  pointer-events:none;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::before,
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::after {
+  content:"";
+  position:absolute;
+  top:0;
+  width:30px;
+  height:30px;
+  background:#142a35;
+  border-radius:50%;
+  transform:translateY(-50%);
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::before {left:-15px;}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::after {right:-15px;}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-card__airlines,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__code,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__time {color:#142a35;}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-city-row,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__duration,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-baggage {color:#58666d;}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line {margin-top:24px;}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row {margin-top:24px;}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-baggage {margin-top:28px;}
+@media(max-width:360px) {
+  .accommodation-view .accommodation-tab-panel .boarding-pass__half {padding-left:12px;padding-right:12px;}
+  .accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__time {font-size:clamp(19px,6.5vw,26px);}
+  .accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__middle {gap:3px;}
+  .accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__segment {flex-basis:7px;}
+}
+
+/* v154: booking page heading follows prep/ledger heading rules. */
+.accommodation-view .accommodation-main-heading { margin-bottom:16px; }
+/* v154: double the visual selected/unselected tab rise, preserving tab widths and label alignment. */
+.accommodation-view .accommodation-tabs { height:52px; padding-top:5.3333px; }
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after { height:48.6667px; }
+/* Gentle elevation only on the white part of the tabs; SVG remains the visual source. */
+.accommodation-view .accommodation-tabs::before { filter:drop-shadow(0 2px 3px rgba(20,42,53,.08)); }
+.accommodation-view .accommodation-tabs::after { filter:drop-shadow(0 2px 3px rgba(20,42,53,.08)); }
+
+/* v155: approved equal white booking tabs; preserve the approved SVG geometry. */
+.accommodation-view .accommodation-tab:first-child,
+.accommodation-view .accommodation-tab:last-child { color:#142a35 !important; }
+.accommodation-view .accommodation-tab[aria-selected="true"],
+.accommodation-view .accommodation-tab[aria-selected="false"] {
+  font-size:17.25px;
+  line-height:1.25;
+  padding:0 18px;
+  box-sizing:border-box;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+}
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  filter:drop-shadow(0 2px 3px rgba(20,42,53,.15));
+}
+/* v155: dark boarding pass, white type; no layout restructuring. */
+.accommodation-view .accommodation-tab-panel .flight-card--boarding .boarding-pass {
+  background:#142a35;
+  color:#fff;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-card__airlines,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__code,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__time,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-city-row,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__duration,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-baggage {color:#fff;}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear {border-top-color:rgba(255,255,255,.55);}
+
+
+/* v156: final verified booking presentation rules. Do not alter tab SVG geometry. */
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  background-size:100% 100%;
+}
+.accommodation-view .accommodation-tab:first-child,
+.accommodation-view .accommodation-tab:last-child {
+  color:#142a35 !important;
+  padding:0 18px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1.25 !important;
+}
+.accommodation-view .accommodation-tab[aria-selected="true"] {font-size:17.25px;}
+.accommodation-view .accommodation-tab[aria-selected="false"] {font-size:15px;}
+.accommodation-view .accommodation-tab-panel .flight-card--boarding .boarding-pass {
+  background-color:#142a35 !important;
+  color:#fff !important;
+}
+.accommodation-view .accommodation-tab-panel .flight-card--boarding .boarding-pass__half {
+  background-color:transparent !important;
+  color:#fff !important;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-card__airlines,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__code,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__time,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-city-row,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__duration,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-baggage,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-route-line__city,
+.accommodation-view .accommodation-tab-panel .boarding-pass .flight-time-row__middle {
+  color:#fff !important;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear {border-top-color:rgba(255,255,255,.55);}
+
+
+/* v157: approved booking presentation fixes. The outer flight card stays white;
+   the original two-part boarding pass is the sole navy ticket. */
+.accommodation-view .accommodation-tab-panel .flights-section,
+.accommodation-view .accommodation-tab-panel .flight-card--boarding {
+  background:#fff !important;
+}
+.accommodation-view .accommodation-tab-panel .flight-card--boarding .boarding-pass {
+  background:#142a35 !important;
+  border-radius:20px !important;
+}
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::before,
+.accommodation-view .accommodation-tab-panel .boarding-pass__tear::after {
+  background:#fff !important;
+}
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  /* Shadows are drawn on the active SVG foreground only, not as a tab border. */
+  filter:none !important;
+}
+.accommodation-view .accommodation-tab {
+  height:38px !important;
+  min-height:38px !important;
+  line-height:1.25 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 18px !important;
+}
+/* The active silhouette rises 10.67px above the inactive one; move its label
+   by half that difference so optical top/bottom padding is balanced. */
+.accommodation-view .accommodation-tab[aria-selected="true"] {
+  padding-bottom:10.6667px !important;
+  padding-top:0 !important;
+}
+.accommodation-view .accommodation-tab[aria-selected="false"] {
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+
+
+/* v158: fixed two-tone booking tabs. The original slanted SVG paths remain
+   unchanged. Only a soft whole-tab elevation, never a seam-only shadow. */
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  filter: drop-shadow(0 3px 4px rgba(20,42,53,.16)) !important;
+}
+.accommodation-view .accommodation-tab:first-child,
+.accommodation-view .accommodation-tab:last-child {
+  color:#142a35 !important;
+  box-sizing:border-box;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin-top:0;
+}
+/* Equal-sized button hit areas are aligned to the centres of the two
+   visible SVG halves, in both selected and unselected states. */
+.accommodation-view .accommodation-tab[aria-selected="true"] {
+  padding-top:0 !important;
+  padding-bottom:10.6667px !important;
+}
+.accommodation-view .accommodation-tab[aria-selected="false"] {
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+/* Flight/car area shares the exact ledger grey. The boarding pass itself
+   is white, with the original two flights and notches intact. */
+/* v159: grey belongs only to the flight ticket region, never the rental section. */
+.accommodation-view #transport-panel {
+  background:transparent !important;
+}
+.accommodation-view #transport-panel .flights-section,
+.accommodation-view #transport-panel .flight-card--boarding {
+  background:#f3f2ef !important;
+}
+.accommodation-view #transport-panel .flight-card--boarding .boarding-pass,
+.accommodation-view #transport-panel .flight-card--boarding .boarding-pass__half {
+  background:#fff !important;
+  color:#142a35 !important;
+}
+.accommodation-view #transport-panel .boarding-pass .flight-card__airlines,
+.accommodation-view #transport-panel .boarding-pass .flight-route-line__code,
+.accommodation-view #transport-panel .boarding-pass .flight-time-row__time,
+.accommodation-view #transport-panel .boarding-pass .flight-city-row,
+.accommodation-view #transport-panel .boarding-pass .flight-route-line__duration,
+.accommodation-view #transport-panel .boarding-pass .flight-baggage,
+.accommodation-view #transport-panel .boarding-pass .flight-route-line__city,
+.accommodation-view #transport-panel .boarding-pass .flight-time-row__middle {
+  color:#142a35 !important;
+}
+.accommodation-view #transport-panel .boarding-pass__tear {
+  border-top-color:#b9c3c6 !important;
+}
+.accommodation-view #transport-panel .boarding-pass__tear::before,
+.accommodation-view #transport-panel .boarding-pass__tear::after {
+  background:#f3f2ef !important;
+}
+
+/* v160: a single visual flight group, without a tab/content shadow seam. */
+.accommodation-view .accommodation-tabs {
+  /* Keep the approved SVG silhouette, but clip any tab shadow below the seam. */
+  clip-path: inset(-22px -22px 0 -22px);
+  margin-bottom: -1px;
+}
+.accommodation-view #transport-panel .flights-section {
+  background:#f3f2ef !important;
+  border-radius:0 0 22px 22px !important;
+  overflow:hidden;
+  /* A bottom-only elevation: no dark line where the tab meets the card. */
+  box-shadow:0 10px 16px -13px rgba(20,42,53,.30);
+  margin-bottom:0 !important;
+}
+.accommodation-view #transport-panel .flight-card--boarding {
+  background:#f3f2ef !important;
+  border-radius:0 0 22px 22px !important;
+  box-shadow:none !important;
+}
+/* Rental starts a new section and must never inherit the ticket's grey. */
+.accommodation-view #transport-panel .drive-section {
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* v161: one continuous outer shadow for the transport ticket region.
+   Never clip the tab shadow; the separate tab/card shadows are removed. */
+.accommodation-view .accommodation-tabs {
+  clip-path: none !important;
+  overflow: visible !important;
+  filter: none !important;
+}
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  filter: none !important;
+}
+.accommodation-view #transport-panel .flights-section {
+  box-shadow: none !important;
+  overflow: visible !important;
+  border-radius: 0 0 22px 22px !important;
+  position: relative;
+  z-index: 1;
+}
+.accommodation-view #transport-panel .flight-card--boarding {
+  box-shadow: none !important;
+  border-radius: 0 0 22px 22px !important;
+}
+.accommodation-view .accommodation-section { position: relative; }
+.accommodation-view .booking-unified-shadow {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 0;
+  filter: none;
+}
+.accommodation-view .accommodation-tabs,
+.accommodation-view .accommodation-tab-panel { position: relative; z-index: 1; }
+
+/* v162: fix only the right-selected tab's foreground stacking.
+   Preserve the approved two SVG silhouettes and left-selected presentation. */
+.accommodation-view .accommodation-tabs.right-active::before {
+  opacity: 0 !important;
+  z-index: 0 !important;
+  transition: none !important;
+}
+.accommodation-view .accommodation-tabs.right-active::after {
+  opacity: 1 !important;
+  z-index: 2 !important;
+  transition: none !important;
+}
+.accommodation-view .accommodation-tabs.right-active .accommodation-tab {
+  z-index: 3;
+}
+.accommodation-view .accommodation-tabs.right-active .accommodation-tab[aria-selected="true"] {
+  z-index: 4;
+}
+
+/* v163: right-selected tab uses one foreground SVG with no competing
+   pseudo-element stacking; the SVG itself paints the grey over white. */
+.accommodation-view .accommodation-tabs.right-active::before { opacity:0 !important; }
+.accommodation-view .accommodation-tabs.right-active::after { opacity:1 !important; z-index:0 !important; }
+.accommodation-view .accommodation-tabs.right-active .accommodation-tab { z-index:1 !important; }
+.accommodation-view .accommodation-tabs.right-active .accommodation-tab[aria-selected="true"] { z-index:2 !important; }
+
+/* v164: resolved grey-selected layering and shadow ownership.
+   The complete state SVG contains BOTH tabs; button stacking only affects text.
+   No tab-specific shadow is allowed to create an internal seam. */
+.accommodation-view .accommodation-tabs::before,
+.accommodation-view .accommodation-tabs::after {
+  filter:none !important;
+  z-index:0 !important;
+  background-size:100% 100%;
+}
+.accommodation-view .accommodation-tabs::before {
+  background-image:url("assets/tabs-left-active.svg?v=241");
+}
+.accommodation-view .accommodation-tabs::after {
+  background-image:url("assets/tabs-right-active.svg?v=241");
+}
+.accommodation-view .accommodation-tabs.right-active::before { opacity:0 !important; }
+.accommodation-view .accommodation-tabs.right-active::after { opacity:1 !important; }
+.accommodation-view .accommodation-tabs:not(.right-active)::before { opacity:1 !important; }
+.accommodation-view .accommodation-tabs:not(.right-active)::after { opacity:0 !important; }
+.accommodation-view .accommodation-tab,
+.accommodation-view .accommodation-tab[aria-selected="true"],
+.accommodation-view .accommodation-tab[aria-selected="false"] {
+  background:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  position:relative;
+  z-index:1 !important;
+}
+.accommodation-view .booking-unified-shadow {
+  z-index:0 !important;
+  filter:none !important;
+}
+.accommodation-view .accommodation-tabs,
+.accommodation-view .accommodation-tab-panel { z-index:1; }
+
+/* v165: three independent tabs; fixed per-position color and approved v164 edge curves. */
+.accommodation-view .accommodation-tabs.three-tabs {
+  height:52px !important; padding-top:5.3333px !important;
+  display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:0 !important; isolation:isolate; overflow:visible !important;
+  position:relative !important; margin-bottom:-1px !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs::before,
+.accommodation-view .accommodation-tabs.three-tabs::after {
+  content:"" !important; position:absolute !important; inset:auto 0 0 !important;
+  height:48.6667px !important; background-position:center bottom !important;
+  background-size:100% 100% !important; background-repeat:no-repeat !important;
+  filter:none !important; pointer-events:none !important; z-index:0 !important;
+  opacity:0 !important; transition:none !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs.left-active::before {
+  background-image:url("assets/tabs-three-left-active.svg?v=241") !important; opacity:1 !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs.middle-active::before {
+  background-image:url("assets/tabs-three-middle-active.svg?v=241") !important; opacity:1 !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs.right-active::before {
+  background-image:url("assets/tabs-three-right-active.svg?v=241") !important; opacity:1 !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs::after {display:none !important;}
+.accommodation-view .accommodation-tabs.three-tabs .accommodation-tab,
+.accommodation-view .accommodation-tabs.three-tabs .accommodation-tab:first-child,
+.accommodation-view .accommodation-tabs.three-tabs .accommodation-tab:last-child {
+  margin:0 !important; flex:none !important; width:100% !important;
+  height:38px !important; min-height:38px !important;
+  padding:0 !important; display:flex !important;
+  justify-content:center !important; align-items:center !important;
+  color:#142a35 !important; background:transparent !important;
+  font-size:15px; line-height:1.25 !important; text-align:center;
+  position:relative; z-index:1 !important; white-space:nowrap;
+}
+.accommodation-view .accommodation-tabs.three-tabs .accommodation-tab[aria-selected="true"] {
+  font-size:17.25px !important;
+  padding-bottom:10.6667px !important;
+  z-index:3 !important;
+}
+.accommodation-view .accommodation-tabs.three-tabs .accommodation-tab[aria-selected="false"] {
+  padding-bottom:0 !important;
+}
+/* Flight content is the grey middle card; rental content is a separate white page. */
+.accommodation-view #flight-panel {background:transparent !important; box-shadow:none !important; border-radius:0 0 22px 22px !important;}
+.accommodation-view #flight-panel .flights-section {
+  background:#fff !important; padding:0 !important;
+  border-radius:0 0 22px 22px !important;
+  box-shadow:none !important; overflow:visible !important;
+  position:relative; z-index:1;
+}
+.accommodation-view #flight-panel .flight-card--boarding {
+  background:#fff !important; color:#142a35 !important;
+  padding:20px !important; border-radius:0 0 22px 22px !important;
+  box-shadow:none !important;
+}
+.accommodation-view #flight-panel .boarding-pass,
+.accommodation-view #flight-panel .boarding-pass__half {
+  background-color:#fff !important;
+  background-image:url("assets/paper-fiber.svg?v=241") !important;
+  background-repeat:repeat !important;
+  background-size:220px 220px !important;
+  color:#142a35 !important;
+  box-shadow:none !important;
+}
+.accommodation-view #flight-panel .boarding-pass .flight-card__airlines,
+.accommodation-view #flight-panel .boarding-pass .flight-route-line__code,
+.accommodation-view #flight-panel .boarding-pass .flight-time-row__time,
+.accommodation-view #flight-panel .boarding-pass .flight-city-row,
+.accommodation-view #flight-panel .boarding-pass .flight-route-line__duration,
+.accommodation-view #flight-panel .boarding-pass .flight-baggage,
+.accommodation-view #flight-panel .boarding-pass .flight-route-line__city,
+.accommodation-view #flight-panel .boarding-pass .flight-time-row__middle {
+  color:#142a35 !important;
+}
+.accommodation-view #flight-panel .boarding-pass__tear {border-top-color:#b9c3c6 !important;}
+.accommodation-view #flight-panel .boarding-pass__tear::before,
+.accommodation-view #flight-panel .boarding-pass__tear::after {background:#fff !important;}
+.accommodation-view #flight-panel .boarding-pass .flight-city-row {margin-top:5px !important;}
+.accommodation-view #flight-panel .flight-time-row__middle {display:flex; flex:1; min-width:0; justify-content:stretch;}
+.accommodation-view #flight-panel .flight-time-row__segment {flex:1 1 0 !important; min-width:0 !important;}
+.accommodation-view #rental-panel {background:#fff !important; border-radius:0 0 22px 22px !important; box-shadow:none !important;}
+.accommodation-view #rental-panel .drive-section {background:transparent !important; box-shadow:none !important;}
+.accommodation-view .booking-unified-shadow {z-index:0 !important;}
+
+/* v167: approved near-white E background and one continuous accommodation card.
+   Keep the three approved tab SVGs, gallery behavior and existing type styles unchanged. */
+.accommodation-view .accommodation-section { padding-top: 32px; } /* align with prep heading */
+.accommodation-view #stay-panel .accommodation-list {
+  display: block;
+  gap: 0;
+  background: #fff;
+  border-radius: 0 0 22px 22px;
+  box-shadow: none;
+  overflow: hidden;
+}
+.accommodation-view #stay-panel .accommodation-card,
+.accommodation-view #stay-panel .accommodation-card:first-child {
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent;
+  box-shadow: none !important;
+  overflow: visible;
+}
+/* Former 12px between separate cards is now the same vertical breathing room
+   inside the single white surface, following each stay's existing text padding. */
+.accommodation-view #stay-panel .accommodation-card + .accommodation-card .accommodation-gallery {
+  margin-top: 12px;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+.accommodation-view #stay-panel .accommodation-card + .accommodation-card .accommodation-gallery img,
+.accommodation-view #stay-panel .accommodation-card + .accommodation-card .accommodation-gallery__slide {
+  border-radius: 0 !important;
+}
+
+/* v168: preparation page two SVG tabs; scoped away from approved booking tabs. */
+.prep-view .prep-tabs {position:relative; display:flex; height:65px; align-items:flex-end; isolation:isolate; margin:0 0 -1px; }
+.prep-view .prep-tabs::before {content:""; position:absolute; inset:0; background:url("assets/tabs-left-active.svg?v=241") center bottom / 100% 100% no-repeat; pointer-events:none; z-index:0; filter:drop-shadow(0 2px 3px rgba(20,42,53,.08));}
+.prep-view .prep-tabs.right-active::before {background-image:url("assets/tabs-right-active.svg?v=241");}
+.prep-view .prep-tab {position:relative; flex:1; height:55px; padding:0 5px 4px; border:0; background:transparent; color:#66757A; font:inherit; font-size:15px; font-weight:650; cursor:pointer; z-index:1;}
+.prep-view .prep-tab[aria-selected="true"] {color:#13262F; font-size:17.25px; font-weight:700;}
+.prep-view .prep-tab:focus-visible {outline:2px solid #287B90; outline-offset:-4px; border-radius:10px;}
+.prep-view .prep-tab-panel {position:relative; background:#fff; padding:20px 16px 24px; border-radius:0 0 16px 16px; min-width:0;}
+.prep-view .prep-tab-panel[hidden] {display:none !important;}
+.prep-view #prep-panel-inspiration {padding-bottom:13px;}
+.prep-view #prep-panel-inspiration .wishlist-region-tabs {margin-bottom:0;}
+.prep-view .prep-tab-panel .wishlist-section {margin-top:0;}
+.prep-view .prep-tab-panel .wishlist-heading {margin-bottom:16px;}
+@media (min-width:700px) {.prep-view .prep-tabs, .prep-view .prep-tab-panel {max-width:100%;}}
+
+/* v169: selected booking tab and its continuous content surface are white.
+   Unselected tabs: adjacent #F3F2EF; farthest #EAE9E6.
+   The approved SVG paths, geometry and tab interactions are unchanged. */
+.accommodation-view #flight-panel .flights-section,
+.accommodation-view #flight-panel .flight-card--boarding {
+  background:#fff !important;
+}
+
+/* v170: unified FAB, minimalist memo rows and modal-only creation */
+.v170-fab {display:none;position:fixed;right:20px;bottom:calc(24px + env(safe-area-inset-bottom, 0px));z-index:1100;width:56px;height:56px;border:0;border-radius:50%;padding:0;align-items:center;justify-content:center;background:#E59C19;color:#fff;cursor:pointer;box-shadow:0 3px 10px rgba(19,38,47,.12);font:400 35px/1 Arial,sans-serif;}
+body[data-active-view="prep"] .v170-fab,body[data-active-view="ledger"] .v170-fab{display:flex;}
+body:has(.v170-dialog[open]) .v170-fab,body.ledger-entry-sheet-open .v170-fab{display:none;}
+.v170-fab:focus-visible{outline:2px solid #142A35;outline-offset:3px;}
+.v170-dialog{box-sizing:border-box;width:min(520px,calc(100% - 32px));max-height:min(86dvh,760px);overflow-y:auto;margin:auto;padding:22px 18px;border:1px solid rgba(19,38,47,.1);border-radius:18px;background:#fff;color:#13262F;box-shadow:0 22px 70px rgba(19,38,47,.2);}
+.v170-dialog::backdrop{background:rgba(19,38,47,.38);}
+.v170-dialog-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px;}
+.v170-dialog-heading h2{margin:0;font-size:19px;}
+.v170-close{border:0;background:transparent;color:#66757A;font-size:26px;cursor:pointer;min-width:36px;min-height:36px;}
+.v170-todo-dialog .todo-form{display:block;}
+.v170-todo-dialog .todo-form input{width:100%;box-sizing:border-box;}
+.v170-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;}
+.v170-form-actions button{min-width:72px;background:#E59C19;color:#fff;}
+.v170-form-actions .v170-cancel{background:#F3F2EF;color:#13262F;}
+.v170-dialog .wishlist-entry-card{margin:0;padding:0;border:0;box-shadow:none;background:transparent;}
+.v170-dialog .wishlist-submit{margin-top:24px;}
+.prep-view .wishlist-counter{display:block;text-align:right;margin:0 0 14px;}
+
+
+
+
+
+
+/* Correct inactive/active SVG fills are in the original two SVGs; content stays white. */
+.prep-view .prep-tabs::before{background-image:url("assets/tabs-left-active.svg?v=241");}
+.prep-view .prep-tabs.right-active::before{background-image:url("assets/tabs-right-active.svg?v=241");}
+
+/* v171: mobile-first floating pill navigation and full-width create action */
+:root {--v171-nav-bottom:calc(12px + env(safe-area-inset-bottom,0px));--v171-nav-height:64px;}
+body{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px));}
+body[data-active-view="prep"],body[data-active-view="ledger"]{padding-bottom:calc(170px + env(safe-area-inset-bottom,0px));}
+.bottom-navigation{position:fixed!important;left:16px!important;right:16px!important;bottom:var(--v171-nav-bottom)!important;transform:none!important;width:auto!important;max-width:none!important;min-height:var(--v171-nav-height)!important;height:var(--v171-nav-height)!important;box-sizing:border-box!important;padding:5px 8px!important;gap:2px!important;border:0!important;border-radius:999px!important;background:#fff!important;box-shadow:0 2px 14px rgba(19,38,47,.08)!important;z-index:1050!important;}
+.bottom-navigation__item{border-radius:999px!important;min-height:54px!important;}
+.bottom-navigation__item[aria-current="page"]{background:#F3F2EF!important;}
+.v170-fab{left:16px!important;right:16px!important;bottom:calc(var(--v171-nav-bottom) + var(--v171-nav-height) + 10px)!important;width:calc(100% - 32px)!important;height:46px!important;border-radius:999px!important;font-size:15px!important;font-weight:650!important;line-height:1.2!important;box-shadow:none!important;}
+@media(min-width:700px){.bottom-navigation,.v170-fab{left:max(16px,calc((100vw - 520px)/2))!important;right:max(16px,calc((100vw - 520px)/2))!important;}.v170-fab{width:auto!important;}}
+/* Memo: 16px outer insets, 10px gaps, 22px delete column. */
+
+
+
+
+
+
+/* Prep two-tab shape preserved; match booking tab's 52px total height. */
+.prep-view .prep-tabs{height:52px!important;padding-top:5.3333px!important;box-sizing:border-box!important;}
+.prep-view .prep-tabs::before{inset:auto 0 0!important;height:48.6667px!important;background-size:100% 100%!important;filter:none!important;}
+.prep-view .prep-tab{height:38px!important;min-height:38px!important;padding:0!important;display:flex!important;justify-content:center!important;align-items:center!important;line-height:1.25!important;}
+.prep-view .prep-tab[aria-selected="true"]{transform:translateY(-5.3333px);}
+
+/* v172 — memo checklist: no dividers, 8px card inset, optically centered V */
+.prep-view #prep-panel-memo { padding-left: 8px !important; padding-right: 8px !important; }
+
+
+
+
+
+
+
+
+
+
+
+/* v173: 12px memo inset, compact original image checkmark, no separators */
+.prep-view #prep-panel-memo { padding-left:12px !important; padding-right:12px !important; }
+
+
+
+
+
+/* v174: tighter memo row spacing, original checkmark with default dark fill */
+
+
+
+
+/* v175: actual 18px X strokes, matching the 18px checkbox silhouette. */
+
+
+
+
+/* v176: align visible checkbox and delete icon, with original restrained X stroke */
+
+
+
+
+
+
+
+/* v178: centered memo dialog, ledger-matched wishlist sheet, saved-card palette. */
+.v170-todo-dialog[open] { position:fixed !important; inset:0 !important; margin:auto !important;
+  width:min(520px,calc(100% - 32px)) !important; height:auto !important; max-height:min(86dvh,760px) !important;
+  padding:22px 18px !important; border-radius:18px !important; display:block !important; overflow-y:auto !important; transform:none !important; }
+.v170-todo-dialog::backdrop, #wishlist-dialog::backdrop {
+  background:rgba(7,18,22,.32) !important; backdrop-filter:blur(4px) !important; -webkit-backdrop-filter:blur(4px) !important; }
+.v170-todo-dialog .todo-form { display:block !important; }
+.v170-todo-dialog .v170-form-actions { display:flex !important; justify-content:flex-end !important; margin-top:20px !important; }
+/* Native dialog placed at bottom; same mobile height/width/corners as ledger sheet. */
+#wishlist-dialog[open] { box-sizing:border-box !important; position:fixed !important; inset:auto 0 0 !important;
+  margin:0 auto !important; width:min(100%,560px) !important; max-width:none !important;
+  height:var(--shared-entry-sheet-height, auto) !important; max-height:min(90svh,760px) !important;
+  border:0 !important; border-radius:28px 28px 0 0 !important; padding:0 18px calc(18px + env(safe-area-inset-bottom,0px)) !important;
+  background:#fff !important; box-shadow:0 -18px 60px rgba(7,18,22,.22) !important; overflow:hidden !important;
+  overscroll-behavior:contain; }
+#wishlist-dialog .v178-sheet-handle-space { height:5px; margin:24px auto 22px; }
+#wishlist-dialog .v170-dialog-heading { touch-action:none; }
+@media(min-width:700px){ #wishlist-dialog[open] { bottom:18px !important; border-radius:28px !important; } }
+.prep-view #prep-panel-inspiration .wishlist-place-card { background:#F3F2EF !important; }
+.prep-view #prep-panel-inspiration .wishlist-region-tabs { box-shadow:0 3px 10px rgba(20,42,53,.12) !important; }
+.prep-view #prep-panel-inspiration .wishlist-counter { display:none !important; }
+/* Memo: both icon canvases use the same row-top offset and 18px dimensions. */
+
+
+
+
+
+
+.prep-view #prep-panel-memo { padding-left:12px !important; padding-right:12px !important; }
+
+
+
+
+/* v179: preparation tab color is sourced from assets/tabs-right-active.svg.
+   Share this token with ledger's details/analysis segmented control. */
+:root { --prep-inactive-tab-bg: #f3f2ef; }
+
+/* Restore v176's compact memo modal, remove v177 sheet-only geometry. */
+.v170-todo-dialog[open] {
+  position: fixed !important; inset: 0 !important; margin: auto !important;
+  width: min(520px, calc(100% - 32px)) !important;
+  height: auto !important; max-height: min(86dvh, 760px) !important;
+  display: block !important; overflow-y: auto !important;
+  padding: 22px 18px !important; border-radius: 18px !important;
+  transform: none !important;
+}
+.v170-todo-dialog .todo-form { display:block !important; }
+.v170-todo-dialog .todo-form input {
+  display:block !important; width:100% !important; min-height:48px !important;
+  padding:0 14px !important; border:1px solid var(--line) !important;
+  border-radius:13px !important; background:#fff !important;
+  font:inherit !important; font-size:13px !important; box-sizing:border-box !important;
+}
+.v170-todo-dialog .v170-form-actions {
+  display:flex !important; justify-content:flex-end !important;
+  gap:10px !important; margin-top:20px !important;
+}
+.v170-todo-dialog::backdrop {
+  background:rgba(7,18,22,.32) !important;
+  backdrop-filter:blur(4px) !important;
+  -webkit-backdrop-filter:blur(4px) !important;
+}
+/* Keep the wishlist bottom sheet dimensions exactly matched to ledger. */
+#wishlist-dialog[open] { width:min(100%,560px) !important; }
+/* Remove the former wishlist heading without reserving vertical space. */
+#wishlist-dialog .wishlist-entry-card { margin-top:0 !important; }
+
+/* Memo layout: 30px from row text centers to top and bottom edges.
+   Single-line row height = 18px text + 20px vertical padding = 38px.
+   30px - (10px padding + 9px half-line-height) = 11px list inset. */
+.prep-view #prep-panel-memo { padding:0 12px !important; }
+
+
+
+
+
+
+
+
+
+/* v180: Booking.com-inspired elevation, scoped ONLY to inspiration place cards. */
+.prep-view #prep-panel-inspiration .wishlist-place-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(20, 42, 53, .035) !important;
+  box-shadow: 0 1px 3px rgba(20, 42, 53, .055),
+              0 4px 12px rgba(20, 42, 53, .045) !important;
+}
+
+/* v181: requested border-only inspiration style; existing gray token retained. */
+.prep-view #prep-panel-inspiration .wishlist-region-tabs {
+  background: var(--prep-inactive-tab-bg) !important;
+  border: 1px solid rgba(20,42,53,.06) !important;
+  box-shadow: none !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-card {
+  background: #fff !important;
+  border: 1px solid rgba(20,42,53,.09) !important;
+  box-shadow: none !important;
+}
+/* v181: compact centered memo dialog, content-driven height. */
+.v170-todo-dialog[open] {
+  position: fixed !important;
+  top: 50% !important; left: 50% !important;
+  right: auto !important; bottom: auto !important;
+  inset: auto !important;
+  transform: translate(-50%,-50%) !important;
+  margin: 0 !important;
+  width: min(520px, calc(100% - 32px)) !important;
+  height: fit-content !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 36px) !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+.v170-todo-dialog .todo-form textarea {
+  display:block !important;
+  width:100% !important;
+  height:96px !important;
+  min-height:96px !important;
+  max-height:96px !important;
+  resize:none !important;
+  box-sizing:border-box !important;
+  padding:12px 14px !important;
+  border:1px solid var(--line) !important;
+  border-radius:13px !important;
+  background:#fff !important;
+  color:inherit !important;
+  font:inherit !important;
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+/* Match the other add-sheet placeholder typography. */
+.v170-todo-dialog #todo-input::placeholder {
+  color:#757575;
+  font-size:13px;
+  font-weight:400;
+  line-height:1.5;
+  opacity:1;
+}
+.v170-todo-dialog .todo-character-count {
+  display:block !important;
+  position:static !important;
+  text-align:right !important;
+  margin:6px 0 0 !important;
+  color:#66757A !important;
+  font-size:12px !important;
+  line-height:16px !important;
+}
+.v170-todo-dialog .v170-form-actions { margin-top:16px !important; }
+
+
+/* v182: inspiration list – one shared surface, row-wide map tap targets. */
+.prep-view #prep-panel-inspiration .wishlist-region-tabs {
+  background: #F3F3F3 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-region-tabs .wishlist-choice[aria-pressed="true"] {
+  box-shadow: none !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-list-card,
+.prep-view #prep-panel-inspiration .wishlist-list {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-list {
+  display: block !important;
+  gap: 0 !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-list-card {
+  margin-top: 13px; padding-bottom: 0 !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-card {
+  position: relative !important;
+  display: block !important;
+  min-height: 48px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-card + .wishlist-place-card {
+  border-top: 1px solid #E8E8E8 !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-row-link {
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  padding: 12px 12px !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-row-link:active { background: #F3F3F3 !important; }
+.prep-view #prep-panel-inspiration .wishlist-place-row-link:focus-visible {
+  outline: 2px solid #287B90 !important;
+  outline-offset: -2px !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-copy { width:100% !important; }
+/* Preserve the existing category/name typography and category-above-name order. */
+.prep-view #prep-panel-inspiration .wishlist-place-copy p { margin: 0 !important; }
+.prep-view #prep-panel-inspiration .wishlist-place-copy h4 { margin: 0 !important; }
+.prep-view #prep-panel-inspiration .wishlist-empty {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* v182: native dialog positioning; do not override top/left with inset:auto. */
+.v170-todo-dialog[open] {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  margin: auto !important;
+  transform: none !important;
+  height: fit-content !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 36px) !important;
+  width: min(520px, calc(100% - 32px)) !important;
+  box-sizing: border-box !important;
+}
+
+
+/* v183: exact user-approved inactive prep-tab gray is embedded in the two
+   existing curved SVG assets; do not overlay the tab geometry. */
+
+/* Memo input: preserve resting border when focused, including mobile focus rings. */
+.v170-todo-dialog #todo-input:focus,
+.v170-todo-dialog #todo-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--line) !important;
+}
+
+/* Memo O and X share the same row-top 18px alignment plane.
+   Multiline text grows downward, without moving either icon. */
+
+
+
+
+
+
+/* Inspiration: a fixed divider length based on the two user-marked red
+   endpoints in the 428px reference image (x≈46 to x≈389: 343px).
+   On narrower screens it stays inside the content without horizontal overflow. */
+.prep-view #prep-panel-inspiration .wishlist-place-card + .wishlist-place-card {
+  border-top: 0 !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-card + .wishlist-place-card::before {
+  content: "";
+  display: block;
+  width: min(343px, calc(100% - 24px));
+  height: 1px;
+  margin-inline: auto;
+  background: #E8E8E8;
+  pointer-events: none;
+}
+
+
+/* Canonical preparation checklist layout (v184). O and X share the same 18px top-aligned plane. */
+.prep-view #prep-panel-memo { padding-inline: 12px; }
+/* Memo rows mirror the inspiration list's 60px rows, 12px vertical padding and centered 1px separators. */
+.prep-view #prep-panel-memo .todo-list { display: block; margin: 0; padding: 11px 0; }
+.prep-view #prep-panel-memo .todo-item {
+  display: block; position: relative; min-height: 60px;
+  margin: 0; padding: 0; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; touch-action: pan-y;
+}
+.prep-view #prep-panel-memo .todo-item + .todo-item::before {
+  content: ""; display: block; width: min(343px, calc(100% - 24px));
+  height: 1px; margin-inline: auto; background: #E8E8E8; pointer-events: none;
+}
+.prep-view #prep-panel-memo .todo-item label {
+  display: grid; grid-template-columns: 16.2px minmax(0, 1fr);
+  column-gap: 10px; align-items: center; min-width: 0;
+  min-height: 60px; margin: 0; padding: 12px 12px;
+  box-sizing: border-box; cursor: pointer;
+}
+.prep-view #prep-panel-memo .todo-item input {
+  position: absolute; opacity: 0; pointer-events: none;
+}
+.prep-view #prep-panel-memo .todo-check {
+  grid-column: 1; width: 16.2px; height: 16.2px; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0; padding: 0; border: 1.35px solid #93a5a2;
+  border-radius: 50%; background: transparent; overflow: hidden;
+}
+.prep-view #prep-panel-memo .todo-check img { display: none; width: 11.6px; height: 11.6px; object-fit: contain; }
+.prep-view #prep-panel-memo .todo-item.is-complete .todo-check { background: #142A35; border-color: #142A35; }
+.prep-view #prep-panel-memo .todo-item.is-complete .todo-check img { display: block; }
+.prep-view #prep-panel-memo .todo-text {
+  grid-column: 2; min-width: 0; font-size: 15px; font-weight: 500;
+  line-height: 1.3; overflow-wrap: anywhere; align-self: center;
+}
+.prep-view #prep-panel-memo .todo-item.is-complete .todo-text { color: #87928f; text-decoration: line-through; }
+.prep-view #prep-panel-memo .todo-empty {
+  margin: 0; padding: 26px 0; text-align: center; color: #8b9899;
+  font-size: 12px; line-height: 1.5; background: transparent; border: 0; box-shadow: none;
+}
+
+/* v185: name uses existing small blue style; note uses existing large dark style. */
+.prep-view #prep-panel-inspiration .wishlist-place-copy p {
+  color: var(--lake) !important; font-size: 12px !important;
+  line-height: 1.3 !important; font-weight: 700 !important;
+}
+.prep-view #prep-panel-inspiration .wishlist-place-copy h4 {
+  color: var(--ink) !important; font-size: 15px !important;
+  line-height: 1.3 !important; font-weight: 500 !important;
+}
+
+/* v186: reuse ledger category picker; only image mask and grid scope differ. */
+.wishlist-region-picker #wishlist-area-choices { grid-template-columns: repeat(3,minmax(0,1fr)); gap:14px 12px; }
+.wishlist-region-picker .wishlist-region-icon { -webkit-mask-image:var(--region-mask); mask-image:var(--region-mask); }
+
+/* v188: wishlist uses the exact ledger-entry-sheet-actions/cancel/save classes.
+   No independent button theme. Let its footer sit below the form fields. */
+#wishlist-dialog .ledger-entry-sheet-actions { margin-top: auto; }
+/* Shared sheet layout: only the content region scrolls when genuinely necessary. */
+#wishlist-dialog[open] { display: flex !important; flex-direction: column; padding: 0 !important; }
+#wishlist-dialog .v178-sheet-handle-space { flex: 0 0 51px; height: 51px; margin: 0; }
+#wishlist-dialog .wishlist-entry-card { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; margin: 0 !important; padding: 0 !important; }
+#wishlist-dialog #wishlist-form { position: relative; min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; padding-bottom: 0; }
+#wishlist-dialog .wishlist-entry-scroll { min-height: 0; flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; padding: 0 18px 12px; }
+
+/* v188: region picker first, without a heading; keep ledger's existing tile rules. */
+#wishlist-dialog .wishlist-region-picker .ledger-sheet-category-fieldset { margin-top: 0 !important; }
+#wishlist-dialog .wishlist-region-picker { margin-top: 0 !important; }
+#wishlist-dialog .wishlist-region-picker + .wishlist-field { margin-top: 44px !important; }
+#wishlist-dialog #wishlist-note { min-height: 44px; max-height: 128px; resize: none; overflow-y: hidden; }
+/* Scale only the bird graphic within its existing ledger category tile. */
+#wishlist-dialog .wishlist-region-icon--toya { transform: scale(1.42); transform-origin: center; }
+#wishlist-dialog .wishlist-region-icon--otaru { transform: scale(1.15); transform-origin: center; }
+#wishlist-dialog .wishlist-region-icon--noboribetsu { transform: scale(1.15); transform-origin: center; }
+
+
+/* v189: requested 20px spacing between inspiration form controls and next labels. */
+#wishlist-dialog .wishlist-field + .wishlist-field { margin-top: 20px !important; }
+
+
+
+/* v207 rental information redesign: mobile-first, no tab underline, icon slots reserved. */
+.accommodation-view #rental-panel .drive-section { padding: 12px 14px 26px; }
+.accommodation-view #rental-panel .rental-panel--editorial { color: #101820; background: #fff; }
+.accommodation-view #rental-panel .rental-vehicle-hero { display: flex; flex-direction: column; gap: 4px; }
+.accommodation-view #rental-panel .rental-vehicle-image { display: block; width: 100%; height: auto; aspect-ratio: 1400/933; object-fit: contain; }
+.accommodation-view #rental-panel .rental-car { margin: 0 0 28px; font-size: 23px; line-height: 1.3; }
+.accommodation-view #rental-panel .rental-spec-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
+.accommodation-view #rental-panel .rental-spec { min-width: 0; min-height: 96.6px; padding: 10px 9px 12px; border-radius: 11px; background: #f3f3f3; color: #141414; display: flex; flex-direction: column; justify-content: space-between; align-items: stretch; font-size: 12px; font-weight: 500; line-height: 1.2; }
+.accommodation-view #rental-panel .rental-spec__icon { display: block; width: 24px; height: 24px; flex: 0 0 24px; align-self: flex-start; object-fit: contain; }
+.accommodation-view #rental-panel .rental-stops { display: grid; grid-template-columns: 1fr; gap: 22px; margin-top: 36px; }
+.accommodation-view #rental-panel .rental-stop { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: 10px; align-items: start; }
+.accommodation-view #rental-panel .rental-stop__label { display: block; margin: 0; color: #111; font: 750 12px/1.55 "Montserrat", sans-serif; padding-top: 1px; }
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line { display: block; color: inherit; font-family: inherit; font-size: 14px; font-weight: 400; line-height: 1.55; }
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line { margin-top: 0; overflow-wrap: anywhere; }
+.accommodation-view #rental-panel .rental-map-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 56px; }
+.accommodation-view #rental-panel .rental-map-button { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 44px; padding: 10px 5px; background: #13262f; border: 0; border-radius: 99px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; }
+.accommodation-view #rental-panel .rental-fuel-note { margin: 12px 0 0; color: #687579; font-size: 11px; line-height: 1.5; }
+.accommodation-view #rental-panel .rental-price { margin-top: 16px; padding-top: 12px; border-top: 1px solid #edf0f0; color: #536267; font-size: 11px; }
+.accommodation-view #rental-panel .rental-price strong { color: #13262f; font-size: 12px; }
+.accommodation-view #rental-panel #drive-notes { margin-top: 28px; display: block; }
+.accommodation-view #rental-panel .drive-note-tabs { display: flex; justify-content: space-between; align-items: center; gap: 5px; border-bottom: 0; }
+.accommodation-view #rental-panel .drive-note-tabs button { flex: 0 1 auto; padding: 12px 0; min-height: 44px; font-size: 11px; color: #859094; font-weight: 500; white-space: nowrap; }
+.accommodation-view #rental-panel .drive-note-tabs button[aria-expanded="true"] { color: #13262f; font-weight: 750; }
+.accommodation-view #rental-panel .drive-note-tabs button::after { display: none; content: none; }
+.accommodation-view #rental-panel .drive-note-panel { padding: 0; }
+.accommodation-view #rental-panel .drive-note-panel li { font-size: 12px; }
+@media (min-width: 700px) { .accommodation-view #rental-panel .drive-section { max-width: 560px; margin-inline: auto; } }
+
+/* v211: confirmed rental spacing, icon visual alignment and map overlay stacking. */
+.accommodation-view #rental-panel .rental-car { position: relative; top: 5px; margin-bottom: 33px; }
+.accommodation-view #rental-panel .rental-map-actions { margin-top: 36px; }
+/* Overlay must cover the floating bottom navigation (z-index:1050) and FAB. */
+.place-map-overlay { z-index: 12000; padding-bottom: 0; }
+.place-map-sheet { box-sizing: border-box; }
+
+/* v213: rental refinements; keep title stationary and move all following content up 3px. */
+.accommodation-view #rental-panel .rental-car { margin-bottom: 30px; }
+.accommodation-view #rental-panel .rental-stop__label { font: 600 14px/1.55 "Montserrat", sans-serif; }
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line:first-child { color: var(--ink); font-family: "Montserrat", sans-serif; font-size: 14px; font-weight: 600; line-height: 1.55; }
+.accommodation-view #rental-panel .rental-map-actions { grid-template-columns: minmax(0,3fr) minmax(0,2fr); }
+.accommodation-view #rental-panel .rental-map-button { white-space: nowrap; }
+
+/* v213: reuse the existing boarding-pass dashed divider; double the rental map-to-notes gap. */
+.accommodation-view #rental-panel #drive-notes {
+  position: relative;
+  margin-top: 56px;
+}
+.accommodation-view #rental-panel #drive-notes::before {
+  content: "";
+  position: absolute;
+  top: -28px;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1.5px dashed #b9c3c6;
+  pointer-events: none;
+}
+/* Match the existing Hakodate region-tab typography, with slightly heavier weight. */
+.accommodation-view #rental-panel .drive-note-tabs button {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: normal;
+  color: #687578;
+}
+.accommodation-view #rental-panel .drive-note-tabs button[aria-expanded="true"] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+
+/* v214: two independent rental cards; no dashed divider. */
+.accommodation-view #rental-panel {
+  background: #f2f5f7 !important;
+  border-radius: 0 !important;
+}
+.accommodation-view #rental-panel .drive-section {
+  padding: 0 0 26px;
+  max-width: 560px;
+  margin-inline: auto;
+}
+.accommodation-view #rental-panel #rental-card {
+  background: #fff;
+  padding: 12px 14px 22px;
+  border-radius: 0 0 22px 22px;
+}
+.accommodation-view #rental-panel #drive-notes {
+  position: static;
+  margin: 16px 0 0;
+  padding: 14px 14px 20px;
+  background: #fff;
+  border-radius: 22px;
+}
+.accommodation-view #rental-panel #drive-notes::before {
+  content: none;
+  display: none;
+}
+/* Four balanced horizontal gaps: edge, text, text, edge. */
+.accommodation-view #rental-panel .drive-note-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0;
+  border-bottom: 0;
+}
+/* Follow the Hakodate region tab's 13px, Noto Sans TC and color;
+   slightly heavier label weight, keeping active-state contrast. */
+.accommodation-view #rental-panel .drive-note-tabs button {
+  flex: 0 0 auto;
+  padding: 12px 0;
+  min-height: 44px;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: normal;
+  color: #687578;
+  white-space: nowrap;
+}
+.accommodation-view #rental-panel .drive-note-tabs button[aria-expanded="true"] {
+  color: var(--ink);
+  font-weight: 700;
+}
+/* Include every note and ordered-list number in the Hakodate body typography. */
+.accommodation-view #rental-panel .drive-note-panel,
+.accommodation-view #rental-panel .drive-note-panel ul,
+.accommodation-view #rental-panel .drive-note-panel ol,
+.accommodation-view #rental-panel .drive-note-panel li,
+.accommodation-view #rental-panel .drive-note-panel li::before {
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+
+/* v215: align driving tabs and note text to the same 14px inner guides;
+   preserve existing type styles and the two-card layout. */
+.accommodation-view #rental-panel #rental-card {
+  padding-bottom: 44px; /* v214 22px: double the button-to-card bottom clearance */
+}
+.accommodation-view #rental-panel .drive-note-tabs {
+  position: relative;
+  justify-content: space-between;
+  padding-inline: 14px;
+  border-bottom: 0;
+}
+.accommodation-view #rental-panel .drive-note-tabs::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -14px;
+  right: -14px;
+  border-bottom: 1px solid var(--line);
+  pointer-events: none;
+}
+.accommodation-view #rental-panel .drive-note-panel {
+  padding: 0 14px;
+}
+.accommodation-view #rental-panel .drive-note-panel li {
+  padding-left: 0;
+}
+.accommodation-view #rental-panel .drive-note-panel li + li {
+  border-top: 0;
+}
+.accommodation-view #rental-panel .drive-note-panel ul li::before,
+.accommodation-view #rental-panel .drive-note-panel ol li::before {
+  left: -14px;
+}
+
+
+/* v216: rental card spacing, shared text guides and selected-tab underline. */
+.accommodation-view #rental-panel #rental-card {
+  padding-bottom: 22px;
+}
+.accommodation-view #rental-panel .drive-note-tabs::after {
+  content: none;
+  display: none;
+}
+.accommodation-view #rental-panel .drive-note-tabs button {
+  font-size: 14px;
+  position: relative;
+}
+.accommodation-view #rental-panel .drive-note-tabs button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  border-radius: 0;
+}
+.accommodation-view #rental-panel .drive-note-tabs button[aria-expanded="true"]::after {
+  background: var(--ink);
+}
+/* Marker/number begins at the same left guide as the first tab's text. */
+.accommodation-view #rental-panel .drive-note-panel li {
+  padding-left: 18px;
+}
+.accommodation-view #rental-panel .drive-note-panel ul li::before,
+.accommodation-view #rental-panel .drive-note-panel ol li::before {
+  left: 0;
+}
+
+
+/* v218: unified typography for all three driving-note panels. */
+.accommodation-view #rental-panel .drive-note-tabs button {
+  font-size: 15px;
+}
+.accommodation-view #rental-panel .drive-note-panel,
+.accommodation-view #rental-panel .drive-note-panel ul,
+.accommodation-view #rental-panel .drive-note-panel ol,
+.accommodation-view #rental-panel .drive-note-panel li,
+.accommodation-view #rental-panel .drive-note-panel li::before {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+/* v218: consistent rental-card clearance and driving-note rhythm.
+   The lower card's top clearance is the reference for the upper card's bottom clearance. */
+.accommodation-view #rental-panel #rental-card {
+  padding-bottom: 28px;
+}
+/* Increase the active-tab underline-to-first-item clearance by 1.5x,
+   while tightening the spacing between individual list items. */
+.accommodation-view #rental-panel .drive-note-panel {
+  padding-top: 14px;
+}
+.accommodation-view #rental-panel .drive-note-panel li {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.accommodation-view #rental-panel .drive-note-panel ul li::before {
+  top: 16px;
+}
+.accommodation-view #rental-panel .drive-note-panel ol li::before {
+  top: 8px;
+}
+
+
+/* v219: three separate accommodation cards, using the 16px rental-card gap. */
+.accommodation-view #stay-panel .accommodation-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+}
+.accommodation-view #stay-panel .accommodation-card,
+.accommodation-view #stay-panel .accommodation-card:first-child {
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 22px !important;
+  background: #fff;
+  box-shadow: none !important;
+  overflow: hidden;
+  min-width: 0;
+}
+/* The first card still meets the existing tab silhouette at the top. */
+.accommodation-view #stay-panel .accommodation-card:first-child {
+  border-radius: 0 0 22px 22px !important;
+}
+.accommodation-view #stay-panel .accommodation-card + .accommodation-card .accommodation-gallery {
+  margin-top: 0;
+  border-radius: 0 !important;
+}
+
+/* v219: match the rental-spec tile grey without losing the paper-fibre texture. */
+.accommodation-view #flight-panel .boarding-pass,
+.accommodation-view #flight-panel .boarding-pass__half {
+  background-color: #f3f3f3 !important;
+  background-image: url("assets/paper-fiber-grey.svg?v=241") !important;
+  background-repeat: repeat !important;
+  background-size: 220px 220px !important;
+}
+.accommodation-view #flight-panel .boarding-pass__tear::before,
+.accommodation-view #flight-panel .boarding-pass__tear::after {
+  background: #fff !important;
+}
+
+/* v220: overview header follows the same baseline as the other main pages. */
+body[data-active-view="travel"] .itinerary-section {
+  padding-top: 0;
+}
+body[data-active-view="travel"] .itinerary-section .section-kicker {
+  margin: 0 0 10px;
+  color: var(--lake);
+  font-size: 11px;
+  line-height: normal;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+body[data-active-view="travel"] .itinerary-section .section-heading h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 700;
+}
+
+/* v220: selected day uses a single dark navy vertical capsule with white text. */
+.itinerary-date-option,
+.itinerary-date-option:first-child {
+  width: 48px;
+  min-width: 48px;
+  flex: 0 0 48px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  padding: 10px 0 4px;
+  gap: 7px;
+  transition: background-color .16s ease, color .16s ease;
+}
+.itinerary-date-option.is-selected {
+  background: var(--ink);
+  color: #fff;
+}
+.itinerary-date-option.is-selected .itinerary-date-weekday,
+.itinerary-date-option.is-selected .itinerary-date-number {
+  color: #fff;
+}
+.itinerary-date-option.is-selected .itinerary-date-number {
+  background: transparent;
+}
+.itinerary-date-option:focus-visible {
+  outline: 2px solid var(--lake);
+  outline-offset: 2px;
+}
+
+/* v221: elongated capsule with straight middle sides and curved ends. */
+.itinerary-date-option,
+.itinerary-date-option:first-child {
+  width: 48px;
+  min-width: 48px;
+  flex: 0 0 48px;
+  min-height: 76px;
+  padding: 10px 0;
+  align-content: center;
+  gap: 8px;
+  border-radius: 24px;
+}
+.itinerary-date-option.is-selected {
+  background: var(--ink);
+}
+.itinerary-date-option.is-selected .itinerary-date-number {
+  color: #fff;
+  background: transparent;
+}
+
+/* v222: two independent, plain-white flight cards. First joins the active tab;
+   second is fully rounded. Match rental drive-notes 14px inset and 16px gap. */
+.accommodation-view #flight-panel,
+.accommodation-view #flight-panel .flights-section {
+  background: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+.accommodation-view #flight-panel .flight-carousel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  overflow: visible !important;
+}
+.accommodation-view #flight-panel .flight-card--boarding.flight-card--single {
+  box-sizing: border-box;
+  display: block !important;
+  margin: 0 !important;
+  padding: 14px !important;
+  background: #fff !important;
+  border-radius: 22px !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+.accommodation-view #flight-panel .flight-card--boarding.flight-card--single:first-child {
+  border-radius: 0 0 22px 22px !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass {
+  display: block !important;
+  grid-template-rows: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  background: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half {
+  display: block !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__tear {
+  display: none !important;
+}
+@media(max-width:360px) {
+  .accommodation-view #flight-panel .flight-card--single .boarding-pass__half {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* v223: fixed-height selected date capsule; straight middle, semicircular ends. */
+.itinerary-date-option,
+.itinerary-date-option:first-child {
+  box-sizing: border-box !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  flex: 0 0 48px !important;
+  height: 88px !important;
+  min-height: 88px !important;
+  max-height: 88px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  padding: 12px 0 !important;
+  border-radius: 24px !important;
+}
+.itinerary-date-option .itinerary-date-weekday,
+.itinerary-date-option .itinerary-date-number {
+  flex-shrink: 0;
+}
+.itinerary-date-option .itinerary-date-number {
+  height: 22px !important;
+  width: 38px !important;
+  line-height: 22px !important;
+}
+.itinerary-date-option.is-selected {
+  background: var(--ink) !important;
+}
+.itinerary-date-option.is-selected .itinerary-date-weekday,
+.itinerary-date-option.is-selected .itinerary-date-number {
+  color: #fff !important;
+}
+.itinerary-date-option.is-selected .itinerary-date-number {
+  background: transparent !important;
+}
+
+/* v223: remove obsolete boarding-pass decoration and colored gap remnants. */
+.accommodation-view #flight-panel .flight-carousel {
+  background: transparent !important;
+  background-image: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 16px !important;
+}
+.accommodation-view #flight-panel .flight-card--single,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half {
+  background: #fff !important;
+  background-image: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass::before,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass::after,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half::before,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half::after {
+  content: none !important;
+  display: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__tear,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__tear::before,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__tear::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* v223: equal short lines flanking centered duration, away from time digits. */
+.accommodation-view #flight-panel .flight-card--single .flight-time-row {
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  column-gap: 10px !important;
+}
+.accommodation-view #flight-panel .flight-card--single .flight-time-row__middle {
+  display: flex !important;
+  flex: 0 1 auto !important;
+  justify-content: center !important;
+  align-items: center !important;
+  justify-self: center !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  gap: 6px !important;
+}
+.accommodation-view #flight-panel .flight-card--single .flight-time-row__segment {
+  display: block !important;
+  flex: 0 0 14px !important;
+  width: 14px !important;
+  max-width: 14px !important;
+  min-width: 14px !important;
+  height: 1px !important;
+}
+@media(max-width: 360px) {
+  .accommodation-view #flight-panel .flight-card--single .flight-time-row {
+    column-gap: 6px !important;
+  }
+  .accommodation-view #flight-panel .flight-card--single .flight-time-row__segment {
+    flex-basis: 9px !important;
+    width: 9px !important;
+    min-width: 9px !important;
+  }
+  .accommodation-view #flight-panel .flight-card--single .flight-time-row__middle {
+    gap: 4px !important;
+  }
+}
+
+/* v224: itinerary map links sit on the same line as each destination title. */
+.itinerary-section .schedule-text__first-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 3px;
+}
+.itinerary-section .schedule-text__first-row .schedule-text__primary {
+  display: inline;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.itinerary-section .schedule-map-links--inline {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin: 0;
+  gap: 5px;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary {
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  min-height: 27px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  display: block;
+  width: 13px;
+  height: 16px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary:focus-visible {
+  outline: 2px solid var(--lake);
+  outline-offset: 2px;
+}
+
+
+/* v225: align timeline dot, first text line and map button on one centreline. */
+.itinerary-section .schedule-main { position: relative; }
+.itinerary-section .schedule-main:has(.schedule-map-links--inline) .schedule-text {
+  padding-right: 44px;
+}
+.itinerary-section .schedule-text__first-row {
+  display: block;
+  min-width: 0;
+}
+.itinerary-section .schedule-text__first-row .schedule-text__primary {
+  display: block;
+  min-width: 0;
+}
+.itinerary-section .schedule-map-links--inline {
+  display: contents;
+  margin: 0;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary {
+  position: absolute;
+  top: -0.5px; /* 23px first-line centre == timeline marker centre at 11.5px */
+  right: 7px; /* button centre 19px from content right edge, matching left dot */
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--ink);
+  color: #fff;
+  flex: none;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  width: 12px;
+  height: 14px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* v226: white independent flight cards, no tinted strip between them. */
+.accommodation-view #flight-panel,
+.accommodation-view #flight-panel .flights-section,
+.accommodation-view #flight-panel .flight-carousel {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.accommodation-view #flight-panel .flights-section {
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+.accommodation-view #flight-panel .flight-carousel {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+.accommodation-view #flight-panel .flight-card--boarding.flight-card--single {
+  padding: 20px 22px 24px !important;
+  margin: 0 !important;
+  background: #fff !important;
+  background-image: none !important;
+  border-radius: 22px !important;
+}
+.accommodation-view #flight-panel .flight-card--boarding.flight-card--single:first-child {
+  border-radius: 0 0 22px 22px !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half {
+  background: transparent !important;
+  background-image: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass::before,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass::after,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half::before,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half::after,
+.accommodation-view #flight-panel .flights-section::before,
+.accommodation-view #flight-panel .flights-section::after {
+  display: none !important;
+  content: none !important;
+}
+@media (min-width: 700px) {
+  .accommodation-view #flight-panel .flight-card--boarding.flight-card--single {
+    padding: 24px 28px 28px !important;
+  }
+}
+
+/* v226: six complete day selectors fit the mobile viewport; day seven requires swiping. */
+@media (max-width: 699px) {
+  .itinerary-section .itinerary-date-strip {
+    width: 100%;
+    box-sizing: border-box;
+    gap: calc((100% - 288px) / 5) !important;
+    overflow-x: auto;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-inline: 0;
+  }
+  .itinerary-section .itinerary-date-option,
+  .itinerary-section .itinerary-date-option:first-child {
+    width: 48px !important;
+    min-width: 48px !important;
+    flex: 0 0 48px !important;
+    scroll-snap-align: start;
+  }
+}
+@media (max-width: 359px) {
+  .itinerary-section .itinerary-date-strip {
+    gap: calc((100% - 252px) / 5) !important;
+  }
+  .itinerary-section .itinerary-date-option,
+  .itinerary-section .itinerary-date-option:first-child {
+    width: 42px !important;
+    min-width: 42px !important;
+    flex: 0 0 42px !important;
+    border-radius: 21px !important;
+  }
+}
+
+/* v226: map circle matches the inspiration-tab gray; icon becomes dark for contrast. */
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary {
+  background: #F3F3F3 !important;
+  color: var(--ink) !important;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  filter: brightness(0) saturate(100%) !important;
+}
+
+/* v227: match Day 6 itinerary warning text exactly. */
+.accommodation-view #rental-panel .rental-note-emphasis { color: #C00000; }
+
+/* v227: location button uses the rental-tab gray with white pin icon. */
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary {
+  background: #E4E4E4 !important;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* v228: flight card gap must exactly match the booking header's #F2F5F7 background. */
+.accommodation-view #flight-panel,
+.accommodation-view #flight-panel .flights-section,
+.accommodation-view #flight-panel .flight-carousel,
+.accommodation-view #flight-panel .accommodation-tab-panel {
+  background-color: #F2F5F7 !important;
+  background-image: none !important;
+}
+.accommodation-view #flight-panel .flight-carousel {
+  gap: 16px !important;
+  box-shadow: none !important;
+}
+.accommodation-view #flight-panel .flight-card--boarding.flight-card--single {
+  background-color: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.accommodation-view #flight-panel .flight-card--single .boarding-pass,
+.accommodation-view #flight-panel .flight-card--single .boarding-pass__half {
+  background: transparent !important;
+  background-image: none !important;
+  filter: none !important;
+}
+/* v245: The date strip needs only 2px of end scroll room for the last capsule.
+   Removed the obsolete 16px flex spacer instead of overriding it. */
+.itinerary-section .itinerary-date-strip {
+  padding-right: 2px;
+}
+/* v228: no sticky brand header or the empty space it formerly occupied. */
+.topbar { display: none !important; }
+/* v246: disable CSS snap; JS owns the smooth per-date scroll targets. */
+.itinerary-section .itinerary-date-strip {
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+.itinerary-section .itinerary-date-strip .itinerary-date-option {
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+}
+/* v228: default navy pin on rental-tab gray circle. */
+.itinerary-section .schedule-map-links--inline .schedule-map-link--itinerary {
+  background-color: #E4E4E4 !important;
+}
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  filter: brightness(0) saturate(100%) invert(11%) sepia(18%) saturate(1448%) hue-rotate(152deg) brightness(93%) contrast(94%) !important;
+}
+
+
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(24%) saturate(945%) hue-rotate(153deg) brightness(91%) contrast(95%) !important;
+}
+
+/* Exact original navy through the icon mask, not an approximate color filter. */
+.itinerary-section .schedule-map-links--inline .schedule-map-link__pin {
+  display: block !important;
+  background-color: var(--ink) !important;
+  filter: none !important;
+  -webkit-mask: url("assets/location-pin.png?v=241") center / contain no-repeat;
+  mask: url("assets/location-pin.png?v=241") center / contain no-repeat;
+}
+
+/* v250: Disable scroll anchoring on the root scroll container as well as
+   inside the itinerary. Otherwise mobile browsers can adjust scrollY to keep
+   the date strip anchored while the photo's actual height is shrinking. */
+html:has(body[data-active-view="travel"]),
+html:has(body[data-active-view="travel"]) body {
+  overflow-anchor: none;
+  scroll-behavior: auto;
+}
+
+/* v235: One authoritative itinerary title spacing rule; preserve sticky/photo behavior. */
+body[data-active-view="travel"] .itinerary-section {
+  overflow-anchor: none;
+  /* v254: Keep only a modest fixed gap after the final itinerary event.
+     Remove the old collapse-dependent bottom padding that left a large blank. */
+  --photo-collapse: 0;
+  --photo-full-height: 174px;
+  padding-bottom: 28px;
+}
+@media (min-width: 700px) {
+  body[data-active-view="travel"] .itinerary-section { --photo-full-height: 220px; }
+}
+body[data-active-view="travel"] .itinerary-section > .section-heading {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  background: #F2F5F7;
+  /* Include the 32px title-to-photo gap INSIDE the sticky boundary.
+     The sticky region ends exactly where the photo begins. */
+  padding: 32px 0 32px;
+  margin: 0;
+}
+/* v239: The photo alone changes layout height; its outer gaps remain fixed.
+   Retired the clip-path rule and fixed-height placeholder from v237/v238. */
+body[data-active-view="travel"] .itinerary-section > .itinerary-day-photo-placeholder {
+  --photo-collapse: 0;
+  --photo-full-height: 174px;
+  display: block;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  height: calc(var(--photo-full-height) * (1 - var(--photo-collapse))) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  margin: 0 0 22px !important;
+  background-color: #e8e8e8 !important;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: none !important;
+  clip-path: none !important;
+}
+/* The date strip and timeline are regular flow content, never clipped by a second sticky layer. */
+body[data-active-view="travel"] .itinerary-section > .itinerary-date-strip {
+  position: relative;
+  top: auto;
+  z-index: auto;
+  background: transparent;
+}
+body[data-active-view="travel"] .itinerary-section .timeline {
+  overflow-anchor: none;
+}
+@media (min-width: 700px) {
+  body[data-active-view="travel"] .itinerary-section > .itinerary-day-photo-placeholder {
+    --photo-full-height: 220px;
+  }
+}
+
+/* v231: preserve normal scrolling while hiding the browser's vertical scrollbar. */
+html, body { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+/* Keep the title sticky in the normal page scroll container. */
+body[data-active-view="travel"] main[data-site-view="travel"] { overflow: visible; }
+
+
+/* v251: Itinerary body typography for accommodation and rental information.
+   Keep heading, action buttons, labels, and original color hierarchy unchanged. */
+.accommodation-view #stay-panel .accommodation-card__dates,
+.accommodation-view #stay-panel .accommodation-card__address-row,
+.accommodation-view #stay-panel .accommodation-card__address-text,
+.accommodation-view #stay-panel .accommodation-card__details .accommodation-card__detail,
+.accommodation-view #stay-panel .accommodation-card__detail-text,
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line,
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line:first-child,
+.accommodation-view #rental-panel .rental-stop__label,
+.accommodation-view #rental-panel .drive-note-panel,
+.accommodation-view #rental-panel .drive-note-panel ul,
+.accommodation-view #rental-panel .drive-note-panel ol,
+.accommodation-view #rental-panel .drive-note-panel li,
+.accommodation-view #rental-panel .drive-note-panel li::before {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 23px;
+}
+
+/* v252: Match rental office names to accommodation date/address muted text.
+   Do not change pickup/return labels or their date-time lines. */
+.accommodation-view #rental-panel .rental-stop__detail .rental-stop__line:nth-child(2) {
+  color: #66757A;
+}
+/* Native button reset for the accommodation address preview trigger. */
+.accommodation-view #stay-panel .accommodation-card__map-link {
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* v257: iOS Safari form focus and native button normalization.
+   Scoped to WebKit touch browsers; do not change Android layouts. */
+@supports (-webkit-touch-callout: none) {
+  #wishlist-dialog .wishlist-field input,
+  #wishlist-dialog .wishlist-field textarea,
+  .v170-todo-dialog .todo-form input,
+  .v170-todo-dialog .todo-form textarea,
+  .todo-form input { font-size: 16px !important; }
+  .v170-todo-dialog .v170-close {
+    -webkit-appearance: none; appearance: none;
+    border: 0 !important; outline: 0; box-shadow: none !important;
+    background: transparent !important; border-radius: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0;
+  }
+  .v170-todo-dialog .v170-close:focus-visible {
+    outline: 2px solid #66757a; outline-offset: 2px;
+  }
+  #wishlist-dialog[open] { max-height: min(90dvh, 760px) !important; }
+}

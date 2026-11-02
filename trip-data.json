@@ -1,0 +1,1280 @@
+{
+  "$schema": "./schemas/trip-data.schema.json",
+  "schemaVersion": "2.0-lite",
+  "config": {
+    "schemaVersion": "1.0.0",
+    "modules": {
+      "flights": true,
+      "overview": false,
+      "itinerary": true,
+      "todo": true,
+      "driving": true,
+      "ledger": true
+    },
+    "language": "zh-TW",
+    "persistence": {
+      "mode": "local"
+    }
+  },
+  "metadata": {
+    "tripId": "hokkaido-2026-1105",
+    "title": "北海道 7 日旅行｜2026.11.05–11.11",
+    "language": "zh-TW",
+    "timeZone": "Asia/Tokyo",
+    "assets": {}
+  },
+  "trip": {
+    "status": "draft",
+    "startDate": "2026-11-05",
+    "endDate": "2026-11-11",
+    "dayCount": 7,
+    "nightCountAway": 6,
+    "countries": [
+      {
+        "code": "JP",
+        "nameZh": "日本  北海道",
+        "nameEn": "JAPAN"
+      }
+    ],
+    "primaryDestinationCountries": [
+      "JP"
+    ],
+    "primaryDestinationName": "北海道",
+    "citiesAndAreas": [
+      "函館",
+      "洞爺湖",
+      "室蘭",
+      "登別",
+      "札幌",
+      "小樽"
+    ],
+    "routeSummary": "函館 → 洞爺湖 → 室蘭 → 登別 → 札幌/小樽 → 新千歲機場",
+    "groupSize": null
+  },
+  "flightJourneys": [
+    {
+      "id": "journey-outbound",
+      "title": "桃園 → 函館",
+      "status": "draft"
+    },
+    {
+      "id": "journey-return",
+      "title": "札幌 → 桃園",
+      "status": "draft"
+    }
+  ],
+  "flights": [
+    {
+      "id": "flight-outbound",
+      "journeyId": "journey-outbound",
+      "sequence": 1,
+      "airline": {
+        "nameZh": "台灣虎航",
+        "name": "Tigerair Taiwan"
+      },
+      "flightNumber": "待確認",
+      "departure": {
+        "airportCode": "TPE",
+        "city": "桃園",
+        "date": "2026-11-05",
+        "time": "06:45",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "HKD",
+        "city": "函館",
+        "date": "2026-11-05",
+        "time": "11:10",
+        "utcOffset": "+09:00"
+      },
+      "baggage": "託運 15 公斤/手提 10 公斤",
+      "plannedDurationText": "3h 25m"
+    },
+    {
+      "id": "flight-return",
+      "journeyId": "journey-return",
+      "sequence": 1,
+      "airline": {
+        "nameZh": "亞洲航空",
+        "name": "AirAsia"
+      },
+      "flightNumber": "待確認",
+      "departure": {
+        "airportCode": "CTS",
+        "city": "札幌",
+        "date": "2026-11-11",
+        "time": "14:00",
+        "utcOffset": "+09:00"
+      },
+      "arrival": {
+        "airportCode": "TPE",
+        "city": "桃園",
+        "date": "2026-11-11",
+        "time": "17:55",
+        "utcOffset": "+08:00"
+      },
+      "baggage": "託運 20 公斤/手提 7 公斤",
+      "plannedDurationText": "4h 55m"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "stay-omo5-hakodate",
+      "name": "OMO5 函館",
+      "city": "函館",
+      "nights": 2,
+      "checkIn": "2026-11-05",
+      "checkOut": "2026-11-07",
+      "notes": [
+        "飯店住址：〒040-0063 北海道函館市若松町24-1",
+        "入住 / 退房時間：15:00 / 11:00",
+        "停車：24 小時 700 JPY (先到先得)",
+        "早餐供應：07:00-10:00 / 最後入場 09:30"
+      ],
+      "googleMapsUrl": "https://maps.app.goo.gl/1hMsj5rfVjFHFtdy9"
+    },
+    {
+      "id": "stay-dormy-muroran",
+      "name": "Dormy Inn 室蘭",
+      "city": "室蘭",
+      "nights": 1,
+      "checkIn": "2026-11-07",
+      "checkOut": "2026-11-08",
+      "notes": [
+        "飯店住址：〒050-0074 北海道室蘭市中島町2丁目30-11",
+        "入住 / 退房時間：15:00 / 11:00",
+        "停車：24 小時 800 JPY (先到先得)",
+        "早餐供應：06:30-09:30 / 最後入場 09:00",
+        "宵夜供應：21:30-23:00"
+      ],
+      "googleMapsUrl": "https://maps.app.goo.gl/x1aWLVp32qVAre4v6"
+    },
+    {
+      "id": "stay-sapporo",
+      "name": "Tokyu Stay 東急札幌大通",
+      "city": "札幌",
+      "nights": 3,
+      "checkIn": "2026-11-08",
+      "checkOut": "2026-11-11",
+      "notes": [
+        "飯店住址：〒060-0062 北海道札幌市中央区南2条西5丁目26-2",
+        "入住 / 退房時間：15:00 / 11:00",
+        "停車：24 小時 2000 JPY (先到先得)",
+        "早餐供應：未購買 (加購 2100 JPY)",
+        "近地鐵大通站，可至狸小路4丁目搭乘手扶梯"
+      ],
+      "googleMapsUrl": "https://maps.app.goo.gl/oKAsFidqPiHh3nnn9"
+    }
+  ],
+  "groundTransport": {
+    "rentalCar": {
+      "company": "Worldnet Car Rental",
+      "rentalPeriodDays": 4,
+      "vehicle": {
+        "example": "禁菸車",
+        "class": "含全險(CDW+NOC)+JAF道路救援"
+      },
+      "unlimitedKilometers": false,
+      "price": {
+        "currency": "JPY",
+        "payAtCounter": 104790
+      },
+      "insurance": [
+        "保險內容待確認"
+      ],
+      "pickup": {
+        "date": "2026-11-06",
+        "time": "10:30",
+        "location": "Worldnet Car Rental 函館空港営業所",
+        "address": "",
+        "utcOffset": "+09:00"
+      },
+      "dropoff": {
+        "date": "2026-11-09",
+        "time": "19:00",
+        "timeZoneLabel": "",
+        "vehicleReturnPoint": "Worldnet Car Rental 札幌駅營業所",
+        "deadlineWarning": "",
+        "recommendedArrivalTime": "",
+        "utcOffset": "+09:00"
+      },
+      "displayTitle": "Noah / Voxy 7–8 人座"
+    },
+    "rentalChecklist": [
+      "取車營業所與正式預約時間待確認",
+      "車型、價格、保險內容待確認",
+      "正式還車截止時間待確認"
+    ],
+    "drivingNotes": [
+      "Day 2 函館山夜景為自駕自由參加。",
+      "函館山纜車於到訪期間適逢秋季定期檢查；PPT 註記自駕車可於 21:00–翌日 16:00 上山。",
+      "上山前可先查看函館山官網 Live Camera。"
+    ],
+    "drivingReferenceLinks": [],
+    "plannedRoadLegs": [
+      {
+        "day": 3,
+        "from": "函館",
+        "to": "洞爺湖",
+        "note": "付費高速公路"
+      },
+      {
+        "day": 3,
+        "from": "洞爺湖",
+        "to": "室蘭"
+      },
+      {
+        "day": 4,
+        "from": "室蘭",
+        "to": "登別"
+      },
+      {
+        "day": 4,
+        "from": "登別",
+        "to": "札幌",
+        "note": "付費高速公路"
+      },
+      {
+        "day": 5,
+        "from": "札幌",
+        "to": "小樽"
+      },
+      {
+        "day": 5,
+        "from": "小樽",
+        "to": "札幌"
+      }
+    ],
+    "publicTransitAndRail": [
+      {
+        "day": 1,
+        "text": "帝產巴士：函館空港 → JR 函館駅前"
+      },
+      {
+        "day": 1,
+        "text": "函館市電：松風町 ↔ 十字街"
+      },
+      {
+        "day": 7,
+        "text": "地鐵至札幌站，再轉乘 JR 機場快線自由座前往新千歲機場"
+      }
+    ]
+  },
+  "days": [
+    {
+      "id": "day-1",
+      "day": 1,
+      "date": "2026-11-05",
+      "title": "抵達函館",
+      "locations": [
+        "函館空港",
+        "JR 函館駅前",
+        "OMO5 函館",
+        "松風グルカ",
+        "金森紅磚倉庫",
+        "とんき大門店"
+      ],
+      "schedule": [
+        {
+          "id": "d1-1",
+          "time": "11:10",
+          "type": "arrival",
+          "text": "抵達函館"
+        },
+        {
+          "id": "d1-2",
+          "time": "12:00–12:20",
+          "type": "transfer",
+          "text": "帝產巴士(3號站牌)",
+          "detailLines": [
+            {
+              "text": "函館空港 → JR 函館駅前",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d1-3",
+          "time": "12:30–13:00",
+          "type": "check-in",
+          "text": "OMO5 飯店 寄存行李"
+        },
+        {
+          "id": "d1-4",
+          "time": "13:10–15:00",
+          "type": "restaurant",
+          "text": "松風グルカ 咖哩"
+        },
+        {
+          "id": "d1-5",
+          "time": "15:00–15:30",
+          "type": "transfer",
+          "text": "函館市電",
+          "detailLines": [
+            {
+              "text": "松風町 → 十字街",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d1-6",
+          "time": "15:30–18:30",
+          "type": "attraction",
+          "text": "金森紅磚倉庫"
+        },
+        {
+          "id": "d1-7",
+          "time": "18:30–19:00",
+          "type": "transfer",
+          "text": "函館市電",
+          "detailLines": [
+            {
+              "text": "十字街 → 松風町",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d1-8",
+          "time": "19:00–20:30",
+          "type": "restaurant",
+          "text": "とんき大門店 日式豬排"
+        },
+        {
+          "id": "d1-9",
+          "time": "20:45–",
+          "type": "rest",
+          "text": "OMO5 飯店",
+          "forceMap": true
+        }
+      ],
+      "summary": "OMO5飯店 寄放行李 → 金森紅磚倉庫"
+    },
+    {
+      "id": "day-2",
+      "day": 2,
+      "date": "2026-11-06",
+      "title": "函館城市漫步",
+      "locations": [
+        "函館朝市/自由市場",
+        "Worldnet Car Rental",
+        "見晴公園/香雪園",
+        "湯倉神社/湯之川溫泉足湯/銀月",
+        "五稜郭公園/五稜郭塔",
+        "お肉のつしま",
+        "OMO5 函館",
+        "函館山"
+      ],
+      "schedule": [
+        {
+          "id": "d2-1",
+          "time": "08:30–10:30",
+          "type": "restaurant",
+          "text": "函館朝市/自由市場"
+        },
+        {
+          "id": "d2-2",
+          "time": "10:30–11:30",
+          "type": "drive",
+          "text": "Worldnet Car Rental租車",
+          "detailLines": [
+            {
+              "text": "計程車前往",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d2-3",
+          "time": "11:40–13:30",
+          "type": "attraction",
+          "text": "見晴公園 賞楓"
+        },
+        {
+          "id": "d2-4",
+          "time": "13:40–15:00",
+          "type": "attraction",
+          "text": "湯倉神社/湯の川温泉足湯\n/銀月 日式團子"
+        },
+        {
+          "id": "d2-5",
+          "time": "15:10–17:00",
+          "type": "attraction",
+          "text": "五稜郭公園",
+          "detailLines": [
+            {
+              "text": "16:00 登上五稜郭塔",
+              "tone": "red"
+            }
+          ]
+        },
+        {
+          "id": "d2-6",
+          "time": "17:30–19:30",
+          "type": "restaurant",
+          "text": "お肉のつしま 日式燒肉",
+          "detailLines": [
+            {
+              "text": "預約17:30",
+              "tone": "red"
+            }
+          ]
+        },
+        {
+          "id": "d2-7",
+          "time": "20:00–",
+          "type": "rest",
+          "text": "OMO5 飯店",
+          "forceMap": true
+        },
+        {
+          "id": "d2-8",
+          "time": "22:00–",
+          "type": "drive",
+          "text": "函館山百萬夜景 自駕",
+          "detailLines": [
+            {
+              "text": "自由參加"
+            }
+          ]
+        }
+      ],
+      "summary": "海鮮朝市早餐 → 租車 → 見晴公園 賞楓 → 五稜郭塔 → 日式燒肉"
+    },
+    {
+      "id": "day-3",
+      "day": 3,
+      "date": "2026-11-07",
+      "title": "洞爺湖半日遊",
+      "locations": [
+        "函館",
+        "洞爺湖展望台",
+        "Lake Hill Farm",
+        "洞爺湖",
+        "室蘭",
+        "Dormy Inn 室蘭",
+        "燒鳥一平"
+      ],
+      "schedule": [
+        {
+          "id": "d3-1",
+          "time": "07:00–09:30",
+          "type": "check-out",
+          "text": "飯店自助早餐/Check out"
+        },
+        {
+          "id": "d3-2",
+          "time": "09:30–12:00",
+          "type": "drive",
+          "text": "函館 → 洞爺湖",
+          "detailLines": [
+            {
+              "text": "付費高速公路",
+              "tone": "green"
+            }
+          ]
+        },
+        {
+          "id": "d3-3",
+          "time": "12:00–12:30",
+          "type": "attraction",
+          "text": "洞爺湖展望台"
+        },
+        {
+          "id": "d3-4",
+          "time": "12:30–13:30",
+          "type": "restaurant",
+          "text": "Lake Hill Farm 披薩"
+        },
+        {
+          "id": "d3-5",
+          "time": "13:40–15:00",
+          "type": "attraction",
+          "text": "洞爺湖 乘船遊湖/湖邊觀光"
+        },
+        {
+          "id": "d3-6",
+          "time": "15:00–16:00",
+          "type": "drive",
+          "text": "洞爺湖 → 室蘭"
+        },
+        {
+          "id": "d3-7",
+          "time": "16:00–18:00",
+          "type": "attraction",
+          "text": "室蘭市區購物",
+          "detailLines": [
+            {
+              "text": "UNIQLO/GU/無印良品..."
+            }
+          ]
+        },
+        {
+          "id": "d3-8",
+          "time": "18:00–18:30",
+          "type": "check-in",
+          "text": "Dormy Inn 飯店 Check In"
+        },
+        {
+          "id": "d3-9",
+          "time": "19:00–21:00",
+          "type": "restaurant",
+          "text": "燒鳥一平 串燒",
+          "detailLines": [
+            {
+              "text": "預約 19:00",
+              "tone": "red"
+            }
+          ]
+        }
+      ],
+      "summary": "飯店早餐自助 → 洞爺湖 展望台/遊湖 → 室蘭 串燒"
+    },
+    {
+      "id": "day-4",
+      "day": 4,
+      "date": "2026-11-08",
+      "title": "登別地獄谷",
+      "locations": [
+        "室蘭",
+        "登別棕熊牧場",
+        "味自慢",
+        "登別商店街",
+        "登別地獄谷/大湯沼",
+        "札幌",
+        "うなぎ屋おのぎ"
+      ],
+      "schedule": [
+        {
+          "id": "d4-1",
+          "time": "08:00–09:30",
+          "type": "check-out",
+          "text": "飯店自助早餐/Check out"
+        },
+        {
+          "id": "d4-2",
+          "time": "09:30–10:20",
+          "type": "drive",
+          "text": "室蘭 → 登別"
+        },
+        {
+          "id": "d4-3",
+          "time": "10:20–12:00",
+          "type": "attraction",
+          "text": "登別棕熊牧場"
+        },
+        {
+          "id": "d4-4",
+          "time": "12:00–13:00",
+          "type": "restaurant",
+          "text": "味自慢 拉麵"
+        },
+        {
+          "id": "d4-5",
+          "time": "13:00–14:00",
+          "type": "attraction",
+          "text": "登別商店街"
+        },
+        {
+          "id": "d4-6",
+          "time": "14:00–16:00",
+          "type": "hike",
+          "text": "地獄谷/大湯沼步道",
+          "detailLines": [
+            {
+              "text": "步行30分鐘/開車可達"
+            }
+          ]
+        },
+        {
+          "id": "d4-7",
+          "time": "16:00–18:00",
+          "type": "drive",
+          "text": "登別 → 札幌",
+          "detailLines": [
+            {
+              "text": "付費高速公路",
+              "tone": "green"
+            }
+          ]
+        },
+        {
+          "id": "d4-8",
+          "time": "18:00–19:30",
+          "type": "restaurant",
+          "text": "うなぎ屋おのぎ 鰻魚飯"
+        },
+        {
+          "id": "d4-9",
+          "time": "20:00–",
+          "type": "check-in",
+          "text": "飯店 Check In"
+        }
+      ],
+      "summary": "飯店早餐自助 → 登別 棕熊牧場 → 登別 地獄谷 → 札幌"
+    },
+    {
+      "id": "day-5",
+      "day": 5,
+      "date": "2026-11-09",
+      "title": "小樽半日遊",
+      "locations": [
+        "札幌",
+        "大創 DAISO",
+        "Toriton",
+        "小樽運河",
+        "小樽",
+        "Worldnet Car Rental 札幌駅營業所",
+        "杵屋"
+      ],
+      "schedule": [
+        {
+          "id": "d5-1",
+          "time": "09:30",
+          "type": "drive",
+          "text": "出發"
+        },
+        {
+          "id": "d5-2",
+          "time": "10:30–11:00",
+          "type": "attraction",
+          "text": "大創 DAISO"
+        },
+        {
+          "id": "d5-3",
+          "time": "11:00–12:30",
+          "type": "restaurant",
+          "text": "Toriton 迴轉壽司"
+        },
+        {
+          "id": "d5-4",
+          "time": "13:10–13:40",
+          "type": "attraction",
+          "text": "小樽運河周邊觀光"
+        },
+        {
+          "id": "d5-5",
+          "time": "13:40–14:40",
+          "type": "attraction",
+          "text": "運河觀光船",
+          "detailLines": [
+            {
+              "text": "14:00 開船/提前 15 分鐘集合",
+              "tone": "red"
+            }
+          ]
+        },
+        {
+          "id": "d5-6",
+          "time": "14:40–17:30",
+          "type": "attraction",
+          "text": "小樽市區觀光"
+        },
+        {
+          "id": "d5-7",
+          "time": "17:30–18:10",
+          "type": "drive",
+          "text": "小樽 → 札幌"
+        },
+        {
+          "id": "d5-8",
+          "time": "18:10–18:40",
+          "type": "return",
+          "text": "Worldnet Car Rental",
+          "detailLines": [
+            {
+              "text": "札幌駅營業所 還車"
+            }
+          ]
+        },
+        {
+          "id": "d5-9",
+          "time": "19:30–21:00",
+          "type": "restaurant",
+          "text": "杵屋 烏龍麵"
+        },
+        {
+          "id": "d5-10",
+          "time": "21:00–",
+          "type": "rest",
+          "text": "飯店"
+        }
+      ],
+      "summary": "迴轉壽司 → 小樽 半日遊 → 還車"
+    },
+    {
+      "id": "day-6",
+      "day": 6,
+      "date": "2026-11-10",
+      "title": "札幌市區購物",
+      "locations": [
+        "Toshi",
+        "札幌市區",
+        "東急百貨",
+        "札幌地下街",
+        "NORBESA",
+        "狸小路商店街",
+        "大黑屋",
+        "札幌夜生活"
+      ],
+      "schedule": [
+        {
+          "id": "d6-1",
+          "time": "11:00–12:30",
+          "type": "restaurant",
+          "text": "Toshi 漢堡排",
+          "detailLines": [
+            {
+              "text": "預約 11:00",
+              "tone": "red"
+            }
+          ]
+        },
+        {
+          "id": "d6-2",
+          "time": "12:30–19:00",
+          "type": "attraction",
+          "text": "札幌市區自由活動",
+          "detailLines": [
+            {
+              "text": "札幌電視塔"
+            },
+            {
+              "text": "東急百貨"
+            },
+            {
+              "text": "札幌地下街"
+            },
+            {
+              "text": "NORBESA(動漫模型週邊)"
+            },
+            {
+              "text": "狸小路商店街"
+            }
+          ]
+        },
+        {
+          "id": "d6-3",
+          "time": "19:00–21:00",
+          "type": "restaurant",
+          "text": "大黑屋 成吉思汗",
+          "detailLines": [
+            {
+              "text": "預約 19:00",
+              "tone": "red"
+            }
+          ]
+        },
+        {
+          "id": "d6-4",
+          "time": "21:00–",
+          "type": "attraction",
+          "text": "札幌夜生活",
+          "detailLines": [
+            {
+              "text": "Taito Station遊戲中心"
+            },
+            {
+              "text": "唐吉訶德"
+            },
+            {
+              "text": "Dinner Bell 超市"
+            },
+            {
+              "text": "ROJIURA Café 夜間芭菲"
+            }
+          ]
+        }
+      ],
+      "summary": "漢堡排 → 札幌市區 自由採購 → 大黑屋 成吉思汗"
+    },
+    {
+      "id": "day-7",
+      "day": 7,
+      "date": "2026-11-11",
+      "title": "新千歲機場",
+      "locations": [
+        "にぎりめし",
+        "札幌站",
+        "新千歲機場"
+      ],
+      "schedule": [
+        {
+          "id": "d7-1",
+          "time": "08:00–08:30",
+          "type": "restaurant",
+          "text": "にぎりめし 現做飯糰(外帶)"
+        },
+        {
+          "id": "d7-2",
+          "time": "08:30–08:45",
+          "type": "transfer",
+          "text": "搭乘地鐵至札幌站",
+          "highlights": [
+            {
+              "text": "札幌站",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d7-3",
+          "time": "08:45–09:40",
+          "type": "transfer",
+          "text": "轉乘 JR 機場快線 自由座",
+          "highlights": [
+            {
+              "text": "JR 機場快線",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "id": "d7-4",
+          "time": "09:40–13:30",
+          "type": "attraction",
+          "text": "新千歲機場 採購＆午餐"
+        },
+        {
+          "id": "d7-5",
+          "time": "14:00–17:55",
+          "type": "flight",
+          "text": "札幌 → 台灣"
+        }
+      ],
+      "summary": "地鐵轉機場快線 → 新千歲機場 → 台灣"
+    }
+  ],
+  "places": [
+    {
+      "id": "kanemori",
+      "nameZh": "金森紅磚倉庫",
+      "description": "1859 年函館開港後設立的倉庫群，1988 年轉型為餐飲與物產店複合設施。",
+      "googleMapsUrl": "https://maps.app.goo.gl/Xd2p6kffyQLsFcGB8",
+      "googleMapsQuery": "金森赤レンガ倉庫 函館"
+    },
+    {
+      "id": "miharashi",
+      "nameZh": "見晴公園/香雪園",
+      "description": "北海道唯一被列為國家名勝的文化財庭園；每逢 10 月底至 11 月初為函館賞楓名所。"
+    },
+    {
+      "id": "goryokaku",
+      "nameZh": "五稜郭公園/五稜郭塔",
+      "description": "日本第一座西式城郭，也是箱館戰爭的重要舞台；五稜郭塔可從高處俯瞰星形城郭。"
+    },
+    {
+      "id": "hakodate-mt",
+      "nameZh": "函館山夜景",
+      "description": "函館山標高 334 公尺，可俯瞰函館市區夜景。PPT 註記到訪期間纜車定期檢查。"
+    },
+    {
+      "id": "noboribetsu-jigokudani",
+      "nameZh": "登別地獄谷/大湯沼",
+      "description": "日和山火山活動形成的火山口遺跡，以硫磺氣味、地熱白煙與木造步道聞名。"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": "yakiniku-tsushima",
+      "nameZh": "お肉屋さんの焼肉レストラン",
+      "city": "函館",
+      "hours": "11:30–13:30/17:00–20:30",
+      "reservation": "2026-11-06 17:30",
+      "notes": "函館在地老字號燒肉店，PPT 推薦特上烤肉套餐。",
+      "name": "お肉屋さんの焼肉レストラン"
+    },
+    {
+      "id": "yakitori-ippei",
+      "nameZh": "燒鳥一平",
+      "city": "室蘭",
+      "hours": "17:00–23:00",
+      "reservation": "2026-11-07 19:00",
+      "notes": "室蘭燒鳥老字號，以豬肉與洋蔥烤串搭配黃芥末。",
+      "name": "燒鳥一平",
+      "googleMapsUrl": "https://maps.app.goo.gl/KcFUiBVPBsbFSw5N9",
+      "googleMapsQuery": "やきとりの一平 本店 室蘭"
+    },
+    {
+      "id": "toriton",
+      "nameZh": "Toriton 迴轉壽司",
+      "city": "北海道",
+      "hours": "11:00–22:00",
+      "reservation": "無預約；營業時間前抵達排隊",
+      "notes": "北海道代表性迴轉壽司品牌。",
+      "name": "Toriton 迴轉壽司",
+      "googleMapsUrl": "https://maps.app.goo.gl/cVQNFoi2xKEmrQtA9",
+      "googleMapsQuery": "回転寿し トリトン 北海道"
+    },
+    {
+      "id": "toshi",
+      "nameZh": "漢堡排專門店 Toshi",
+      "city": "札幌",
+      "hours": "11:00–15:00/17:30–21:00",
+      "reservation": "2026-11-10 11:00",
+      "notes": "PPT 註記為 Tabelog 百名店、全國漢堡排大獎賽金賞。",
+      "name": "漢堡排專門店 Toshi"
+    },
+    {
+      "id": "daikokuya",
+      "nameZh": "大黑屋 成吉思汗",
+      "city": "札幌",
+      "hours": "17:00–23:30",
+      "reservation": "2026-11-10 19:00",
+      "notes": "來自旭川的成吉思汗烤羊肉名店。",
+      "name": "大黑屋 成吉思汗",
+      "googleMapsUrl": "https://maps.app.goo.gl/TRZ6MNPkTwSCE4Qo6",
+      "googleMapsQuery": "成吉思汗 大黒屋 札幌"
+    }
+  ],
+  "bookingsAndTickets": [],
+  "ticketPlanning": {
+    "statusStorage": "local",
+    "statusStorageNote": "門票狀態預設只保存在目前瀏覽器。",
+    "items": []
+  },
+  "preTrip": {
+    "packingItems": [],
+    "preparationsExplicitlyMentioned": [
+      "函館山夜景：注意保暖並於上山前查看 Live Camera。"
+    ],
+    "missingNote": ""
+  },
+  "mapLinks": {
+    "providedGoogleMapsLinks": [
+      {
+        "label": "OMO5飯店",
+        "url": "https://www.google.com/maps/place/OMO5+Hakodate+by+Hoshino+Resorts/@41.7711446,140.7290901,16.25z/data=!4m9!3m8!1s0x5f9ef34c57f0d9ab:0xde27fafa051f7321!5m2!4m1!1i2!8m2!3d41.7741388!4d140.7300065!16s%2Fg%2F11ldc_l4c8?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "松風グルカ 咖哩",
+        "url": "https://www.google.com/maps/place/%E6%9D%BE%E9%A2%A8%E3%82%B0%E3%83%AB%E3%82%AB+Asian+Restaurant+%26+Bar+Matsukaze+Gurkha/@41.771459,140.7289983,16.75z/data=!4m6!3m5!1s0x5f9ef39e4b7447b3:0xaaa7e0e6deab86d2!8m2!3d41.7733048!4d140.7325015!16s%2Fg%2F11c1l9vs5s?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "とんき大門店 日式豬排",
+        "url": "https://www.google.com/maps/place/%E3%81%A8%E3%82%93%E3%81%8D%E5%A4%A7%E9%96%80%E5%BA%97/@41.7711446,140.7290901,16.25z/data=!4m6!3m5!1s0x5f9ef39fbed0e585:0xf069f43ab5c32433!8m2!3d41.771447!4d140.7308545!16s%2Fg%2F1tfr080p?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "Worldnet Car Rental",
+        "url": "https://www.google.com/maps/place/Worldnet+Car+Rental/@41.7787058,140.7863194,15.25z/data=!4m6!3m5!1s0x5f9ef4c482c5371d:0x26e777bf01549fde!8m2!3d41.7728893!4d140.7993698!16s%2Fg%2F11c4zdnynn?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "見晴公園",
+        "url": "https://www.google.com/maps/place/Hakodate+Kosetsuen+Parking+Lot/@41.7918643,140.8050425,16z/data=!4m6!3m5!1s0x5f9ef4fd153a6ddb:0xa6a44fc9d67816fd!8m2!3d41.7918052!4d140.8061001!16s%2Fg%2F11bxc43npf?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "五稜郭公園",
+        "url": "https://www.google.com/maps/place/%E5%87%BD%E9%A4%A8%E5%B8%82%E8%8A%B8%E8%A1%93%E3%83%9B%E3%83%BC%E3%83%AB%E9%A7%90%E8%BB%8A%E5%A0%B4A/@41.7944122,140.7576783,15.5z/data=!4m6!3m5!1s0x5f9ef5123cf33f3f:0xd4f076ce69f26ec0!8m2!3d41.7940681!4d140.753994!16s%2Fg%2F11h64rghtt?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "お肉のつしま 日式燒肉",
+        "url": "https://www.google.com/maps/place/Irwak-Irriku+Wagyu+Beef+Yakiniku+Restaurant,+Hakodate./@41.7937355,140.7527803,15.25z/data=!3m1!5s0x5f9ef4133ab53df1:0x2a0f823739ec8aaf!4m6!3m5!1s0x5f9ef4133ad34167:0x1b1f7bb4d5eaaa70!8m2!3d41.797869!4d140.7475019!16s%2Fg%2F1w455g09?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "燒鳥一平",
+        "url": "https://www.google.com/maps/place/%E7%87%92%E9%B3%A5%E4%B8%80%E5%B9%B3+%E4%B8%AD%E5%B3%B6%E6%9C%AC%E5%BA%97/@42.3534383,141.014282,16.5z/data=!4m6!3m5!1s0x5f9fda17997f9b03:0xd1cadfc8b6d1a49f!8m2!3d42.352904!4d141.016157!16s%2Fg%2F1td0mw38?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "金森紅磚倉庫",
+        "url": "https://www.google.com/maps/place/%E9%87%91%E6%A3%AE%E7%B4%85%E7%A3%9A%E5%80%89%E5%BA%AB/@41.7665842,140.7238497,16z/data=!4m6!3m5!1s0x5f9ef3a8785f50a3:0xe796ba2772ca1f8!8m2!3d41.7664927!4d140.7163777!16s%2Fg%2F1219h35q?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "洞爺湖展望台",
+        "url": "https://www.google.com/maps/place/SAIRO%E5%B1%95%E6%9C%9B%E5%8F%B0/@42.6205328,140.8262145,12.5z/data=!4m6!3m5!1s0x5f75564faea756c1:0xf9ac89d4923a4497!8m2!3d42.6261722!4d140.7995763!16s%2Fg%2F1tdg7lvb?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "Lake Hill Farm 披薩",
+        "url": "https://www.google.com/maps/place/Lake+Hill+Farm/@42.6205328,140.8262145,12.5z/data=!4m6!3m5!1s0x5f7556325433ceb7:0x39cb3c4b99b3b88!8m2!3d42.6155325!4d140.786491!16s%2Fg%2F1vxdy2hs?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "登別棕熊牧場",
+        "url": "https://www.google.com/maps/place/%E7%99%BB%E5%B1%B1%E7%BA%9C%E8%BB%8A%E5%B1%B1%E9%BA%93%E7%AB%99+%E7%99%BB%E5%88%A5%E6%A3%95%E7%86%8A%E7%89%A7%E5%A0%B4/@42.4936033,141.1519808,15.5z/data=!4m6!3m5!1s0x5f7566c6b7093ce3:0xba39d0c6ccc1cb17!8m2!3d42.4930844!4d141.1444956!16s%2Fg%2F11g8cy42yj?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "味自慢 拉麵",
+        "url": "https://www.google.com/maps/place/%E5%91%B3%E8%87%AA%E6%85%A2/@42.4931333,141.1454245,15.5z/data=!4m6!3m5!1s0x5f7566c3c3930f51:0xfe085d4114a4c80!8m2!3d42.49409!4d141.1435215!16s%2Fg%2F1v44q6k8?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "うなぎ屋おのぎ 鰻魚飯",
+        "url": "https://www.google.com/maps/place/%E3%81%86%E3%81%AA%E3%81%8E%E5%B1%8B%E3%81%8A%E3%81%AE%E3%81%8E+%E6%9C%AD%E5%B9%8C%E6%9C%AC%E5%BA%97/@43.0342093,141.4131135,12.25z/data=!4m6!3m5!1s0x5f0b2b1e6f3c8e2d:0xb9047d22b3cfc39a!8m2!3d43.0465326!4d141.3935073!16s%2Fg%2F11vdjsz8vb?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "Toriton",
+        "url": "https://www.google.com/maps/place/%E6%B5%B7%E9%AE%AE%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%89%8B%E7%A8%B2%E5%BA%97/@43.1265394,141.2420933,16.75z/data=!3m1!5s0x5f0b27a95c462af9:0x4104f791f711991b!4m6!3m5!1s0x5f0b270966e606a7:0x9bb41da7b2a74d7c!8m2!3d43.1258174!4d141.2425121!16s%2Fg%2F11sskcjz11?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "札幌駅營業所",
+        "url": "https://www.google.com/maps/place/World+Net+Rent-A-Car+Sapporo+Sales+Office/@43.0629921,141.3437073,14.5z/data=!4m6!3m5!1s0x5f0b2912f42e193b:0x93aa32e9ca06aab5!8m2!3d43.0742374!4d141.35853!16s%2Fg%2F11c1t53px5?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "杵屋 烏龍麵",
+        "url": "https://www.google.com/maps/place/Kineya,+Sapporo+APIA/@43.0664121,141.3518109,16.5z/data=!3m1!5s0x5f0b299ddcd52377:0x2600b595070615b8!4m6!3m5!1s0x5f0b297569e8aa17:0xa7cc16d1c76c8350!8m2!3d43.067012!4d141.3490745!16s%2Fg%2F1thxkw3r?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "Toshi 漢堡排",
+        "url": "https://www.google.com/maps/place/Toshi/@43.0597578,141.3543463,15.75z/data=!3m1!5s0x5f0b299bdffafacf:0x15e2ed7a57ea678e!4m6!3m5!1s0x5f0b298323514dd5:0xaaad1d8a90a7d8fa!8m2!3d43.0590637!4d141.3547885!16s%2Fg%2F1tk6vq6h?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "大黑屋",
+        "url": "https://maps.app.goo.gl/TRZ6MNPkTwSCE4Qo6"
+      },
+      {
+        "label": "にぎりめし 現做飯糰",
+        "url": "https://www.google.com/maps/place/Nigirimeshi/@43.0532004,141.3499421,17z/data=!3m2!4b1!5s0x5f0b2986729e7b6d:0x8d82eb5f408addc5!4m6!3m5!1s0x5f0b29866d6da8f5:0x351a6bd0aaed0b02!8m2!3d43.0531965!4d141.352517!16s%2Fg%2F1tc_kyhc?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "label": "Dormy Inn 飯店",
+        "url": "https://www.google.com/maps/place/Dormy+Inn+%E6%9D%B1%E5%AE%A4%E8%98%AD/@42.3537067,141.0175676,16.75z/data=!4m9!3m8!1s0x5f9fda19914f8fa1:0xee3666a6f22e72aa!5m2!4m1!1i2!8m2!3d42.3526924!4d141.0211773!16s%2Fg%2F11c3q3mwkm?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+      }
+    ],
+    "note": "Google Map 按鈕使用使用者確認的完整 Google Maps 地點網址作為唯一目的地資料；預覽與外部開啟皆由同一網址衍生。",
+    "cityLevelNavigationDisabled": false,
+    "navigationPolicy": {
+      "noNavigationTypes": [
+        "flight",
+        "note",
+        "rest"
+      ],
+      "selfNavigationTypes": [
+        "drive",
+        "return",
+        "transfer",
+        "check-in",
+        "check-out",
+        "restaurant",
+        "attraction",
+        "walk",
+        "hike"
+      ]
+    },
+    "navigationPlaces": [
+      {
+        "id": "nav-omo5",
+        "label": "OMO5飯店",
+        "matchTerms": [
+          "omo5"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/OMO5+Hakodate+by+Hoshino+Resorts/@41.7711446,140.7290901,16.25z/data=!4m9!3m8!1s0x5f9ef34c57f0d9ab:0xde27fafa051f7321!5m2!4m1!1i2!8m2!3d41.7741388!4d140.7300065!16s%2Fg%2F11ldc_l4c8?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/1hMsj5rfVjFHFtdy9",
+        "priority": 5
+      },
+      {
+        "id": "nav-matsukaze-gurkha",
+        "label": "松風グルカ 咖哩",
+        "matchTerms": [
+          "松風グルカ"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E6%9D%BE%E9%A2%A8%E3%82%B0%E3%83%AB%E3%82%AB+Asian+Restaurant+%26+Bar+Matsukaze+Gurkha/@41.771459,140.7289983,16.75z/data=!4m6!3m5!1s0x5f9ef39e4b7447b3:0xaaa7e0e6deab86d2!8m2!3d41.7733048!4d140.7325015!16s%2Fg%2F11c1l9vs5s?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/DKr9dkwFZ5BQCRCo9",
+        "priority": 5
+      },
+      {
+        "id": "nav-tonki-daimon",
+        "label": "とんき大門店 日式豬排",
+        "matchTerms": [
+          "とんき大門店"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E3%81%A8%E3%82%93%E3%81%8D%E5%A4%A7%E9%96%80%E5%BA%97/@41.7711446,140.7290901,16.25z/data=!4m6!3m5!1s0x5f9ef39fbed0e585:0xf069f43ab5c32433!8m2!3d41.771447!4d140.7308545!16s%2Fg%2F1tfr080p?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/BWPTgKiVRPSbiuj78",
+        "priority": 5
+      },
+      {
+        "id": "nav-worldnet",
+        "label": "Worldnet Car Rental",
+        "matchTerms": [
+          "worldnet car rental",
+          "租車 worldnet"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Worldnet+Car+Rental/@41.7787058,140.7863194,15.25z/data=!4m6!3m5!1s0x5f9ef4c482c5371d:0x26e777bf01549fde!8m2!3d41.7728893!4d140.7993698!16s%2Fg%2F11c4zdnynn?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/N3ToQAQD1GG5Wmzc7",
+        "priority": 5
+      },
+      {
+        "id": "nav-miharashi",
+        "label": "見晴公園",
+        "matchTerms": [
+          "見晴公園"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Hakodate+Kosetsuen+Parking+Lot/@41.7918643,140.8050425,16z/data=!4m6!3m5!1s0x5f9ef4fd153a6ddb:0xa6a44fc9d67816fd!8m2!3d41.7918052!4d140.8061001!16s%2Fg%2F11bxc43npf?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/za2L8iTmxPPxX64j7",
+        "priority": 5
+      },
+      {
+        "id": "nav-goryokaku",
+        "label": "五稜郭公園",
+        "matchTerms": [
+          "五稜郭公園"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E5%87%BD%E9%A4%A8%E5%B8%82%E8%8A%B8%E8%A1%93%E3%83%9B%E3%83%BC%E3%83%AB%E9%A7%90%E8%BB%8A%E5%A0%B4A/@41.7944122,140.7576783,15.5z/data=!4m6!3m5!1s0x5f9ef5123cf33f3f:0xd4f076ce69f26ec0!8m2!3d41.7940681!4d140.753994!16s%2Fg%2F11h64rghtt?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/1Z3B4e5BDY9uD8XH6",
+        "priority": 5
+      },
+      {
+        "id": "nav-oniku-tsushima",
+        "label": "お肉のつしま 日式燒肉",
+        "matchTerms": [
+          "お肉のつしま"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Irwak-Irriku+Wagyu+Beef+Yakiniku+Restaurant,+Hakodate./@41.7937355,140.7527803,15.25z/data=!3m1!5s0x5f9ef4133ab53df1:0x2a0f823739ec8aaf!4m6!3m5!1s0x5f9ef4133ad34167:0x1b1f7bb4d5eaaa70!8m2!3d41.797869!4d140.7475019!16s%2Fg%2F1w455g09?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/wx6ZgLdnxHNqmwUe8",
+        "priority": 5
+      },
+      {
+        "id": "nav-yakitori-ippei",
+        "label": "燒鳥一平",
+        "matchTerms": [
+          "燒鳥一平"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E7%87%92%E9%B3%A5%E4%B8%80%E5%B9%B3+%E4%B8%AD%E5%B3%B6%E6%9C%AC%E5%BA%97/@42.3534383,141.014282,16.5z/data=!4m6!3m5!1s0x5f9fda17997f9b03:0xd1cadfc8b6d1a49f!8m2!3d42.352904!4d141.016157!16s%2Fg%2F1td0mw38?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/KcFUiBVPBsbFSw5N9",
+        "priority": 5
+      },
+      {
+        "id": "nav-kanemori",
+        "label": "金森紅磚倉庫",
+        "matchTerms": [
+          "金森紅磚倉庫"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E9%87%91%E6%A3%AE%E7%B4%85%E7%A3%9A%E5%80%89%E5%BA%AB/@41.7665842,140.7238497,16z/data=!4m6!3m5!1s0x5f9ef3a8785f50a3:0xe796ba2772ca1f8!8m2!3d41.7664927!4d140.7163777!16s%2Fg%2F1219h35q?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/Xd2p6kffyQLsFcGB8",
+        "priority": 5
+      },
+      {
+        "id": "nav-toyako-observatory",
+        "label": "洞爺湖展望台",
+        "matchTerms": [
+          "洞爺湖展望台"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/SAIRO%E5%B1%95%E6%9C%9B%E5%8F%B0/@42.6205328,140.8262145,12.5z/data=!4m6!3m5!1s0x5f75564faea756c1:0xf9ac89d4923a4497!8m2!3d42.6261722!4d140.7995763!16s%2Fg%2F1tdg7lvb?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/7CBrFr2YvVwvWvvH8",
+        "priority": 5
+      },
+      {
+        "id": "nav-lake-hill-farm",
+        "label": "Lake Hill Farm 披薩",
+        "matchTerms": [
+          "lake hill farm"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Lake+Hill+Farm/@42.6205328,140.8262145,12.5z/data=!4m6!3m5!1s0x5f7556325433ceb7:0x39cb3c4b99b3b88!8m2!3d42.6155325!4d140.786491!16s%2Fg%2F1vxdy2hs?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/BxVKyuCNCcmrEMrk8",
+        "priority": 5
+      },
+      {
+        "id": "nav-bear-park",
+        "label": "登別棕熊牧場",
+        "matchTerms": [
+          "登別棕熊牧場"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E7%99%BB%E5%B1%B1%E7%BA%9C%E8%BB%8A%E5%B1%B1%E9%BA%93%E7%AB%99+%E7%99%BB%E5%88%A5%E6%A3%95%E7%86%8A%E7%89%A7%E5%A0%B4/@42.4936033,141.1519808,15.5z/data=!4m6!3m5!1s0x5f7566c6b7093ce3:0xba39d0c6ccc1cb17!8m2!3d42.4930844!4d141.1444956!16s%2Fg%2F11g8cy42yj?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/Gqfj8DnbYzpptFUHA",
+        "priority": 5
+      },
+      {
+        "id": "nav-aji-jiman",
+        "label": "味自慢 拉麵",
+        "matchTerms": [
+          "味自慢"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E5%91%B3%E8%87%AA%E6%85%A2/@42.4931333,141.1454245,15.5z/data=!4m6!3m5!1s0x5f7566c3c3930f51:0xfe085d4114a4c80!8m2!3d42.49409!4d141.1435215!16s%2Fg%2F1v44q6k8?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/vVkQp6nErazN74hK9",
+        "priority": 5
+      },
+      {
+        "id": "nav-unagi-onogi",
+        "label": "うなぎ屋おのぎ 鰻魚飯",
+        "matchTerms": [
+          "うなぎ屋おのぎ"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E3%81%86%E3%81%AA%E3%81%8E%E5%B1%8B%E3%81%8A%E3%81%AE%E3%81%8E+%E6%9C%AD%E5%B9%8C%E6%9C%AC%E5%BA%97/@43.0342093,141.4131135,12.25z/data=!4m6!3m5!1s0x5f0b2b1e6f3c8e2d:0xb9047d22b3cfc39a!8m2!3d43.0465326!4d141.3935073!16s%2Fg%2F11vdjsz8vb?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/yWtkrywPCLxzTJHA8",
+        "priority": 5
+      },
+      {
+        "id": "nav-toriton",
+        "label": "Toriton",
+        "matchTerms": [
+          "toriton"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/%E6%B5%B7%E9%AE%AE%E5%AF%BF%E3%81%97%E3%83%88%E3%83%AA%E3%83%88%E3%83%B3+%E6%89%8B%E7%A8%B2%E5%BA%97/@43.1265394,141.2420933,16.75z/data=!3m1!5s0x5f0b27a95c462af9:0x4104f791f711991b!4m6!3m5!1s0x5f0b270966e606a7:0x9bb41da7b2a74d7c!8m2!3d43.1258174!4d141.2425121!16s%2Fg%2F11sskcjz11?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/cVQNFoi2xKEmrQtA9",
+        "priority": 5
+      },
+      {
+        "id": "nav-sapporo-station-office",
+        "label": "札幌駅營業所",
+        "matchTerms": [
+          "札幌駅營業所"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/World+Net+Rent-A-Car+Sapporo+Sales+Office/@43.0627597,141.3416769,14.75z/data=!4m6!3m5!1s0x5f0b2912f42e193b:0x93aa32e9ca06aab5!8m2!3d43.0742374!4d141.35853!16s%2Fg%2F11c1t53px5?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/wfmd6gMZvMWTcVE79",
+        "priority": 6
+      },
+      {
+        "id": "nav-kineya",
+        "label": "杵屋 烏龍麵",
+        "matchTerms": [
+          "杵屋"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Kineya,+Sapporo+APIA/@43.0664121,141.3518109,16.5z/data=!3m1!5s0x5f0b299ddcd52377:0x2600b595070615b8!4m6!3m5!1s0x5f0b297569e8aa17:0xa7cc16d1c76c8350!8m2!3d43.067012!4d141.3490745!16s%2Fg%2F1thxkw3r?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/bYUSFq9swtbbqTzR8",
+        "priority": 5
+      },
+      {
+        "id": "nav-toshi",
+        "label": "Toshi 漢堡排",
+        "matchTerms": [
+          "toshi 漢堡排"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Toshi/@43.0597578,141.3543463,15.75z/data=!3m1!5s0x5f0b299bdffafacf:0x15e2ed7a57ea678e!4m6!3m5!1s0x5f0b298323514dd5:0xaaad1d8a90a7d8fa!8m2!3d43.0590637!4d141.3547885!16s%2Fg%2F1tk6vq6h?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/cAKmipef4ADd2LMJ9",
+        "priority": 5
+      },
+      {
+        "id": "nav-daikokuya",
+        "label": "大黑屋",
+        "matchTerms": [
+          "大黑屋"
+        ],
+        "canonicalUrl": "https://maps.app.goo.gl/TRZ6MNPkTwSCE4Qo6",
+        "shortUrl": "https://maps.app.goo.gl/oBZ5mALyiXW21bYp6",
+        "priority": 5
+      },
+      {
+        "id": "nav-nigiri-meshi",
+        "label": "にぎりめし 現做飯糰",
+        "matchTerms": [
+          "にぎりめし"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Nigirimeshi/@43.0532004,141.3499421,17z/data=!3m2!4b1!5s0x5f0b2986729e7b6d:0x8d82eb5f408addc5!4m6!3m5!1s0x5f0b29866d6da8f5:0x351a6bd0aaed0b02!8m2!3d43.0531965!4d141.352517!16s%2Fg%2F1tc_kyhc?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/AiHmokqUJ5ZS2hco9",
+        "priority": 5
+      },
+      {
+        "id": "nav-dormy-muroran",
+        "label": "Dormy Inn 飯店",
+        "matchTerms": [
+          "dormy inn 飯店"
+        ],
+        "canonicalUrl": "https://www.google.com/maps/place/Dormy+Inn+%E6%9D%B1%E5%AE%A4%E8%98%AD/@42.3537067,141.0175676,16.75z/data=!4m9!3m8!1s0x5f9fda19914f8fa1:0xee3666a6f22e72aa!5m2!4m1!1i2!8m2!3d42.3526924!4d141.0211773!16s%2Fg%2F11c3q3mwkm?authuser=0&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D",
+        "shortUrl": "https://maps.app.goo.gl/x1aWLVp32qVAre4v6",
+        "priority": 5
+      }
+    ]
+  },
+  "issuesAndUncertainties": [
+    "去回程航班號未出現在 PPT，先顯示待確認。",
+    "租車車型、價格、保險、函館取車營業所地址與正式預約時間未出現在 PPT。",
+    "札幌住宿在 Day 7 頁面同時出現東急大通 HOTEL 與 VESSEL HOTEL 兩種路線，最終住宿待確認。",
+    "PPT Day 7 英文副標寫作 Final Shopping at Hakodate Airport，但中文與行程內容均為新千歲機場；第一版依中文與實際行程標示為 New Chitose Airport。"
+  ],
+  "map": {
+    "schemaVersion": "1.0-lite",
+    "mapMode": "template-auto",
+    "templateId": "auto",
+    "disclaimer": "本圖僅表達地點的相對方位與路線順序，不代表真實比例或精確地理邊界。",
+    "places": [],
+    "routes": [],
+    "dailyRoutes": []
+  }
+}
